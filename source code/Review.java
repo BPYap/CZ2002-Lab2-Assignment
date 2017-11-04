@@ -1,4 +1,3 @@
-package movie;
 
 public class Review {
    private String comments;

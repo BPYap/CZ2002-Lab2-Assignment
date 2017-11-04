@@ -1,4 +1,4 @@
-package movie;
+
 
 import java.io.FileInputStream;
 import java.io.FileWriter;
