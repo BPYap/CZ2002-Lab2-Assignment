@@ -12,11 +12,11 @@ public class utility
             StringBuffer inputBuffer = new StringBuffer();
         
             String current_line = file.readLine();
-            while (current_lineline != null) 
+            while (current_line != null) 
             {
                 inputBuffer.append(current_line);
                 inputBuffer.append('\n');
-                current_line = file.readline();
+                current_line = file.readLine();
             }
             String file_content = inputBuffer.toString();
             file.close();
@@ -42,16 +42,23 @@ public class utility
     {
         try 
         {
-            FileWriter fwStream = new FileWriter(filename);
+            FileWriter fwStream = new FileWriter(filename, true);
             BufferedWriter bwStream = new BufferedWriter(fwStream);
             PrintWriter pwStream = new PrintWriter(bwStream);
             pwStream.println(record);
+            pwStream.close();
         }
         catch(Exception e)
         {
             System.out.println( "Problem writing file. " + filename + " " + e.getMessage() );
             System.exit(0);
         }
+    }
+    
+    public static void main(String[] args)
+    {
+        updateFile("test.txt", "line 1", "line1");
+        updateFile("test.txt", "line 2", "line2");
     }
 }    
 
