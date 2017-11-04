@@ -12,23 +12,24 @@ public class utility
             StringBuffer inputBuffer = new StringBuffer();
         
             String current_line = file.readLine();
+            String newLineChar = System.getProperty("line.separator");
             while (current_line != null) 
             {
-                inputBuffer.append(current_line);
-                inputBuffer.append('\n');
+                inputBuffer.append(current_line.replace("\n", ""));
+                inputBuffer.append(newLineChar);
                 current_line = file.readLine();
             }
             String file_content = inputBuffer.toString();
             file.close();
 
             file_content = file_content.replace(old_record, new_record); 
-            System.out.println("Content of " + file_name + ": " + file_content); // debug
+            System.out.print("Content  : " + file_content); // debug
 
             // write the new String with the replaced line OVER the same file
-            FileOutputStream fileOut = new FileOutputStream(file_name);
-            fileOut.write(file_content.getBytes());
+            BufferedWriter bwStream = new BufferedWriter(new FileWriter(file_name));
+            PrintWriter    fileOut = new PrintWriter(bwStream);
+            fileOut.write(file_content);
             fileOut.close();
-
         } 
         catch (Exception e) 
         {
@@ -56,8 +57,7 @@ public class utility
     
     public static void main(String[] args)
     {
-        updateFile("test.txt", "line 1", "line1");
-        updateFile("test.txt", "line 2", "line2");
+        updateFile("test.txt", "line 3", "line1");
     }
 }    
 
