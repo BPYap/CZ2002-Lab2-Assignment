@@ -55,6 +55,52 @@ public class utility
         }
     }
     
+    public static String readline(String filename, String[] keywords)
+    {
+        try 
+        {
+            // input the file content to the StringBuffer "input"
+            BufferedReader file = new BufferedReader(new FileReader(file_name));
+        
+            String current_line = file.readLine();
+            
+            int matched = 0; 
+            while (current_line != null) 
+            {
+                for (int i = 0; i < keywords.length; i++)
+                {
+                    if (current_line.toLowerCase().contains(keywords[i].toLowerCase()))
+                    {
+                        matched++;
+                    }
+                    else
+                    {
+                        current_line = file.readLine();
+                        break;
+                    }
+                    
+                    if (matched == keywords.length)
+                    {
+                        file.close();
+                        return current_line;
+                    }
+                    else
+                    {
+                        current_line = file.readLine();
+                    }
+                        
+                }
+            }
+            file.close();
+            return -1;
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Problem reading file. " + file_name);
+            System.exit(0);
+        }
+    }
+    
     public static void main(String[] args)
     {
         updateFile("test.txt", "line 3", "line1");
