@@ -2,7 +2,6 @@ public class Cinema {
 
 	private String cinema_code;
 	private String cinema_class;
-	private int seat_capaity;
 	private int number_of_rows;
 	private int number_of_columns;
 	

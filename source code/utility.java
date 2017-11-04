@@ -21,9 +21,8 @@ public class utility
             String file_content = inputBuffer.toString();
             file.close();
 
-            System.out.println("Content of " + file_name + ": " + file_content); // debug
-
             file_content = file_content.replace(old_record, new_record); 
+            System.out.println("Content of " + file_name + ": " + file_content); // debug
 
             // write the new String with the replaced line OVER the same file
             FileOutputStream fileOut = new FileOutputStream(file_name);
