@@ -10,29 +10,74 @@ public class CinemaStaff
     {
         System.out.println("Enter password: ");
         String input = sc.next();
-        if(this.password != input)
+        if(!password.equals(input))
             System.out.println("Incorrect password");
         else
-            this.login_status = true;
+            login_status = true;
+            System.out.println("Welcome Staff");
     }
     
     public static void addMovie()
     {
-        try 
+        System.out.println("========== Add Movie ==========");
+        sc.nextLine();
+        System.out.println("Enter movie title: ");
+        String title = sc.nextLine();
+        System.out.println("Enter genre: ");
+        String genre = sc.nextLine();
+        System.out.println("Enter movie synopsis: ");
+        String synopsis = sc.nextLine();
+        System.out.println("Enter director(s) for this movie: ");
+        String director = sc.nextLine();
+        System.out.println("Enter cast(s) for this movie: ");
+        String cast = sc.nextLine();
+        System.out.println("Select age group for this movie: ");
+        System.out.println("    1. PG13");
+        System.out.println("    2. NC16");
+        System.out.println("    3. M18");
+        int choice;
+        do
         {
-            FileWriter fwStream = new FileWriter("Movie.txt");
-            BufferedWriter bwStream = new BufferedWriter(fwStream);
-            PrintWriter pwStream = new PrintWriter(bwStream);
-            int num ;
-            for ( num = 0 ; num < 5 ; num++ )
-                pwStream.println( "Number = " + num * 5 );
-                pwStream.close();
-        }
-        catch(IOException e)
+            choice = sc.nextInt();
+        }while(choice <= 0 || choice > 3);
+        String age_group = "NULL";
+        switch(choice)
         {
-            System.out.println( "IO Error at addMovie()!" + e.getMessage() );
-            System.exit(0);
+            case 1:
+                age_group = "PG13";
+                break;
+            case 2:
+                age_group = "NC16";
+                break;
+            case 3:
+                age_group = "M18";
+                break;
         }
+        System.out.println("Select movie status for this movie: ");
+        System.out.println("    1. Coming Soon");
+        System.out.println("    2. Now Showing");
+        System.out.println("    3. Preview");
+        do
+        {
+            choice = sc.nextInt();
+        }while(choice <= 0 || choice > 3);
+        String status = "NULL";
+        switch(choice)
+        {
+            case 1:
+                status = "Coming Soon";
+                break;
+            case 2:
+                status = "Now Showing";
+                break;
+            case 3:
+                status = "Preview";
+                break;
+        }
+        
+        String record = title + "|" + genre + "|" + synopsis + "|" + director + "|" + cast + "|" + age_group + "|" + status;
+        utility.addRecord("movie.txt", record);
+        System.out.println(title + " is added into movie database.");
     }
 
     
