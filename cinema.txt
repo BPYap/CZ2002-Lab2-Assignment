@@ -1,0 +1,12 @@
+Jurong Point
+JP1|Platinum Movie Suites|3|10
+JP2|Normal Movie Suites|5|10
+JP3|Normal Movie Suites|6|10
+Bugis
+BG1|Platinum Movie Suites|3|10
+BG2|Normal Movie Suites|5|10
+BG3|Normal Movie Suites|6|10
+Pasir Ris
+PR1|Platinum Movie Suites|3|10
+PR2|Normal Movie Suites|5|10
+PR3|Normal Movie Suites|6|10
