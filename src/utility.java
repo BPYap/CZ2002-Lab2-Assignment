@@ -3,7 +3,13 @@ import java.io.* ;
 
 public class utility
 {
+    public static void printBorder()
+    {
+        System.out.println("================================");
+    }
+    
     public static void updateFile(String file_name, String old_record, String new_record) 
+    // replace old record in file with new record. Recommend to use readLine(file_name, keyword) to find old record
     {    
         try 
         {
@@ -23,7 +29,6 @@ public class utility
             file.close();
 
             file_content = file_content.replace(old_record, new_record); 
-            System.out.print("Content  : " + file_content); // debug
 
             // write the new String with the replaced line OVER the same file
             BufferedWriter bwStream = new BufferedWriter(new FileWriter(file_name));
@@ -33,12 +38,13 @@ public class utility
         } 
         catch (Exception e) 
         {
-            System.out.println("Problem reading file. " + file_name);
+            System.out.println("Problem reading file. " + file_name + " " + e.getMessage());
             System.exit(0);
         }
     }
 
     public static void addRecord(String filename, String record)
+    // append new record to file
     {
         try 
         {
@@ -50,12 +56,13 @@ public class utility
         }
         catch(Exception e)
         {
-            System.out.println( "Problem writing file. " + filename + " " + e.getMessage() );
+            System.out.println( "Problem writing file. " + filename + " " + e.getMessage());
             System.exit(0);
         }
     }
     
     public static String readLine(String file_name, String keyword)
+    // read a record from file using specified unique keywords separated by comma ','
     {
         try 
         {
@@ -96,15 +103,38 @@ public class utility
         } 
         catch (Exception e) 
         {
-            System.out.println("Problem reading file. " + file_name);
+            System.out.println("Problem reading file. " + file_name + " " + e.getMessage());
             System.exit(0);
         }
-        return "-1";
+        return "None";
     }
-    
-    public static void main(String[] args)
+
+    public static String readContent(String file_name)
+    // Return all records from file. Each record is separated by '\n'
     {
-        System.out.println(readLine("cinema.txt", "Jurong Point, JP1"));
+        try 
+        {
+            BufferedReader file = new BufferedReader(new FileReader(file_name));
+            StringBuffer inputBuffer = new StringBuffer();
+            
+            String current_line = file.readLine();      
+
+            while (current_line != null) 
+            {
+                inputBuffer.append(current_line);
+                inputBuffer.append("\n");
+                current_line = file.readLine();
+            }
+            String file_content = inputBuffer.toString();
+            file.close();
+            return file_content;
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Problem reading file. " + file_name + " " + e.getMessage());
+            System.exit(0);
+        }
+        return null;
     }
 }    
 
