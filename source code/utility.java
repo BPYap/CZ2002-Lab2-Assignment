@@ -55,7 +55,7 @@ public class utility
         }
     }
     
-    public static String readline(String filename, String[] keywords)
+    public static String readLine(String file_name, String keyword)
     {
         try 
         {
@@ -64,6 +64,7 @@ public class utility
         
             String current_line = file.readLine();
             
+            String[] keywords = keyword.split(",");
             int matched = 0; 
             while (current_line != null) 
             {
@@ -92,18 +93,18 @@ public class utility
                 }
             }
             file.close();
-            return -1;
         } 
         catch (Exception e) 
         {
             System.out.println("Problem reading file. " + file_name);
             System.exit(0);
         }
+        return "-1";
     }
     
     public static void main(String[] args)
     {
-        updateFile("test.txt", "line 3", "line1");
+        System.out.println(readLine("test.txt", "line 2"));
     }
 }    
 
