@@ -34,8 +34,25 @@ public class utility
         catch (Exception e) 
         {
             System.out.println("Problem reading file. " + file_name);
+            System.exit(0);
         }
-    }    
+    }
+
+    public static void addRecord(String filename, String record)
+    {
+        try 
+        {
+            FileWriter fwStream = new FileWriter(filename);
+            BufferedWriter bwStream = new BufferedWriter(fwStream);
+            PrintWriter pwStream = new PrintWriter(bwStream);
+            pwStream.println(record);
+        }
+        catch(Exception e)
+        {
+            System.out.println( "Problem writing file. " + filename + " " + e.getMessage() );
+            System.exit(0);
+        }
+    }
 }    
 
  
