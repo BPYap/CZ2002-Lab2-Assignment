@@ -104,7 +104,7 @@ public class utility
     
     public static void main(String[] args)
     {
-        System.out.println(readLine("test.txt", "line 2"));
+        System.out.println(readLine("cinema.txt", "Jurong Point, JP1"));
     }
 }    
 
