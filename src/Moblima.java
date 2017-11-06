@@ -30,8 +30,10 @@ public class Moblima {
 						
 						switch(choice) {
 							case 1:
+								MovieGoer.listMovies();
 								break;
 							case 2:
+                                //MovieGoer.viewMovieDetails();
 								break;
 							case 3:
 								break;
@@ -103,8 +105,6 @@ public class Moblima {
                             break;
                     }
                         }while(choice2 < 11);
-					
-
 					break;
 				}
 			}while(stafforcust<3);

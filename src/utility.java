@@ -8,6 +8,11 @@ public class utility
         System.out.println("================================");
     }
     
+    public static void printline()
+    {
+        System.out.println("--------------------------");
+    }
+    
     public static void updateFile(String file_name, String old_record, String new_record) 
     // replace old record in file with new record. Recommend to use readLine(file_name, keyword) to find old record
     {    
@@ -118,6 +123,7 @@ public class utility
             StringBuffer inputBuffer = new StringBuffer();
             
             String current_line = file.readLine();      
+            //System.out.println(current_line);
 
             while (current_line != null) 
             {
