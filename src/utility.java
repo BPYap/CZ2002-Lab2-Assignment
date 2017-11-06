@@ -13,6 +13,74 @@ public class utility
         System.out.println("--------------------------");
     }
     
+    public static void print_table(Object[] column_title, String[] raw_records)
+    // example column_title format : ["Movie Title", "Age Group", "Status"]
+    // example raw_records format : ["Kingsman, PG13, Now Showing", 
+    //                               "Thor Ragnarok","PG13", "Now Showing"]
+    {
+        int[] max_lengths = new int[column_title.length]; // store the longest string length for each column
+        for(int i = 0; i < column_title.length; i++)
+        {
+            max_lengths[i] = 0; // initialize all values to 0
+        }
+        
+        Object[][] records = new String[raw_records.length][]; 
+        for (int i = 0; i < raw_records.length; i++)
+        {
+            records[i] = new String[column_title.length];
+            String[] record = raw_records[i].split(",");
+            for(int j = 0; j < column_title.length; j++)
+            {
+                records[i][j] = record[j];
+                if (record[j].length() > max_lengths[j])
+                {
+                    max_lengths[j] = record[j].length();
+                }
+            }
+            
+        }  
+        
+        int character_count = 0;
+        String format = "";
+        for (int i = 0; i < max_lengths.length; i++)
+        {
+            format = format + "|%" + (max_lengths[i] + 10) + "s";
+            character_count += max_lengths[i] + 10;
+        }
+        
+        String border = "+";
+        String title_border = "+";
+        int temp = 0;
+        int count = 0;
+        for (int i = 0; i < character_count; i++)
+        {
+            border = border + "-";
+            title_border = title_border + "=";
+            if (count+1 == (max_lengths[temp] + 10))
+            {
+                border = border + "+";
+                title_border = title_border + "+";
+                temp++;
+                count = 0;
+            }
+            else
+            {
+                count++;
+            }
+        }
+
+        format += "|";
+        
+        System.out.println(title_border);
+        System.out.format(format + "\n", column_title);
+        System.out.println(title_border);
+        for (int i = 0; i < raw_records.length; i++)
+        {
+            System.out.format(format + "\n", records[i]);
+            System.out.println(border);
+        }
+    }
+    
     public static void updateFile(String file_name, String old_record, String new_record) 
     // replace old record in file with new record. Recommend to use readLine(file_name, keyword) to find old record
     {    
