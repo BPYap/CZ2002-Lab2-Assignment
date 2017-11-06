@@ -15,8 +15,8 @@ public class utility
     
     public static void print_table(Object[] column_title, String[] raw_records)
     // example column_title format : ["Movie Title", "Age Group", "Status"]
-    // example raw_records format : ["Kingsman | PG13 | Now Showing", 
-    //                               "Thor Ragnarok | PG13 | Now Showing"]
+    // example raw_records format : ["Kingsman|PG13|Now Showing", 
+    //                               "Thor Ragnarok|PG13|Now Showing"]
     {
         int[] max_lengths = new int[column_title.length]; // store the longest string length for each column
         for(int i = 0; i < column_title.length; i++)
@@ -28,7 +28,7 @@ public class utility
         for (int i = 0; i < raw_records.length; i++)
         {
             records[i] = new String[column_title.length];
-            String[] record = raw_records[i].split("|");
+            String[] record = raw_records[i].split("\|");
             for(int j = 0; j < column_title.length; j++)
             {
                 records[i][j] = record[j];
