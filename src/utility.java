@@ -13,7 +13,7 @@ public class utility
         System.out.println("--------------------------");
     }
     
-    public static void print_table(Object[] column_title, String[][] records)
+    public static void print_table(String[] column_title, String[][] records)
     // example column_title format : ["Movie Title", "Age Group", "Status"]
     // example raw_records format : ["Kingsman|PG13|Now Showing", 
     //                               "Thor Ragnarok|PG13|Now Showing"]
@@ -25,20 +25,19 @@ public class utility
         }
         
         //Object[][] records = new String[raw_records.length][]; 
-        for (int i = 0; i < raw_records.length; i++)
+        for (int i = 0; i < records.length; i++)
         {
             //records[i] = new String[column_title.length];
             //String[] record = raw_records[i].split("\|");
             for(int j = 0; j < column_title.length; j++)
             {
                 //records[i][j] = record[j];
-                if (record[i][j].length() > max_lengths[j])
+                if (records[i][j].length() > max_lengths[j])
                 {
-                    max_lengths[j] = record[i][j].length();
+                    max_lengths[j] = records[i][j].length();
                 }
             }
-            
-        }  
+        }    
         
         int character_count = 0;
         String format = "";
@@ -74,7 +73,7 @@ public class utility
         System.out.println(title_border);
         System.out.format(format + "\n", column_title);
         System.out.println(title_border);
-        for (int i = 0; i < raw_records.length; i++)
+        for (int i = 0; i < records.length; i++)
         {
             System.out.format(format + "\n", records[i]);
             System.out.println(border);
