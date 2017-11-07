@@ -5,28 +5,32 @@ public class MovieGoer {
     
 	public static void listMovies() 
     {
-        Movie[] movies = CinemaStaff.read_movie();
+        Movie[] movies = Moblima.read_movie(true);
+        
+        String widths = "30,15,12,18";
+        utility.print_title_row("Movie Title, Genre, Age_Rating, Status", widths);
         for(int i = 0; i < movies.length; i++)
         {
-            System.out.println(movies[i].getMovieTitle());
+            String row = movies[i].getMovieTitle() + "," + movies[i].getGenre() + "," + movies[i].getAgeRating() + "," + movies[i].getStatus();
+            utility.print_row(i+1, row, widths);
         }
 	}
     
-/*     public static void viewMovieDetails()
+    public static void viewMovieDetails()
     {
         listMovies();
-        movie_attribute[] attributes = {movie_attribute.Movie_Title, movie_attribute.Synopsis, movie_attribute.Director, movie_attribute.Cast};
-		String [][] list= read_movie(attributes);
-        System.out.println("Enter the index of movie you wish to know more about: ");
+        System.out.print("Enter the index of movie you wish to know more about: ");
+        Movie movies[] = Moblima.read_movie(true);
         int choice = 0;
-        do{
+        do
+        {
             choice = sc.nextInt();
-        }while (choice <= 0 || choice > list.length);
+        }while (choice <= 0 || choice > movies.length);
         
         utility.printBorder();
-        for (int i = 0; i < attributes.length; i++)
-        {
-            System.out.println(attributes[i].name() + " : " + list[choice-1][i]);
-        }
-    } */
+        System.out.println("Movie Title: " + movies[choice-1].getMovieTitle());
+        System.out.println("Synopsis   : " + movies[choice-1].getSynopsis());
+        System.out.println("Director   : " + movies[choice-1].getDirector());
+        System.out.println("Cast       : " + movies[choice-1].getCast());
+    }
 }

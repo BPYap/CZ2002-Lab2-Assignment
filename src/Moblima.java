@@ -1,14 +1,45 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Moblima {
 	private static Scanner sc= new Scanner(System.in);
+    
+    public static Movie[] read_movie(boolean FilterEndOfShow)
+    // available attributes : Movie_Title, Genre, Synopsis, Director, Cast, Age_Group, Status
+    {
+        String allmovie = utility.readContent("movie.txt");
+        String [] raw_records = allmovie.split("\n");
+        
+        Movie[] movies = new Movie[raw_records.length];
+        
+        int count = 0; // end of show count
+        int temp = 0;
+        
+        for (int i = 0; i < raw_records.length; i++)
+        {
+            if(FilterEndOfShow && raw_records[i].contains("End of Showing"))
+            {
+                count++;
+                continue;
+            }
+            movies[temp] = new Movie(raw_records[i]);
+            temp++;
+        }
+        
+        if(count > 0)
+        {
+            movies = Arrays.copyOfRange(movies, 0, movies.length - count);
+        }
+
+        return movies;
+    }
+    
 	public static void main(String[] args) {
 		int stafforcust;
 		do {
 			System.out.println("\n(1)Customer");
 			System.out.println("(2)Staff");
 			System.out.println("(3)Exit");
-			System.out.println("\nChoose an option: ");
+			System.out.print("\nChoose an option: ");
 			stafforcust=sc.nextInt();
 			
 			switch(stafforcust) {
@@ -25,7 +56,7 @@ public class Moblima {
 						System.out.println("(8)List Current Top Rated Movies");
 						System.out.println("(9)Review Movie");
 						System.out.println("(10)Exit");
-						System.out.println("\nEnter the number of your choice: ");
+						System.out.print("\nEnter the number of your choice: ");
 						choice=sc.nextInt();
 						
 						switch(choice) {
@@ -33,7 +64,7 @@ public class Moblima {
 								MovieGoer.listMovies();
 								break;
 							case 2:
-                                //MovieGoer.viewMovieDetails();
+                                MovieGoer.viewMovieDetails();
 								break;
 							case 3:
 								break;
@@ -77,7 +108,7 @@ public class Moblima {
 						System.out.println("(9)Show All Ticket Price");
 						System.out.println("(10)Show All Movie Show Time");
 						System.out.println("(11)Exit");
-						System.out.println("\nChoose an option: ");
+						System.out.print("\nChoose an option: ");
 						choice2=sc.nextInt();
                         switch(choice2) {
                         case 1:

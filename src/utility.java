@@ -5,7 +5,7 @@ public class utility
 {
     public static void printBorder()
     {
-        System.out.println("================================");
+        System.out.println("==========================================");
     }
     
     public static void printline()
@@ -13,74 +13,70 @@ public class utility
         System.out.println("--------------------------");
     }
     
-    public static void print_table(String[] column_title, String[][] records)
-    // example column_title format : ["Movie Title", "Age Group", "Status"]
-    // example raw_records format : ["Kingsman|PG13|Now Showing", 
-    //                               "Thor Ragnarok|PG13|Now Showing"]
+    public static void print_title_row(String titles, String widths)
+    // separate title and width of each column with comma 
+    // Example: print_title_row("Movie title, Age rating, Status", "10, 20, 10")
     {
-        int[] max_lengths = new int[column_title.length]; // store the longest string length for each column
-        for(int i = 0; i < column_title.length; i++)
+        String[] title_array = titles.split(",");
+        String[] width_array = widths.split(",");
+        
+        String title_border = "+===+";
+        for (int i = 0; i < title_array.length; i++)
         {
-            max_lengths[i] = 0; // initialize all values to 0
+            for(int j = 0; j < Integer.parseInt(width_array[i]); j++)
+            {
+               title_border += "="; 
+            }
+            title_border += "+";
         }
         
-        //Object[][] records = new String[raw_records.length][]; 
-        for (int i = 0; i < records.length; i++)
+        String format = "|   |";
+        for (int i = 0; i < width_array.length; i++)
         {
-            //records[i] = new String[column_title.length];
-            //String[] record = raw_records[i].split("\|");
-            for(int j = 0; j < column_title.length; j++)
-            {
-                //records[i][j] = record[j];
-                if (records[i][j].length() > max_lengths[j])
-                {
-                    max_lengths[j] = records[i][j].length();
-                }
-            }
-        }    
-        
-        int character_count = 0;
-        String format = "";
-        for (int i = 0; i < max_lengths.length; i++)
-        {
-            format = format + "|%" + (max_lengths[i] + 10) + "s";
-            character_count += max_lengths[i] + 10;
+            format += "%" + Integer.parseInt(width_array[i]) + "s|";
         }
-        
-        String border = "   +";
-        String title_border = "   +";
-        int temp = 0;
-        int count = 0;
-        for (int i = 0; i < character_count; i++)
-        {
-            border = border + "-";
-            title_border = title_border + "=";
-            if (count+1 == (max_lengths[temp] + 10))
-            {
-                border = border + "+";
-                title_border = title_border + "+";
-                temp++;
-                count = 0;
-            }
-            else
-            {
-                count++;
-            }
-        }
-
-        format += "|";
         
         System.out.println(title_border);
-        System.out.format("   ");
-        System.out.format(format + "\n", column_title);
+        System.out.format(format + "\n", title_array);
         System.out.println(title_border);
-        for (int i = 0; i < records.length; i++)
-        {
-            System.out.format("%-3s", i+1);
-            System.out.format(format + "\n", records[i]);
-            System.out.println(border);
-        }
+        
     }
+    
+    public static void print_row(int index, String row, String widths)
+    // include indexing
+    {
+        String[] temp = row.split(",");
+        String[] row_attributes = new String[temp.length + 1];
+        row_attributes[0] = Integer.toString(index);
+        String[] width_array = widths.split(",");
+        
+        String border = "+---+";
+        for (int i = 0; i < temp.length; i++)
+        {
+            if(i != 0)
+            {
+                row_attributes[i] = temp[i-1];
+            }
+            for(int j = 0; j < Integer.parseInt(width_array[i]); j++)
+            {
+               border += "-"; 
+            }
+            border += "+";
+        }
+        
+        row_attributes[temp.length] = temp[temp.length - 1];
+        
+        String format = "|%3s|";
+        for (int i = 0; i < width_array.length; i++)
+        {
+            format += "%" + Integer.parseInt(width_array[i]) + "s|";
+        }
+        
+        System.out.format(format + "\n", row_attributes);
+        System.out.println(border);
+    }
+    
+
     
     public static void updateFile(String file_name, String old_record, String new_record) 
     // replace old record in file with new record. Recommend to use readLine(file_name, keyword) to find old record

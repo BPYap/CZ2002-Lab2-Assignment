@@ -13,23 +13,11 @@ public class CinemaStaff
         if(!password.equals(input))
             System.out.println("Incorrect password");
         else
-            login_status = true;
-            System.out.println("Welcome Staff");
-    }
-    
-    public static Movie[] read_movie()
-    // available attributes : Movie_Title, Genre, Synopsis, Director, Cast, Age_Group, Status
-    {
-        String allmovie = utility.readContent("movie.txt");
-        String [] raw_records = allmovie.split("\n");
-        
-        Movie[] movies = new Movie[raw_records.length];
-        for (int i = 0; i < raw_records.length; i++)
         {
-            movies[i] = new Movie(raw_records[i]);
+            login_status = true;
+            System.out.println("Welcome, Staff");
         }
 
-        return movies;
     }
     
 /* 	public static void listMovies() 
