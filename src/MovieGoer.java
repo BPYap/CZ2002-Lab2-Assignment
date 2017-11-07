@@ -52,15 +52,20 @@ public class MovieGoer {
         utility.print_table(column_title, list);
 	}
     
-    /* public static void viewMovieDetails(){
-        String [][] list= readmovie();
+    public static void viewMovieDetails()
+    {
+        listMovies();
+        movie_attribute[] attributes = {movie_attribute.Movie_Title, movie_attribute.Synopsis, movie_attribute.Director, movie_attribute.Cast};
+		String [][] list= read_movie(attributes);
+        System.out.println("Enter the index of movie you wish to know more about: ");
+        int choice = 0;
+        do{
+            choice = sc.nextInt();
+        }while (choice <= 0 || choice > list.length);
         
-        for(int i=0;i<list.length;i++){
-            if(list[i][6].equals("End of Showing")){
-                continue;
-            }
-            int k=i+1;
-            System.out.println("("+k+") "+list[i][0]);
+        for (int i = 0; i < attributes.length; i++)
+        {
+            System.out.println(attributes[i].name() + " : " + list[choice-1][i]);
         }
-    } */
+    }
 }

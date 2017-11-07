@@ -47,8 +47,8 @@ public class utility
             character_count += max_lengths[i] + 10;
         }
         
-        String border = "+";
-        String title_border = "+";
+        String border = "   +";
+        String title_border = "   +";
         int temp = 0;
         int count = 0;
         for (int i = 0; i < character_count; i++)
@@ -71,10 +71,12 @@ public class utility
         format += "|";
         
         System.out.println(title_border);
+        System.out.format("   ");
         System.out.format(format + "\n", column_title);
         System.out.println(title_border);
         for (int i = 0; i < records.length; i++)
         {
+            System.out.format("%-3s", i+1);
             System.out.format(format + "\n", records[i]);
             System.out.println(border);
         }
