@@ -13,7 +13,7 @@ public class utility
         System.out.println("--------------------------");
     }
     
-    public static void print_table(Object[] column_title, String[] raw_records)
+    public static void print_table(Object[] column_title, String[][] records)
     // example column_title format : ["Movie Title", "Age Group", "Status"]
     // example raw_records format : ["Kingsman|PG13|Now Showing", 
     //                               "Thor Ragnarok|PG13|Now Showing"]
@@ -24,17 +24,17 @@ public class utility
             max_lengths[i] = 0; // initialize all values to 0
         }
         
-        Object[][] records = new String[raw_records.length][]; 
+        //Object[][] records = new String[raw_records.length][]; 
         for (int i = 0; i < raw_records.length; i++)
         {
-            records[i] = new String[column_title.length];
-            String[] record = raw_records[i].split("\|");
+            //records[i] = new String[column_title.length];
+            //String[] record = raw_records[i].split("\|");
             for(int j = 0; j < column_title.length; j++)
             {
-                records[i][j] = record[j];
-                if (record[j].length() > max_lengths[j])
+                //records[i][j] = record[j];
+                if (record[i][j].length() > max_lengths[j])
                 {
-                    max_lengths[j] = record[j].length();
+                    max_lengths[j] = record[i][j].length();
                 }
             }
             
