@@ -115,6 +115,7 @@ public class Moblima {
                             CinemaStaff.addMovie();
                             break;
                         case 2:
+                            CinemaStaff.setMovieStatus();
                             break;
                         case 3:
                             break;
