@@ -2,26 +2,10 @@ import java.util.*;
 
 public class MovieGoer {
 	public static Scanner sc = new Scanner(System.in);
-	
-
-    public static Movie[] read_movie()
-    // available attributes : Movie_Title, Genre, Synopsis, Director, Cast, Age_Group, Status
-    {
-        String allmovie = utility.readContent("movie.txt");
-        String [] raw_records = allmovie.split("\n");
-        
-        Movie[] movies = new Movie[raw_records.length];
-        for (int i = 0; i < raw_records.length; i++)
-        {
-            movies[i] = new Movie(raw_records[i]);
-        }
-
-        return movies;
-    }
     
 	public static void listMovies() 
     {
-        Movie[] movies = read_movie();
+        Movie[] movies = CinemaStaff.read_movie();
         for(int i = 0; i < movies.length; i++)
         {
             System.out.println(movies[i].getMovieTitle());
