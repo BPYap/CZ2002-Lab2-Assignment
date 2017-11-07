@@ -33,7 +33,7 @@ public class Moblima {
 								MovieGoer.listMovies();
 								break;
 							case 2:
-                                MovieGoer.viewMovieDetails();
+                                //MovieGoer.viewMovieDetails();
 								break;
 							case 3:
 								break;
