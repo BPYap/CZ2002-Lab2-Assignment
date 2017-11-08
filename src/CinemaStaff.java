@@ -8,7 +8,7 @@ public class CinemaStaff
     
     private static void listMovies() 
     {
-        Movie[] movies = Moblima.read_movie(false);
+        Movie[] movies = Database.read_movie(false);
         
         String widths = "30,18";
         utility.print_title_row("Movie Title, Status", widths);
@@ -101,7 +101,7 @@ public class CinemaStaff
     {
         System.out.println("========== Set Movie Status ==========");
         listMovies();
-        Movie[] movies = Moblima.read_movie(false);
+        Movie[] movies = Database.read_movie(false);
         System.out.print("Enter index of movie to be updated: ");
         int choice = 0;
         do
@@ -178,13 +178,12 @@ public class CinemaStaff
     public static void editSpecialDate()
     {
         System.out.println("========== Edit Special Date ==========");
-        String[] raw_records = utility.readContent("special_date.txt");
-        SpecialDate[] special_dates = new SpecialDate[raw_records.length];
+
+        SpecialDate[] special_dates = Database.read_special_date();
         String widths = "12,15,30";
         utility.print_title_row("Date, Discount(%), Remark", widths);
         for(int i = 0; i < special_dates.length; i++)
         {
-            special_dates[i] = new SpecialDate(raw_records[i]);
             String row = special_dates[i].getDate() + "," + special_dates[i].getDiscount() + "," + special_dates[i].getRemark();
             utility.print_row(i+1, row, widths);
         }
