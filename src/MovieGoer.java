@@ -5,7 +5,7 @@ public class MovieGoer {
     
 	public static void listMovies() 
     {
-        Movie[] movies = Moblima.read_movie(true);
+        Movie[] movies = Database.read_movie(true);
         
         String widths = "30,15,12,18";
         utility.print_title_row("Movie Title, Genre, Age_Rating, Status", widths);
@@ -20,7 +20,7 @@ public class MovieGoer {
     {
         listMovies();
         System.out.print("Enter the index of movie you wish to know more about: ");
-        Movie movies[] = Moblima.read_movie(true);
+        Movie movies[] = Database.read_movie(true);
         int choice = 0;
         do
         {

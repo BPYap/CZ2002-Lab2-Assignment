@@ -3,34 +3,6 @@ import java.util.*;
 public class Moblima {
 	private static Scanner sc= new Scanner(System.in);
     
-    public static Movie[] read_movie(boolean FilterEndOfShow)
-    // available attributes : Movie_Title, Genre, Synopsis, Director, Cast, Age_Group, Status
-    {
-        String [] raw_records = utility.readContent("movie.txt");
-        Movie[] movies = new Movie[raw_records.length];
-        
-        int count = 0; // end of show count
-        int temp = 0;
-        
-        for (int i = 0; i < raw_records.length; i++)
-        {
-            if(FilterEndOfShow && raw_records[i].contains("End of Showing"))
-            {
-                count++;
-                continue;
-            }
-            movies[temp] = new Movie(raw_records[i]);
-            temp++;
-        }
-        
-        if(count > 0)
-        {
-            movies = Arrays.copyOfRange(movies, 0, movies.length - count);
-        }
-
-        return movies;
-    }
-    
 	public static void main(String[] args) {
 		int stafforcust;
 		do {
