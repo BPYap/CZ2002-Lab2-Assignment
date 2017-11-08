@@ -3,17 +3,6 @@ import java.util.*;
 public class MovieGoer {
 	public static Scanner sc = new Scanner(System.in);
     
-    public static Review[] read_review(){
-        String [] raw_records = utility.readContent("review.txt");
-        Review[] reviews = new Review[raw_records.length];
-        
-        for(int i=0;i < raw_records.length;i++){
-            reviews[i] = new Review(raw_records[i]);
-        }
-        
-        return reviews;
-    }
-    
     public static void reviewMovie(){
         System.out.println("========== Review Movie ==========");
         System.out.println("Which movie you want to review");
@@ -38,7 +27,7 @@ public class MovieGoer {
     public static void listReview(){
         String movie;
         movie = listAllMovies();
-        Review[] reviews = read_review();
+        Review[] reviews = Database.read_review();
         
         for(int i=0;i<reviews.length;i++){
             if(reviews[i].getMovieTitle().equals(movie)){
@@ -51,7 +40,7 @@ public class MovieGoer {
     public static String listAllMovies(){
         String movie;
         
-        Movie[] movies = Moblima.read_movie(false);
+        Movie[] movies = Database.read_movie(false);
         
         for(int i=0;i<movies.length;i++){
             int k=i+1;

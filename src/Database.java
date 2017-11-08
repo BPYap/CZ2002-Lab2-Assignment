@@ -41,7 +41,7 @@ public class Database
         return special_dates;
     }
     
-    public static ShowTime[] read_show_time()
+/*     public static ShowTime[] read_show_time()
     {
         
     }
@@ -50,16 +50,22 @@ public class Database
     {
         
     }
-
-    public static Review[] read_review()
-    {
+ */
+    public static Review[] read_review(){
+        String [] raw_records = utility.readContent("review.txt");
+        Review[] reviews = new Review[raw_records.length];
         
+        for(int i=0;i < raw_records.length;i++){
+            reviews[i] = new Review(raw_records[i]);
+        }
+        
+        return reviews;
     }
     
-    public static Transaction[] read_transaction()
+/*     public static Transaction[] read_transaction()
     {
         
-    }
+    } */
     
     
 }
