@@ -108,7 +108,7 @@ public class utility
         } 
         catch (Exception e) 
         {
-            System.out.println("Problem reading file. " + file_name + " " + e.getMessage());
+            System.out.println("Problem reading file. " + " " + e.getMessage());
             System.exit(0);
         }
     }
@@ -138,7 +138,7 @@ public class utility
         {
             // input the file content to the StringBuffer "input"
             BufferedReader file = new BufferedReader(new FileReader(file_name));
-        
+            
             String current_line = file.readLine();
             
             String[] keywords = keyword.split(",");
@@ -173,7 +173,7 @@ public class utility
         } 
         catch (Exception e) 
         {
-            System.out.println("Problem reading file. " + file_name + " " + e.getMessage());
+            System.out.println("Problem reading file. " + e.getMessage());
             System.exit(0);
         }
         return "None";
@@ -214,6 +214,7 @@ public class utility
         try 
         {
             BufferedReader file = new BufferedReader(new FileReader(file_name));
+            
             StringBuffer inputBuffer = new StringBuffer();
             
             String current_line = file.readLine();      
@@ -231,7 +232,8 @@ public class utility
         } 
         catch (Exception e) 
         {
-            System.out.println("Problem reading file. " + file_name + " " + e.getMessage());
+            System.out.println("Problem reading file. " + e.getMessage());
+            e.printStackTrace(System.err);
             System.exit(0);
         }
         return null;

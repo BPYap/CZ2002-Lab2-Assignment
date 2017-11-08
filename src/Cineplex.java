@@ -1,3 +1,5 @@
+
+
 public class Cineplex {
 	private Cinema[] cinema;
 	private String location;
@@ -7,6 +9,14 @@ public class Cineplex {
 		this.location=location;
 		this.number_of_cinema=number_of_cinema;
 	}
+	
+	public Cineplex(String record)
+    {
+        Object [] attributes = record.split("\\|");
+        number_of_cinema = (int) attributes[0];
+        location = (String)attributes[1];
+        //Cinema(record);
+    }
 	
 	public String getLocation() {
 		return location;

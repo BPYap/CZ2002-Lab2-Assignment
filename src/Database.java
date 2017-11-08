@@ -46,7 +46,7 @@ public class Database
         
     }
 */
-public static TicketPrice read_ticket_price()
+    public static TicketPrice read_ticket_price()
     {
         String raw_record = utility.readContent("ticket.txt")[0];
         return new TicketPrice(raw_record);
@@ -67,6 +67,15 @@ public static TicketPrice read_ticket_price()
     {
         
     } */
-    
+    public static Cineplex[] read_cineplex() {
+    	String [] raw_records = utility.readContent("cinema.txt");
+        Cineplex[] cineplexs = new Cineplex[raw_records.length];
+        
+        for(int i=0;i < raw_records.length;i++){
+            cineplexs[i] = new Cineplex(raw_records[i]);
+        }
+        
+        return cineplexs;
+    }
     
 }
