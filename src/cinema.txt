@@ -1,11 +1,11 @@
 Location|Cinema_Code|Cinema_Class|Number_of_Rows|Number_of_Columns
 
-Jurong Point|JP1|Platinum Movie Suites|3|10
-Jurong Point|JP2|Normal Movie Suites|5|10
-Jurong Point|JP3|Normal Movie Suites|6|10
-Bugis|BG1|Platinum Movie Suites|3|10
-Bugis|BG2|Normal Movie Suites|5|10
-Bugis|BG3|Normal Movie Suites|6|10
-Pasir Ris|PR1|Platinum Movie Suites|3|10
-Pasir Ris|PR2|Normal Movie Suites|5|10
-Pasir Ris|PR3|Normal Movie Suites|6|10
+3|Jurong Point|JP1|Platinum Movie Suites|3|10
+3|Jurong Point|JP2|Normal Movie Suites|5|10
+3|Jurong Point|JP3|Normal Movie Suites|6|10
+3|Bugis|BG1|Platinum Movie Suites|3|10
+3|Bugis|BG2|Normal Movie Suites|5|10
+3|Bugis|BG3|Normal Movie Suites|6|10
+3|Pasir Ris|PR1|Platinum Movie Suites|3|10
+3|Pasir Ris|PR2|Normal Movie Suites|5|10
+3|Pasir Ris|PR3|Normal Movie Suites|6|10
