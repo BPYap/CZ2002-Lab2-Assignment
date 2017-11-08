@@ -33,7 +33,7 @@ public class Moblima {
                         System.out.println("(11)Exit");
                         do
                         {
-                            System.out.print("\nEnter the number of your choice: ");
+                            System.out.print("\nChoose an option: ");
                             choice=sc.nextInt();
                         }while(choice <= 0 || choice > 11);
 						sc.nextLine();
