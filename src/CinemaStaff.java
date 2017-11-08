@@ -218,17 +218,60 @@ public class CinemaStaff
     }   
     public static void editTicketPrice()
     {
+        System.out.println("========== Edit Ticket Price==========");
+        TicketPrice ticket_info = Database.read_ticket_price(); 
+        int choice = 0;
+        System.out.println("Select which to update: ");
+        System.out.println("    1. Adult Ticket Price          (current: S$" + ticket_info.getAdult() + ")");
+        System.out.println("    2. Children Ticket Price       (current: S$" + ticket_info.getChildren() + ")");
+        System.out.println("    3. Senior Citizen Ticket Price (current: S$" + ticket_info.getSenior() + ")");
+        System.out.println("    4. Platinum suites charge      (current: S$" + ticket_info.getPlatinum() + ")");
+        do
+        {
+            System.out.print("> ");
+            choice = sc.nextInt();
+        }while(choice <= 0 || choice > 4);
+        sc.nextLine();
+        double amount = 0;
+        do
+        {
+            System.out.print("Enter new amount: S$");
+            amount = sc.nextDouble();
+        }while(amount < 0);
+
+        String old_record = ticket_info.toString();
+        switch(choice)
+        {
+            case 1:
+                ticket_info.setAdult(amount);
+                break;
+            case 2:
+                ticket_info.setChildren(amount);
+                break;
+            case 3:
+                ticket_info.setSenior(amount);
+                break;
+            case 4:
+                ticket_info.setPlatinum(amount);
+                break;
+        }
         
+        utility.updateFile("ticket.txt", old_record, ticket_info.toString());
+        
+        System.out.println("Successfully updated ticket price");
+        
+    }
+    
+    public static void showAllTicketPrice()
+    {
+        TicketPrice ticket_info = Database.read_ticket_price();
+        String widths = "8,10,15,30";
+        utility.print_title_row("Adult, Children, Senior Citizen, Platinum suite extra charge", widths);
+        String row = "S$" + ticket_info.getAdult() + "," + "S$" +  ticket_info.getChildren() + "," + "S$" + ticket_info.getSenior() + "," + "S$" + ticket_info.getPlatinum();
+        utility.print_row(1, row, widths);
     }
     
     public static void createMovieShowTime()
-    {
-        
-    }
-    
-
-    
-    public static void showAllTicketPrice()
     {
         
     }

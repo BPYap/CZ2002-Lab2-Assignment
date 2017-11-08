@@ -116,8 +116,10 @@ public class Moblima {
                             CinemaStaff.showAllSpecialDates();
                             break;
                         case 7:
+                            CinemaStaff.editTicketPrice();
                             break;
                         case 8:
+                            CinemaStaff.showAllTicketPrice();
                             break;
                         case 9:
                             break;
