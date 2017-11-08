@@ -6,19 +6,6 @@ public class CinemaStaff
     public static boolean login_status = false;
     public static Scanner sc = new Scanner(System.in);
     
-    private static void listMovies() 
-    {
-        Movie[] movies = Database.read_movie(false);
-        
-        String widths = "30,18";
-        utility.print_title_row("Movie Title, Status", widths);
-        for(int i = 0; i < movies.length; i++)
-        {
-            String row = movies[i].getMovieTitle() + "," + movies[i].getStatus();
-            utility.print_row(i+1, row, widths);
-        }
-	}
-    
     public static void login()
     {
         System.out.println("Enter password: ");
@@ -32,6 +19,19 @@ public class CinemaStaff
         }
 
     }
+    
+    public static void listMovies() 
+    {
+        Movie[] movies = Database.read_movie(false);
+        
+        String widths = "30,18";
+        utility.print_title_row("Movie Title, Status", widths);
+        for(int i = 0; i < movies.length; i++)
+        {
+            String row = movies[i].getMovieTitle() + "," + movies[i].getStatus();
+            utility.print_row(i+1, row, widths);
+        }
+	}
     
     public static void addMovie()
     {
@@ -181,15 +181,8 @@ public class CinemaStaff
     public static void editSpecialDate()
     {
         System.out.println("========== Edit Special Date ==========");
-
+        showAllSpecialDates();
         SpecialDate[] special_dates = Database.read_special_date();
-        String widths = "12,15,30";
-        utility.print_title_row("Date, Discount(%), Remark", widths);
-        for(int i = 0; i < special_dates.length; i++)
-        {
-            String row = special_dates[i].getDate() + "," + special_dates[i].getDiscount() + "," + special_dates[i].getRemark();
-            utility.print_row(i+1, row, widths);
-        }
         int choice = 0;
         do
         {
@@ -212,6 +205,17 @@ public class CinemaStaff
         System.out.println("Successfully updated new discount rate to " + selected_date.getDiscount() + "%");
     }
     
+     public static void showAllSpecialDates()
+    {
+        SpecialDate[] special_dates = Database.read_special_date();
+        String widths = "12,15,30";
+        utility.print_title_row("Date, Discount(%), Remark", widths);
+        for(int i = 0; i < special_dates.length; i++)
+        {
+            String row = special_dates[i].getDate() + "," + special_dates[i].getDiscount() + "," + special_dates[i].getRemark();
+            utility.print_row(i+1, row, widths);
+        }
+    }   
     public static void editTicketPrice()
     {
         
@@ -222,15 +226,7 @@ public class CinemaStaff
         
     }
     
-    public static void showAllMovies()
-    {
-        
-    }
-    
-    public static void showAllSpecialDates()
-    {
-        
-    }
+
     
     public static void showAllTicketPrice()
     {

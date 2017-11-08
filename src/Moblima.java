@@ -81,13 +81,13 @@ public class Moblima {
                         utility.printBorder();
 						System.out.println("(1)Add Movie");
 						System.out.println("(2)Set Movie Status");
-						System.out.println("(3)Add Special Date");
-						System.out.println("(4)Edit Special Date");
-						System.out.println("(5)Edit Ticket Price");
-						System.out.println("(6)Create Movie Show Time");
-						System.out.println("(7)Show All Movie");
-						System.out.println("(8)Show All Special Date");
-						System.out.println("(9)Show All Ticket Price");
+                        System.out.println("(3)Show All Movie");
+						System.out.println("(4)Add Special Date");
+						System.out.println("(5)Edit Special Date");
+                        System.out.println("(6)Show All Special Date");
+						System.out.println("(7)Edit Ticket Price");
+                        System.out.println("(8)Show All Ticket Price");
+						System.out.println("(9)Create Movie Show Time");
 						System.out.println("(10)Show All Movie Show Time");
 						System.out.println("(11)Exit");
                         do
@@ -104,14 +104,16 @@ public class Moblima {
                             CinemaStaff.setMovieStatus();
                             break;
                         case 3:
-                            CinemaStaff.addSpecialDate();
+                            CinemaStaff.listMovies();
                             break;
                         case 4:
-                            CinemaStaff.editSpecialDate();
+                            CinemaStaff.addSpecialDate();
                             break;
                         case 5:
+                            CinemaStaff.editSpecialDate();
                             break;
                         case 6:
+                            CinemaStaff.showAllSpecialDates();
                             break;
                         case 7:
                             break;
