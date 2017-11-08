@@ -53,6 +53,7 @@ public class CinemaStaff
         int choice;
         do
         {
+            System.out.print("> ");
             choice = sc.nextInt();
         }while(choice <= 0 || choice > 3);
         String age_group = "NULL";
@@ -74,6 +75,7 @@ public class CinemaStaff
         System.out.println("    3. Preview");
         do
         {
+            System.out.print("> ");
             choice = sc.nextInt();
         }while(choice <= 0 || choice > 3);
         String status = "NULL";
@@ -102,10 +104,10 @@ public class CinemaStaff
         System.out.println("========== Set Movie Status ==========");
         listMovies();
         Movie[] movies = Database.read_movie(false);
-        System.out.print("Enter index of movie to be updated: ");
         int choice = 0;
         do
         {
+            System.out.print("Enter index of movie to be updated: ");
             choice = sc.nextInt();
         }while (choice <= 0 || choice > movies.length);
         
@@ -119,6 +121,7 @@ public class CinemaStaff
         System.out.println("    4. End of Showing");
         do
         {
+            System.out.print("> ");
             choice = sc.nextInt();
         }while(choice <= 0 || choice > 4);
         sc.nextLine();
@@ -147,22 +150,22 @@ public class CinemaStaff
         System.out.println("========== Add Special Date ==========");
         System.out.print("Enter year: ");
         int year = sc.nextInt();
-        System.out.print("Enter month: ");
         int month = 0;
         do
         {
+            System.out.print("Enter month: ");
             month = sc.nextInt();
         }while(month <= 0 || month > 12);
-        System.out.print("Enter day: ");
         int day = 0;
         do
         {
+            System.out.print("Enter day: ");
             day = sc.nextInt();
         }while(month <= 0 || month > 31);
-        System.out.print("Enter discount: ");
         double discount = 0;
         do
         {
+            System.out.print("Enter discount: ");
             discount = sc.nextDouble();
         }while(discount <= 0 || discount > 100);
         System.out.print("Enter remark: ");
@@ -187,20 +190,19 @@ public class CinemaStaff
             String row = special_dates[i].getDate() + "," + special_dates[i].getDiscount() + "," + special_dates[i].getRemark();
             utility.print_row(i+1, row, widths);
         }
-        System.out.print("Enter index of dates to be updated: ");
         int choice = 0;
         do
         {
+            System.out.print("Enter index of dates to be updated: ");
             choice = sc.nextInt();
         }while (choice <= 0 || choice > special_dates.length);
         
         SpecialDate selected_date = special_dates[choice-1];
         String old_record = selected_date.toString();
-        
-        System.out.println("Enter new discount : ");
         double discount = 0;
         do
         {
+            System.out.println("Enter new discount : ");
             discount = sc.nextDouble();
         }while(discount <= 0 || discount > 100);
         selected_date.setDiscount(discount);

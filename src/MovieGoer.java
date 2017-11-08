@@ -10,10 +10,10 @@ public class MovieGoer {
             int k=i+1;
             System.out.println("("+k+") : "+ movies[i].getMovieTitle());
         }
-        System.out.println("Select the index of a movie to review");
         int choice = 0;
         do
         {
+            System.out.println("Select the index of a movie to review");
             choice = sc.nextInt();
         }while(choice <= 0 || choice > movies.length);
         sc.nextLine();
@@ -37,11 +37,11 @@ public class MovieGoer {
     public static void viewMovieDetails()
     {
         listMovies();
-        System.out.print("Enter the index of movie you wish to know more about: ");
         Movie movies[] = Database.read_movie(true);
         int choice = 0;
         do
         {
+            System.out.print("Enter the index of movie you wish to know more about: ");
             choice = sc.nextInt();
         }while (choice <= 0 || choice > movies.length);
         sc.nextLine();
@@ -59,9 +59,9 @@ public class MovieGoer {
         String reviewer = sc.nextLine();
         System.out.print("Enter your comment: ");
         String comment = sc.nextLine();
-        System.out.print("Enter your rating (1-10): ");
         int rating;
         do{
+            System.out.print("Enter your rating (1-10): ");
             rating = sc.nextInt();
         }while(rating <= 0 || rating >10);
         sc.nextLine();
