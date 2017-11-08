@@ -10,10 +10,11 @@ public class MovieGoer {
             int k=i+1;
             System.out.println("("+k+") : "+ movies[i].getMovieTitle());
         }
+        System.out.println();
         int choice = 0;
         do
         {
-            System.out.println("Select the index of a movie to review");
+            System.out.print("Select an index from the movie titles: ");
             choice = sc.nextInt();
         }while(choice <= 0 || choice > movies.length);
         sc.nextLine();
@@ -50,6 +51,7 @@ public class MovieGoer {
         System.out.println("Synopsis   : " + movies[choice-1].getSynopsis());
         System.out.println("Director   : " + movies[choice-1].getDirector());
         System.out.println("Cast       : " + movies[choice-1].getCast());
+        utility.printBorder();
     }
     
     public static void reviewMovie(){
@@ -73,6 +75,7 @@ public class MovieGoer {
     }
     
     public static void listReview(){
+        System.out.println("========== View Movie Review ==========");
         String movie_title = selectMovieTitle();
         Review[] reviews = Database.read_review();
         
