@@ -3,6 +3,69 @@ import java.util.*;
 public class MovieGoer {
 	public static Scanner sc = new Scanner(System.in);
     
+    public static Review[] read_review(){
+        String [] raw_records = utility.readContent("review.txt");
+        Review[] reviews = new Review[raw_records.length];
+        
+        for(int i=0;i < raw_records.length;i++){
+            reviews[i] = new Review(raw_records[i]);
+        }
+        
+        return reviews;
+    }
+    
+    public static void reviewMovie(){
+        System.out.println("========== Review Movie ==========");
+        System.out.println("Which movie you want to review");
+        String movie = listAllMovies();
+        System.out.print("Enter your comment: ");
+        String dummy = sc.nextLine();
+        String comment = sc.nextLine();
+        System.out.print("Enter your name: ");
+        String reviewer = sc.nextLine();
+        System.out.print("Enter your rating (1-10): ");
+        int rating;
+        do{
+            rating = sc.nextInt();
+        }while(rating<0 || rating >10);
+        
+        Review review = new Review(movie, reviewer, comment, rating);
+        String record = review.toString();
+        utility.addRecord("review.txt",record);
+        System.out.println("Your review is added into review database");
+    }
+    
+    public static void listReview(){
+        String movie;
+        movie = listAllMovies();
+        Review[] reviews = read_review();
+        
+        for(int i=0;i<reviews.length;i++){
+            if(reviews[i].getMovieTitle().equals(movie)){
+                String row = "Movie Title : "+reviews[i].getMovieTitle()+"\n"+"Reviewer :    "+reviews[i].getReviewer()+"\n"+"Comment :    "+reviews[i].getComments()+"\n"+"Rating :    "+reviews[i].getRating();
+                System.out.println(row);
+            }
+        }
+    }
+    
+    public static String listAllMovies(){
+        String movie;
+        
+        Movie[] movies = Moblima.read_movie(false);
+        
+        for(int i=0;i<movies.length;i++){
+            int k=i+1;
+            System.out.println("("+k+") : "+movies[i].getMovieTitle());
+        }
+        
+        int choice = 0;
+        choice = sc.nextInt();
+        
+        movie=movies[choice-1].getMovieTitle();
+        
+        return movie;
+    }
+    
 	public static void listMovies() 
     {
         Movie[] movies = Moblima.read_movie(true);

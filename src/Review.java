@@ -3,7 +3,6 @@ public class Review {
    private String comments;
    private int rating;
    private String reviewer;
-  
    private String movie_title;
    
    public Review( String movie_title,String reviewer, String comments,int rating) {
@@ -13,6 +12,16 @@ public class Review {
 	   this.rating = rating;
 	   
    }
+   
+   public Review (String record){
+        String[] attributes = record.split("\\|");
+        movie_title = attributes[0];
+        reviewer = attributes[1];
+        comments = attributes[2];
+        int record_rating = Integer.parseInt(attributes[3]);
+        rating = record_rating;
+   }
+   
    public String getMovieTitle() {
 	   return this.movie_title;
 	   
@@ -27,9 +36,6 @@ public class Review {
 	   return this.rating;
    }
    public String toString() {
-	   return String.format("Reviewer " + this.reviewer +
-			  " ,Comments " + this.comments +
-			  ",Rating: " + this.rating);
-			      
+        return movie_title + "|" + reviewer + "|" + comments + "|" +rating;
    }
 }
