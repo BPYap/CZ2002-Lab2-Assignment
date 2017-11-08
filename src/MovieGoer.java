@@ -8,7 +8,7 @@ public class MovieGoer {
         
         for(int i = 0; i < movies.length; i++){
             int k=i+1;
-            System.out.println("("+k+") : "+ movies[i].getMovieTitle());
+            System.out.format("%-2s : " + movies[i].getMovieTitle() + "\n", k);
         }
         System.out.println();
         int choice = 0;
@@ -79,10 +79,14 @@ public class MovieGoer {
         String movie_title = selectMovieTitle();
         Review[] reviews = Database.read_review();
         
+        System.out.println("\nMovie Title: " + movie_title);
+        utility.printline();
         for(int i=0;i<reviews.length;i++){
             if(reviews[i].getMovieTitle().equals(movie_title)){
-                String row = "Movie Title : "+reviews[i].getMovieTitle()+"\n"+"Reviewer :    "+reviews[i].getReviewer()+"\n"+"Comment :    "+reviews[i].getComments()+"\n"+"Rating :    "+reviews[i].getRating();
-                System.out.println(row);
+                System.out.println("Reviewer : " + reviews[i].getReviewer());
+                System.out.println("Rating   : " + reviews[i].getRating());
+                System.out.println('"'+ reviews[i].getComments() + '"');
+                utility.printline();
             }
         }
     }
