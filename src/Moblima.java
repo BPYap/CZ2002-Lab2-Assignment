@@ -4,17 +4,21 @@ public class Moblima {
 	private static Scanner sc= new Scanner(System.in);
     
 	public static void main(String[] args) {
-		int stafforcust;
+		int stafforcust = 0;
 		do {
 			System.out.println("\n(1)Customer");
 			System.out.println("(2)Staff");
 			System.out.println("(3)Exit");
-			System.out.print("\nChoose an option: ");
-			stafforcust=sc.nextInt();
+            do
+            {
+                System.out.print("\nChoose an option: ");
+                stafforcust=sc.nextInt();
+            }while(stafforcust <= 0 || stafforcust > 3);
+            sc.nextLine();
 			
 			switch(stafforcust) {
 				case 1:
-					int choice;
+					int choice = 0;
 					do {
 						System.out.println("\n(1)List Movies");
 						System.out.println("(2)View Movie Details");
@@ -27,9 +31,12 @@ public class Moblima {
 						System.out.println("(9)Review Movie");
 						System.out.println("(10)View Movie's Reviews");
                         System.out.println("(11)Exit");
-						System.out.print("\nEnter the number of your choice: ");
-						choice=sc.nextInt();
-						
+                        do
+                        {
+                            System.out.print("\nEnter the number of your choice: ");
+                            choice=sc.nextInt();
+                        }while(choice <= 0 || choice > 11);
+						sc.nextLine();
 						switch(choice) {
 							case 1:
 								MovieGoer.listMovies();
@@ -69,7 +76,7 @@ public class Moblima {
                         break;
                     }
 					
-                    int choice2;
+                    int choice2 = 0;
 					do {
                         utility.printBorder();
 						System.out.println("(1)Add Movie");
@@ -83,8 +90,12 @@ public class Moblima {
 						System.out.println("(9)Show All Ticket Price");
 						System.out.println("(10)Show All Movie Show Time");
 						System.out.println("(11)Exit");
-						System.out.print("\nChoose an option: ");
-						choice2=sc.nextInt();
+                        do
+                        {
+                            System.out.print("\nChoose an option: ");
+                            choice2 = sc.nextInt();
+                        }while(choice2 <= 0 || choice2 > 11);
+                        sc.nextLine();
                         switch(choice2) {
                         case 1:
                             CinemaStaff.addMovie();
