@@ -6,9 +6,7 @@ public class Moblima {
     public static Movie[] read_movie(boolean FilterEndOfShow)
     // available attributes : Movie_Title, Genre, Synopsis, Director, Cast, Age_Group, Status
     {
-        String allmovie = utility.readContent("movie.txt");
-        String [] raw_records = allmovie.split("\n");
-        
+        String [] raw_records = utility.readContent("movie.txt");
         Movie[] movies = new Movie[raw_records.length];
         
         int count = 0; // end of show count
@@ -118,8 +116,10 @@ public class Moblima {
                             CinemaStaff.setMovieStatus();
                             break;
                         case 3:
+                            CinemaStaff.addSpecialDate();
                             break;
                         case 4:
+                            CinemaStaff.editSpecialDate();
                             break;
                         case 5:
                             break;

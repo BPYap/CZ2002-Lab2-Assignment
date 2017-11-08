@@ -22,13 +22,13 @@ public class CinemaStaff
     public static void login()
     {
         System.out.println("Enter password: ");
-        String input = sc.next();
+        String input = sc.nextLine();;
         if(!password.equals(input))
             System.out.println("Incorrect password");
         else
         {
             login_status = true;
-            System.out.println("Welcome, Staff");
+            System.out.println("\nWelcome, Staff");
         }
 
     }
@@ -36,7 +36,6 @@ public class CinemaStaff
     public static void addMovie()
     {
         System.out.println("========== Add Movie ==========");
-        sc.nextLine();
         System.out.print("Enter movie title: ");
         String title = sc.nextLine();
         System.out.print("Enter genre: ");
@@ -47,7 +46,7 @@ public class CinemaStaff
         String director = sc.nextLine();
         System.out.print("Enter cast(s) for this movie: ");
         String cast = sc.nextLine();
-        System.out.print("Select age group for this movie: ");
+        System.out.println("Select age group for this movie: ");
         System.out.println("    1. PG13");
         System.out.println("    2. NC16");
         System.out.println("    3. M18");
@@ -69,7 +68,7 @@ public class CinemaStaff
                 age_group = "M18";
                 break;
         }
-        System.out.print("Select movie status for this movie: ");
+        System.out.println("Select movie status for this movie: ");
         System.out.println("    1. Coming Soon");
         System.out.println("    2. Now Showing");
         System.out.println("    3. Preview");
@@ -100,6 +99,7 @@ public class CinemaStaff
     
     public static void setMovieStatus()
     {
+        System.out.println("========== Set Movie Status ==========");
         listMovies();
         Movie[] movies = Moblima.read_movie(false);
         System.out.print("Enter index of movie to be updated: ");
@@ -121,7 +121,7 @@ public class CinemaStaff
         {
             choice = sc.nextInt();
         }while(choice <= 0 || choice > 4);
-
+        sc.nextLine();
         switch(choice)
         {
             case 1:
@@ -144,12 +144,71 @@ public class CinemaStaff
     
     public static void addSpecialDate()
     {
+        System.out.println("========== Add Special Date ==========");
+        System.out.print("Enter year: ");
+        int year = sc.nextInt();
+        System.out.print("Enter month: ");
+        int month = 0;
+        do
+        {
+            month = sc.nextInt();
+        }while(month <= 0 || month > 12);
+        System.out.print("Enter day: ");
+        int day = 0;
+        do
+        {
+            day = sc.nextInt();
+        }while(month <= 0 || month > 31);
+        System.out.print("Enter discount: ");
+        double discount = 0;
+        do
+        {
+            discount = sc.nextDouble();
+        }while(discount <= 0 || discount > 100);
+        System.out.print("Enter remark: ");
+        sc.nextLine();
+        String remark = sc.nextLine();
         
+        SpecialDate sp = new SpecialDate(year, month, day, discount, remark);
+        String record = sp.toString();
+        utility.addRecord("special_date.txt", record);
+        System.out.println(remark + " is added into special_date database.");
     }
     
     public static void editSpecialDate()
     {
+        System.out.println("========== Edit Special Date ==========");
+        String[] raw_records = utility.readContent("special_date.txt");
+        SpecialDate[] special_dates = new SpecialDate[raw_records.length];
+        String widths = "12,15,30";
+        utility.print_title_row("Date, Discount(%), Remark", widths);
+        for(int i = 0; i < special_dates.length; i++)
+        {
+            special_dates[i] = new SpecialDate(raw_records[i]);
+            String row = special_dates[i].getDate() + "," + special_dates[i].getDiscount() + "," + special_dates[i].getRemark();
+            utility.print_row(i+1, row, widths);
+        }
+        System.out.print("Enter index of dates to be updated: ");
+        int choice = 0;
+        do
+        {
+            choice = sc.nextInt();
+        }while (choice <= 0 || choice > special_dates.length);
         
+        SpecialDate selected_date = special_dates[choice-1];
+        String old_record = selected_date.toString();
+        
+        System.out.println("Enter new discount : ");
+        double discount = 0;
+        do
+        {
+            discount = sc.nextDouble();
+        }while(discount <= 0 || discount > 100);
+        selected_date.setDiscount(discount);
+        sc.nextLine();
+        utility.updateFile("special_date.txt", old_record, selected_date.toString());
+        
+        System.out.println("Successfully updated new discount rate to " + selected_date.getDiscount() + "%");
     }
     
     public static void editTicketPrice()

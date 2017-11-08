@@ -179,7 +179,7 @@ public class utility
         return "None";
     }
 
-    public static String readContent(String file_name)
+/*     public static String readContent(String file_name)
     // Return all records from file. Each record is separated by '\n'
     {
         try 
@@ -199,6 +199,35 @@ public class utility
             String file_content = inputBuffer.toString();
             file.close();
             return file_content;
+        } 
+        catch (Exception e) 
+        {
+            System.out.println("Problem reading file. " + file_name + " " + e.getMessage());
+            System.exit(0);
+        }
+        return null;
+    } */
+    
+    public static String[] readContent(String file_name)
+    // Return all records from file in String array. 
+    {
+        try 
+        {
+            BufferedReader file = new BufferedReader(new FileReader(file_name));
+            StringBuffer inputBuffer = new StringBuffer();
+            
+            String current_line = file.readLine();      
+            //System.out.println(current_line);
+
+            while (current_line != null) 
+            {
+                inputBuffer.append(current_line);
+                inputBuffer.append("\n");
+                current_line = file.readLine();
+            }
+            String file_content = inputBuffer.toString();
+            file.close();
+            return file_content.split("\n");
         } 
         catch (Exception e) 
         {
