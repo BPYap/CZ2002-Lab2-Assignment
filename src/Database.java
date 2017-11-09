@@ -89,8 +89,8 @@ public class Database
     {
         
     } */
-    public static Cineplex[] read_cineplex() {
-    	String [] raw_records = utility.readContent("cinema.txt");
+/*     public static Cineplex[] read_cineplex() {
+    	String [] raw_records = utility.readContent("cineplex.txt");
         Cineplex[] cineplexs = new Cineplex[raw_records.length];
         
         for(int i=0;i < raw_records.length;i++){
@@ -98,6 +98,34 @@ public class Database
         }
         
         return cineplexs;
+    } */
+
+public static Cineplex read_cineplex(String location) 
+{
+    	String [] raw_records = utility.readContent("cineplex.txt");
+        Cineplex[] cineplexs = new Cineplex[raw_records.length];
+        
+        for(int i=0;i < raw_records.length;i++){
+            cineplexs[i] = new Cineplex(raw_records[i]);
+            if (cineplexs[i].getLocation().equals(location))
+            {
+                return cineplexs[i];
+            }
+        }
+        
+        return null;
+}
+ 
+ 
+// example call: 
+/* Cineplex[] cineplexes = Database.read_cineplex();
+for(int i = 0; i < cineplexes.length; i++)
+{
+    System.out.println(cineplexes[i].getLocation() + ": ");
+    for(int j = 0; j < cineplexes[i].getNumberOfCinema(); j++)
+    {
+         System.out.println(cineplexes[i].cinema[j].toString());
     }
+} */
     
 }

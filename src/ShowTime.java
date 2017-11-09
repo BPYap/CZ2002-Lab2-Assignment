@@ -16,7 +16,7 @@ public class ShowTime {
 	private int available_seats;
 	
 	public ShowTime(int year, int month, int day, int start_time, int end_time, String cineplex_location, String cinema_code, int ID) {
-		Cinema c = new Cinema('Jurong Point','JP1','Platinum Movie Suites',3,10);
+		Cinema c = new Cinema("JP1","Platinum Movie Suites",3,10);
 		this.year = year;
 		this.month = month;
 		this.day = day;
@@ -32,15 +32,15 @@ public class ShowTime {
 	
 	public ShowTime(String record)
     {
-        Object [] attributes = record.split("\\|");
-        year = (int) attributes[0];
-        month = (int) attributes[1];
-        day = (int) attributes[2];
-        start_time = (int)attributes[3];
-        end_time = (int)attributes[4];
-        cineplex_location = (String) attributes[5];
-        cinema_code = (String)attributes[6];
-        listing_ID = (int)attributes[7];
+        String [] attributes = record.split("\\|");
+        year = Integer.parseInt(attributes[0]);
+        month = Integer.parseInt(attributes[1]);
+        day = Integer.parseInt(attributes[2]);
+        start_time = Integer.parseInt(attributes[3]);
+        end_time = Integer.parseInt(attributes[4]);
+        cineplex_location = attributes[5];
+        cinema_code = attributes[6];
+        listing_ID = Integer.parseInt(attributes[7]);
     }
 	
     public String toString() {
@@ -48,14 +48,28 @@ public class ShowTime {
 	}
 	
 	public void printSeatLayout() {
-		for (int i=0;i<)
+		Cinema c = new Cinema();
+		for(int i=0;i<number_of_rows;i++) {
+			System.out.print("|  ");
+			for(int j=0;j<number_of_columns;j++) {
+				System.out.print("O");
+				if(j==(number_of_columns/2)) {
+					System.out.print("   ");
+				}
+			}
+			System.out.print("  |");
+		}
 	}
 	
 	public boolean checkSeat (int row_number, int column_number) {
-		if (Cinema[number_of_rows][number_of_column] )
+		if (Cinema[row_number][column_number] = 'O')
+			return true;
+		else return false;
+			
 	}
-	public int selectSeat() {
-		if (checkSeat)
+	public void selectSeat(int row_number, int column_number) {
+		if (checkSeat[row_number][column_number] == TRUE)
+			Cinema[row_number][column_number] = 'X';
 	}
 	
 }

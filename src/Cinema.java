@@ -12,15 +12,6 @@ public class Cinema {
 		this.number_of_columns=number_of_columns;
 	}
 	
-	public Cinema(String record)
-    {
-        Object [] attributes = record.split("\\|");
-        cinema_code = (String) attributes[0];
-        cinema_class = (String)attributes[1];
-        number_of_rows = (int)attributes[2];
-        number_of_columns = (int)attributes[3];
-    }
-	
 	public String getCinemaCode() {
 		return cinema_code;
 	}
@@ -43,6 +34,7 @@ public class Cinema {
 				}
 			}
 			System.out.print("  |");
+            System.out.println();
 		}
 	}
 	
