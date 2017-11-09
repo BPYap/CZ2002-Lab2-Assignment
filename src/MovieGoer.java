@@ -22,6 +22,25 @@ public class MovieGoer {
         return movies[choice-1].getMovieTitle();
     }
     
+    public static String selectCineplex(){
+        Cineplex[] cineplex = Database.read_cineplex();
+        String widths = "20";
+        utility.print_title_row("Cineplex Location", widths);
+        for(int i=0;i<cineplex.length;i++){
+            String row = cineplex[i].getLocation();
+            utility.print_row(i, row, widths);
+        }
+        int choice =0;
+        do
+        {
+            System.out.println("Which cineplex you want to go?");
+            choice = sc.nextInt();
+        }while(choice <= 0 || choice > cineplex.length);
+        sc.nextLine();
+        
+        return cineplex[choice-1].getLocation();
+    }
+    
 	public static void listMovies() 
     {
         Movie[] movies = Database.read_movie(true);
@@ -145,6 +164,19 @@ public class MovieGoer {
         for(int i=0;i<movielist.length;i++){
             String row = movielist[i]+","+rating[i];
             utility.print_row(i+1, row, widths);
+        }
+    }
+    
+    public static void checkSeatAvailability(){
+        System.out.println("========== Check Seat Availability ==========");
+        ShowTime[] showtime = Database.read_show_time("showtime.txt");
+        String movietitle=selectMovieTitle();
+        String cineplex=selectCineplex();
+        
+        for(int i=0;i<showtime.length;i++){
+            if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getLocation().equals(cineplex)){
+                showtime[i].printSeatLayout();
+            }
         }
     }
     

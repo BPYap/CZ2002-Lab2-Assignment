@@ -47,6 +47,7 @@ public class Moblima {
 							case 3:
 								break;
 							case 4:
+                                MovieGoer.checkSeatAvailability();
 								break;
 							case 5:
 								break;

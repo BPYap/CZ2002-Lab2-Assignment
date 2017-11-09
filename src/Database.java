@@ -89,7 +89,7 @@ public class Database
     {
         
     } */
-/*     public static Cineplex[] read_cineplex() {
+    public static Cineplex[] read_cineplex() {
     	String [] raw_records = utility.readContent("cineplex.txt");
         Cineplex[] cineplexs = new Cineplex[raw_records.length];
         
@@ -98,7 +98,7 @@ public class Database
         }
         
         return cineplexs;
-    } */
+    }
 
 public static Cineplex read_cineplex(String location) 
 {
