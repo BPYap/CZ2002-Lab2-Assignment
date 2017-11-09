@@ -119,7 +119,16 @@ public static Cineplex[] read_all_cineplex()
     return cineplexs;
 }
 
+public static ShowTime[] read_all_showtime(){
+    String [] raw_records = utility.readContent("showtime.txt");
+    ShowTime[] showtime = new ShowTime[raw_records.length];
 
+    for(int i=0;i < raw_records.length;i++){
+        showtime[i] = new ShowTime(raw_records[i]);
+    }
+
+    return showtime;
+}
 
 public static Cineplex read_cineplex(String location) 
 {

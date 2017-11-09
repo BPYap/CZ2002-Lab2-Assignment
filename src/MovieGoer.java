@@ -28,7 +28,7 @@ public class MovieGoer {
         utility.print_title_row("Cineplex Location", widths);
         for(int i=0;i<cineplex.length;i++){
             String row = cineplex[i].getLocation();
-            utility.print_row(i, row, widths);
+            utility.print_row(i+1, row, widths);
         }
         int choice =0;
         do
