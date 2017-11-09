@@ -116,6 +116,22 @@ public static Cineplex read_cineplex(String location)
         return null;
 }
  
+public static ShowTime read_show_time(String listingID)
+{
+    String [] raw_records = utility.readContent("showtime.txt");
+    ShowTime[] showtimes = new ShowTime[raw_records.length];
+    
+    for (int i = 0; i < raw_records.length; i++)
+    {
+        showtimes[i] = new ShowTime(raw_records[i]);
+        if (showtimes[i].getListingID().equals(listingID))
+        {
+            return showtimes[i];
+        }
+    }
+    
+    return null;
+}
  
 // example call: 
 /* Cineplex[] cineplexes = Database.read_cineplex();
