@@ -129,10 +129,10 @@ public class Transaction extends ShowTime{
 				System.out.println("    Please Enter Column Number:");
 		 		int y = scn1.nextInt();
 		 		//check seat automaticalies print out the layout 
-           }while (!ShowTime.checkSeat(x,y));
+           }while (!s2.checkSeat(x,y));
            int index=getIndexNeg1(purchased_column);
-           ShowTime.purchased_column[index]=y;
-           ShowTime.purchased_row[index]=x;
+           s2.purchased_column[index]=y;
+           s2.purchased_row[index]=x;
 		}
 		
 		for( int j = number_of_child ;j>0;j--) {
@@ -145,10 +145,10 @@ public class Transaction extends ShowTime{
 				System.out.println("    Please Enter Column Number:");
 		 		int y = scn2.nextInt();
 		 		//check seat automaticalies print out the layout 
-           }while (!ShowTime.checkSeat(x,y));
+           }while (!s2.checkSeat(x,y));
            int index=getIndexNeg1(purchased_column);
-           ShowTime.purchased_column[index]=y;
-           ShowTime.purchased_row[index]=x;
+           s2.purchased_column[index]=y;
+           s2.purchased_row[index]=x;
 		}
 			
 		
@@ -162,16 +162,14 @@ public class Transaction extends ShowTime{
 				System.out.println("    Please Enter Column Number:");
 		 		int y = scn3.nextInt();
 		 		//check seat automaticalies print out the layout 
-           }while (!ShowTime.checkSeat(x,y));
+           }while (!s2.checkSeat(x,y));
            int index=getIndexNeg1(purchased_column);
-           ShowTime.purchased_column[index]=y;
-           ShowTime.purchased_row[index]=x;
+           s2.purchased_column[index]=y;
+           s2.purchased_row[index]=x;
 		}
 	}
 	
 	public String toString() {
-       return  s2.getCineplexLocation()+"|"+ s2.getMovieTitle() + "|" + s2.getYear()+'-'+s2.getMonth()+'-'+s2.getDay() + "|" +  s2.start_time() + '-' + s2.end_time()+
-        	"|"+ this.transactionID +"|" + this.total_amount + "|" + this.number_of_adult +"|" + this.number_of_child + "|"+this.number_of_scitizen + "|"+ Arrays.toString(ShowTime.puchased_row)+
-        	"|"+Arrays.toString(ShowTime.purchased_column) ;
+        return listing_Id + "|" + cinema_code + "|" +
     }
 }
