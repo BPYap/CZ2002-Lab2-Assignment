@@ -169,6 +169,7 @@ public class MovieGoer {
     public static void checkSeatAvailability(){
         System.out.println("========== Check Seat Availability ==========");
         ShowTime[] showtime = Database.read_all_showtime();
+
         String movietitle=selectMovieTitle();
         String cineplex=selectCineplex();
         

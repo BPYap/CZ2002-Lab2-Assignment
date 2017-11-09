@@ -50,6 +50,16 @@ public class Moblima {
                                 MovieGoer.checkSeatAvailability();
 								break;
 							case 5:
+                                Cineplex[] cineplexes = Database.read_cineplex();
+                                for(int i = 0; i < cineplexes.length; i++)
+                                {
+                                    System.out.println(cineplexes[i].getLocation() + ": ");
+                                    for(int j = 0; j < cineplexes[i].getNumberOfCinema(); j++)
+                                    {
+                                         System.out.println(cineplexes[i].cinema[j].toString());
+                                         cineplexes[i].cinema[j].printSeatLayout();
+                                    }
+                                }
 								break;
 							case 6:
 								break;
