@@ -1,4 +1,3 @@
-//notice the changes in filename
 public class Movie {
     private String movie_title ;
     private String genre ;
