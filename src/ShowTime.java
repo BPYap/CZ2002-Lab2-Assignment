@@ -66,9 +66,6 @@ public class ShowTime {
 	
     public String toString() {
         return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + "|" + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code; 
-
-    	public String toString() {
-        	return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + " | " + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code; 
 	}
 	
 	public void printSeatLayout() {

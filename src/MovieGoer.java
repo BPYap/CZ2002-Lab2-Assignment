@@ -22,7 +22,6 @@ public class MovieGoer {
 		return movies[choice-1].getMovieTitle();
     	}
     
-<<<<<<< HEAD
     public static String selectCineplex(){
         Cineplex[] cineplex = Database.read_cineplex();
         String widths = "20";
@@ -54,19 +53,6 @@ public class MovieGoer {
             utility.print_row(i+1, row, widths);
         }
 	}
-=======
-	public static void listMovies() {
-		Movie[] movies = Database.read_movie(true);
-
-		String widths = "30,15,12,18";
-		utility.print_title_row("Movie Title, Genre, Age_Rating, Status", widths);
-		for(int i = 0; i < movies.length; i++)
-		{
-		    String row = movies[i].getMovieTitle() + "," + movies[i].getGenre() + "," + movies[i].getAgeRating() + "," + movies[i].getStatus();
-		    utility.print_row(i+1, row, widths);
-		}
-	 }
->>>>>>> 6e2c9ea6a732402dba5347f0b6da39b926a1c18b
     
 	 public static void viewMovieDetails(){
 		listMovies();
