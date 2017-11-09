@@ -66,14 +66,14 @@ public class Database
         return special_dates;
     }
     
-    public static ShowTime[] read_show_time()
+/*     public static ShowTime[] read_show_time()
     {
     	 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     	 LocalDateTime now = LocalDateTime.now();
 //    	 System.out.println(dtf.format(now));
     	 
     	 
-    }
+    } */
     public static TicketPrice read_ticket_price()
     {
         String raw_record = utility.readContent("ticket.txt")[0];
@@ -95,16 +95,17 @@ public class Database
     {
         
     } */
-/*     public static Cineplex[] read_cineplex() {
-    	String [] raw_records = utility.readContent("cineplex.txt");
-        Cineplex[] cineplexs = new Cineplex[raw_records.length];
-        
-        for(int i=0;i < raw_records.length;i++){
-            cineplexs[i] = new Cineplex(raw_records[i]);
-        }
-        
-        return cineplexs;
-    } */
+public static Cineplex[] read_all_cineplex() 
+{
+    String [] raw_records = utility.readContent("cineplex.txt");
+    Cineplex[] cineplexs = new Cineplex[raw_records.length];
+
+    for(int i=0;i < raw_records.length;i++){
+        cineplexs[i] = new Cineplex(raw_records[i]);
+    }
+
+    return cineplexs;
+}
 
 public static Cineplex read_cineplex(String location) 
 {

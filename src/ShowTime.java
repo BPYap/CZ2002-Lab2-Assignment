@@ -31,8 +31,8 @@ public class ShowTime {
 		Cineplex cineplex = Database.read_cineplex(cineplex_location);
 		this.available_seats = cineplex.getCinema(cinema_code).getSeatCapacity();
 		
-		this.purchased_row = new int[this.available_seats-1];
-		this.purchased_column = new int[this.available_seats-1];
+		this.purchased_row = new int[this.available_seats];
+		this.purchased_column = new int[this.available_seats];
 		
 		for(int i=0;i<this.available_seats;i++) {
 			purchased_row[i] = -1;
@@ -67,7 +67,7 @@ public class ShowTime {
     public int getAvailableSeats() {return available_seats; }
 	
     public String toString() {
-        return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + " | " + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code; 
+        return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + "|" + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code; 
 	}
 	
 	public void printSeatLayout() {
