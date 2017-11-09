@@ -170,6 +170,8 @@ public class Transaction extends ShowTime{
 	}
 	
 	public String toString() {
-        return listing_Id + "|" + cinema_code + "|" +
+       return  s2.getCineplexLocation()+"|"+ s2.getMovieTitle() + "|" + s2.getYear()+'-'+s2.getMonth()+'-'+s2.getDay() + "|" +  s2.start_time() + '-' + s2.end_time()+
+        	"|"+ this.transactionID +"|" + this.total_amount + "|" + this.number_of_adult +"|" + this.number_of_child + "|"+this.number_of_scitizen + "|"+ Arrays.toString(ShowTime.puchased_row)+
+        	"|"+Arrays.toString(ShowTime.purchased_column) ;
     }
 }
