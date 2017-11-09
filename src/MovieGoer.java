@@ -168,12 +168,12 @@ public class MovieGoer {
     
     public static void checkSeatAvailability(){
         System.out.println("========== Check Seat Availability ==========");
-        ShowTime[] showtime = Database.read_show_time("showtime.txt");
+        ShowTime[] showtime = Database.read_all_showtime();
         String movietitle=selectMovieTitle();
         String cineplex=selectCineplex();
         
         for(int i=0;i<showtime.length;i++){
-            if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getLocation().equals(cineplex)){
+            if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getCineplexLocation().equals(cineplex)){
                 showtime[i].printSeatLayout();
             }
         }
