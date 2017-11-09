@@ -36,4 +36,15 @@ public class Cineplex {
 	public int getNumberOfCinema() {
 		return number_of_cinema;
 	}
+    
+    public Cinema getCinema(String cinemaCode)
+    {
+        for (int i = 0; i < number_of_cinema; i++)
+        {
+            if(this.cinema[i].getCinemaCode().equals(cinemaCode))
+            {
+                return this.cinema[i];
+            }
+        }
+    }
 }
