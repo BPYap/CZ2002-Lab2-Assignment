@@ -1,4 +1,7 @@
 import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Database
 {
@@ -63,11 +66,14 @@ public class Database
         return special_dates;
     }
     
-/*     public static ShowTime[] read_show_time()
+    public static ShowTime[] read_show_time()
     {
-        
+    	 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    	 LocalDateTime now = LocalDateTime.now();
+//    	 System.out.println(dtf.format(now));
+    	 
+    	 
     }
-*/
     public static TicketPrice read_ticket_price()
     {
         String raw_record = utility.readContent("ticket.txt")[0];
