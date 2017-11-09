@@ -30,6 +30,28 @@ public class Database
         return movies;
     }
     
+    public static Movie[] read_now_showing_movie()
+    {
+        String [] raw_records = utility.readContent("movie.txt");
+        Movie[] movies = new Movie[raw_records.length];
+        
+        int count = 0; // end of show count
+        int temp = 0;
+        
+        for (int i = 0; i < raw_records.length; i++)
+        {
+            if(raw_records[i].contains("NowShowing"))
+            {
+                movies[temp] = new Movie(raw_records[i]);
+                temp++;
+                count++;
+            }
+        }
+        movies = Arrays.copyOfRange(movies, 0, count);
+
+        return movies;
+    }
+    
     public static SpecialDate[] read_special_date()
     {
         String[] raw_records = utility.readContent("special_date.txt");
