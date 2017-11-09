@@ -15,13 +15,14 @@ public class ShowTime {
 	private int[] purchased_column;
 	private int available_seats;
 	
-	public ShowTime(int year, int month, int day, int start_time, int end_time, String movie, String cineplex_location, String cinema_code) {
-		
+	public ShowTime(int year, int month, int day, int start_time, String movie, String cineplex_location, String cinema_code) {
+		//assume all movies have the same duration of 2hours
+		//assume all movies are played at start_time before 2200
 		this.year = year;
 		this.month = month;
 		this.day = day;
 		this.start_time = start_time;
-		this.end_time = end_time;
+		this.end_time = start_time + 200;
 		this.movie_title = movie;
 		this.cineplex_location = cineplex_location;
 		this.cinema_code = cinema_code;
