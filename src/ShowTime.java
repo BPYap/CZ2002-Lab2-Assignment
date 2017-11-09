@@ -72,13 +72,9 @@ public class ShowTime {
 		for(int i=0;i<purchased_row.length;i++) {
 			System.out.print("|  ");
 			for(int j=0;j<purchased_column.length;j++) {
-				if (checkSeat(i,j) == false)
-					System.out.print("X");
-				if (checkSeat(i,j) == true)
-					System.out.print("O");
-				if(j==(purchased_column.length/2)) {
-					System.out.print("   ");
-				}
+                if(j==(purchased_column.length/2)) {System.out.print("   ");}
+				else if (checkSeat(i,j) == false){System.out.print("X");}
+				else if (checkSeat(i,j) == true){System.out.print("O");}
 			}
 			System.out.print("  |");
 		}
