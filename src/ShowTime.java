@@ -15,13 +15,14 @@ public class ShowTime {
 	private int[] purchased_column;
 	private int available_seats;
 	
-	public ShowTime(int year, int month, int day, int start_time, int end_time, String cineplex_location, String cinema_code, int ID) {
-		Cinema c = new Cinema("JP1","Platinum Movie Suites",3,10);
+	public ShowTime(int year, int month, int day, int start_time, int end_time, String movie, String cineplex_location, String cinema_code, int ID) {
+//		
 		this.year = year;
 		this.month = month;
 		this.day = day;
 		this.start_time = start_time;
 		this.end_time = end_time;
+		this.movie_title = movie;
 		this.cineplex_location = cineplex_location;
 		this.cinema_code = cinema_code;
 		this.listing_ID = ID;
@@ -38,9 +39,10 @@ public class ShowTime {
         day = Integer.parseInt(attributes[2]);
         start_time = Integer.parseInt(attributes[3]);
         end_time = Integer.parseInt(attributes[4]);
-        cineplex_location = attributes[5];
-        cinema_code = attributes[6];
-        listing_ID = Integer.parseInt(attributes[7]);
+        movie_title = attributes[5];
+        cineplex_location = attributes[6];
+        cinema_code = attributes[7];
+        listing_ID = Integer.parseInt(attributes[8]);
     }
 	
     public String toString() {
