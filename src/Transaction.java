@@ -89,6 +89,12 @@ public class Transaction extends ShowTime{
 	public int getListing_Id(){
 		return listing_Id;
 	}
+
+	public int getIndexNeg1(int[] x){
+		int i=0;
+		while(x[i]!=-1) i++;
+		return i;
+	}
 	
 	SpecialDate[] s1 = Database.read_special_date();
 	TicketPrice t1 = Database.read_ticket_price();
@@ -124,8 +130,9 @@ public class Transaction extends ShowTime{
 		 		int y = scn1.nextInt();
 		 		//check seat automaticalies print out the layout 
            }while (!ShowTime.checkSeat(x,y));
-           ShowTime.purchased_column[/* index ?*/]=y;
-           ShowTime.purchased_row[/* index ?*/]=x;
+           int index=getIndexNeg1(purchased_column);
+           ShowTime.purchased_column[index]=y;
+           ShowTime.purchased_row[index]=x;
 		}
 		
 		for( int j = number_of_child ;j>0;j--) {
@@ -139,8 +146,9 @@ public class Transaction extends ShowTime{
 		 		int y = scn2.nextInt();
 		 		//check seat automaticalies print out the layout 
            }while (!ShowTime.checkSeat(x,y));
-           ShowTime.purchased_column[/* index ?*/]=y;
-           ShowTime.purchased_row[/* index ?*/]=x;
+           int index=getIndexNeg1(purchased_column);
+           ShowTime.purchased_column[index]=y;
+           ShowTime.purchased_row[index]=x;
 		}
 			
 		
@@ -155,8 +163,9 @@ public class Transaction extends ShowTime{
 		 		int y = scn3.nextInt();
 		 		//check seat automaticalies print out the layout 
            }while (!ShowTime.checkSeat(x,y));
-           ShowTime.purchased_column[/* index ?*/]=y;
-           ShowTime.purchased_row[/* index ?*/]=x;
+           int index=getIndexNeg1(purchased_column);
+           ShowTime.purchased_column[index]=y;
+           ShowTime.purchased_row[index]=x;
 		}
 	}
 	
