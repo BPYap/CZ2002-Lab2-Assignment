@@ -34,6 +34,7 @@ public class Cinema {
 				}
 			}
 			System.out.print("  |");
+            System.out.println();
 		}
 	}
 	
