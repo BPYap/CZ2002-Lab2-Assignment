@@ -16,7 +16,7 @@ public class ShowTime {
 	private int available_seats;
 	
 	public ShowTime(int year, int month, int day, int start_time, int end_time, String movie, String cineplex_location, String cinema_code, int ID) {
-//		
+		
 		this.year = year;
 		this.month = month;
 		this.day = day;
@@ -26,11 +26,18 @@ public class ShowTime {
 		this.cineplex_location = cineplex_location;
 		this.cinema_code = cinema_code;
 		this.listing_ID = ID;
-		//this.purchased_row = ;
-		//this.purchased_column = ;
-		//this.available_seats = c.getSeatCapacity() - 
+		
+		Cineplex cineplex = Database.read_cineplex(cineplex_location);
+		this.available_seats = cineplex.getCinema(cinema_code).getSeatCapacity();
+		
+		this.purchased_row = new int[this.available_seats-1];
+		this.purchased_column = new int[this.available_seats-1];
+		
+		for(int i=0;i<this.available_seats;i++) {
+			purchased_row[i] = -1;
+			purchased_column[i] = -1;
+		}
 	}
-	
 	public ShowTime(String record)
     {
         String [] attributes = record.split("\\|");
@@ -46,16 +53,18 @@ public class ShowTime {
     }
 	
     public String toString() {
-        return this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + " | " + this.cineplex_location + "|" + this.cinema_code + "|" + this.listing_ID; 
+        return this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + " | " + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code + "|" + this.listing_ID; 
 	}
 	
 	public void printSeatLayout() {
-		Cinema c = new Cinema();
-		for(int i=0;i<number_of_rows;i++) {
+		for(int i=0;i<purchased_row.length;i++) {
 			System.out.print("|  ");
-			for(int j=0;j<number_of_columns;j++) {
-				System.out.print("O");
-				if(j==(number_of_columns/2)) {
+			for(int j=0;j<purchased_column.length;j++) {
+				if (checkSeat(i,j) == false)
+					System.out.print("X");
+				if (checkSeat(i,j) == true)
+					System.out.print("O");
+				if(j==(purchased_column.length/2)) {
 					System.out.print("   ");
 				}
 			}
@@ -64,14 +73,13 @@ public class ShowTime {
 	}
 	
 	public boolean checkSeat (int row_number, int column_number) {
-		if (Cinema[row_number][column_number] = 'O')
+		for (int i=0;i<purchased_row.length;i++)
+		{
+			for (int j=0;j<purchased_column.length;j++)
+				if (row_number == purchased_row[i] && column_number == purchased_column[j])
+					return false;
+		}
 			return true;
-		else return false;
-			
-	}
-	public void selectSeat(int row_number, int column_number) {
-		if (checkSeat[row_number][column_number] == TRUE)
-			Cinema[row_number][column_number] = 'X';
 	}
 	
 }
