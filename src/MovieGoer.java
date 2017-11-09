@@ -3,25 +3,26 @@ import java.util.*;
 public class MovieGoer {
 	public static Scanner sc = new Scanner(System.in);
     
-    public static String selectMovieTitle(){
-        Movie[] movies = Database.read_movie(false);
-        
-        for(int i = 0; i < movies.length; i++){
-            int k=i+1;
-            System.out.format("%-2s : " + movies[i].getMovieTitle() + "\n", k);
-        }
-        System.out.println();
-        int choice = 0;
-        do
-        {
-            System.out.print("Select an index from the movie titles: ");
-            choice = sc.nextInt();
-        }while(choice <= 0 || choice > movies.length);
-        sc.nextLine();
-        
-        return movies[choice-1].getMovieTitle();
-    }
+    	public static String selectMovieTitle(){
+		Movie[] movies = Database.read_movie(false);
+
+		for(int i = 0; i < movies.length; i++){
+		    int k=i+1;
+		    System.out.format("%-2s : " + movies[i].getMovieTitle() + "\n", k);
+		}
+		System.out.println();
+		int choice = 0;
+		do
+		{
+		    System.out.print("Select an index from the movie titles: ");
+		    choice = sc.nextInt();
+		}while(choice <= 0 || choice > movies.length);
+		sc.nextLine();
+
+		return movies[choice-1].getMovieTitle();
+    	}
     
+<<<<<<< HEAD
     public static String selectCineplex(){
         Cineplex[] cineplex = Database.read_cineplex();
         String widths = "20";
@@ -53,25 +54,37 @@ public class MovieGoer {
             utility.print_row(i+1, row, widths);
         }
 	}
+=======
+	public static void listMovies() {
+		Movie[] movies = Database.read_movie(true);
+
+		String widths = "30,15,12,18";
+		utility.print_title_row("Movie Title, Genre, Age_Rating, Status", widths);
+		for(int i = 0; i < movies.length; i++)
+		{
+		    String row = movies[i].getMovieTitle() + "," + movies[i].getGenre() + "," + movies[i].getAgeRating() + "," + movies[i].getStatus();
+		    utility.print_row(i+1, row, widths);
+		}
+	 }
+>>>>>>> 6e2c9ea6a732402dba5347f0b6da39b926a1c18b
     
-    public static void viewMovieDetails()
-    {
-        listMovies();
-        Movie movies[] = Database.read_movie(true);
-        int choice = 0;
-        do
-        {
-            System.out.print("Enter the index of movie you wish to know more about: ");
-            choice = sc.nextInt();
-        }while (choice <= 0 || choice > movies.length);
-        sc.nextLine();
-        utility.printBorder();
-        System.out.println("Movie Title: " + movies[choice-1].getMovieTitle());
-        System.out.println("Synopsis   : " + movies[choice-1].getSynopsis());
-        System.out.println("Director   : " + movies[choice-1].getDirector());
-        System.out.println("Cast       : " + movies[choice-1].getCast());
-        utility.printBorder();
-    }
+	 public static void viewMovieDetails(){
+		listMovies();
+		Movie movies[] = Database.read_movie(true);
+		int choice = 0;
+		do
+		{
+		    System.out.print("Enter the index of movie you wish to know more about: ");
+		    choice = sc.nextInt();
+		}while (choice <= 0 || choice > movies.length);
+		sc.nextLine();
+		utility.printBorder();
+		System.out.println("Movie Title: " + movies[choice-1].getMovieTitle());
+		System.out.println("Synopsis   : " + movies[choice-1].getSynopsis());
+		System.out.println("Director   : " + movies[choice-1].getDirector());
+		System.out.println("Cast       : " + movies[choice-1].getCast());
+		utility.printBorder();
+	    }
     
     public static void reviewMovie(){
         System.out.println("========== Review Movie ==========");

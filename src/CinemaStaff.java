@@ -20,9 +20,9 @@ public class CinemaStaff
 
     }
     
-    public static void listMovies() 
+    public static void listMovies(boolean FilterEndOfShow) 
     {
-        Movie[] movies = Database.read_movie(false);
+        Movie[] movies = Database.read_movie(FilterEndOfShow);
         
         String widths = "30,18";
         utility.print_title_row("Movie Title, Status", widths);
@@ -32,6 +32,29 @@ public class CinemaStaff
             utility.print_row(i+1, row, widths);
         }
 	}
+    
+    public static void listCineplexs()
+    {
+        Cineplex[] cineplexs = Database.read_all_cineplex();
+        String widths = "30,18";
+        utility.print_title_row("Location, Number of cinema", widths);
+        for(int i = 0; i < cineplexs.length; i++)
+        {
+            String row = cineplexs[i].getLocation() + "," + cineplexs[i].getNumberOfCinema();
+            utility.print_row(i+1, row, widths);
+        }
+    }
+    
+    public static void listCinemas(Cineplex cineplex)
+    {
+        String widths = "20,18";
+        utility.print_title_row("Cinema Code, Seats Capacity", widths);
+        for(int i = 0; i < cineplex.cinema.length; i++)
+        {
+            String row = cineplex.cinema[i].getCinemaCode() + "," + cineplex.cinema[i].getSeatCapacity();
+            utility.print_row(i+1, row, widths);
+        }
+    }
     
     public static void addMovie()
     {
@@ -102,7 +125,7 @@ public class CinemaStaff
     public static void setMovieStatus()
     {
         System.out.println("========== Set Movie Status ==========");
-        listMovies();
+        listMovies(false);
         Movie[] movies = Database.read_movie(false);
         int choice = 0;
         do
@@ -273,7 +296,66 @@ public class CinemaStaff
     
     public static void createMovieShowTime()
     {
+        System.out.println("========== Create Movie Showtime ==========");
+        System.out.print("Enter year: ");
+        int year = sc.nextInt();
+        int month = 0;
+        do
+        {
+            System.out.print("Enter month: ");
+            month = sc.nextInt();
+        }while(month < 0 || month > 12);
+        int day = 0;
+        do
+        {
+            System.out.print("Enter day: ");
+            day = sc.nextInt();
+        }while(month < 0 || month > 31);
+        int start_time = 0;
+        do
+        {
+            System.out.print("Enter start_time (Eg: 1530): ");
+            start_time = sc.nextInt();
+        }while(start_time <= 0000 || start_time > 2000); // Set the start time for last movie of the day at 2000 for simplicity
+        sc.nextLine();
         
+        listMovies(true);
+        Movie[] movies = Database.read_movie(true);
+        int choice = 0;
+        do
+        {
+            System.out.print("Choose a movie: ");
+            choice = sc.nextInt();
+        }while (choice <= 0 || choice > movies.length);
+        sc.nextLine();
+        String movie_title = movies[choice-1].getMovieTitle();
+        
+        listCineplexs();
+        Cineplex[] cineplexs = Database.read_all_cineplex();
+        choice = 0;
+        do
+        {
+            System.out.print("Choose a cineplex: ");
+            choice = sc.nextInt();
+        }while (choice <= 0 || choice > cineplexs.length);
+        sc.nextLine();
+        String location = cineplexs[choice-1].getLocation();
+        
+        Cineplex selected_cineplex = cineplexs[choice-1];
+        listCinemas(selected_cineplex);
+        choice = 0;
+        do
+        {
+            System.out.print("Choose a cinema: ");
+            choice = sc.nextInt();
+        }while (choice <= 0 || choice > selected_cineplex.cinema.length);
+        sc.nextLine();
+        String cinema_code = selected_cineplex.cinema[choice-1].getCinemaCode();
+        
+        ShowTime showtime = new ShowTime(year, month, day, start_time, movie_title, location, cinema_code);
+        String record = showtime.toString();
+        utility.addRecord("showtime.txt", record);
+        System.out.println("Show Time ID: " + showtime.getListingID() + " is added into show time database.");
     }
     
     public static void showAllMovieShowTime()

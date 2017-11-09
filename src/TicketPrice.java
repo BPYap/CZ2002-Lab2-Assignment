@@ -1,10 +1,10 @@
 public class TicketPrice {
-	private double adult_price;
-	private double children_price;
+    private double adult_price;
+    private double children_price;
     private double senior_citizen_price;
     private double platinum_charge;
 	
-	public TicketPrice(String record) {
+    public TicketPrice(String record) {
         String [] attributes = record.split("\\|");
         adult_price = Double.parseDouble(attributes[0]);
         children_price = Double.parseDouble(attributes[1]);

@@ -1,4 +1,7 @@
 import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Database
 {
@@ -65,9 +68,12 @@ public class Database
     
 /*     public static ShowTime[] read_show_time()
     {
-        
-    }
-*/
+    	 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    	 LocalDateTime now = LocalDateTime.now();
+//    	 System.out.println(dtf.format(now));
+    	 
+    	 
+    } */
     public static TicketPrice read_ticket_price()
     {
         String raw_record = utility.readContent("ticket.txt")[0];
@@ -89,6 +95,7 @@ public class Database
     {
         
     } */
+<<<<<<< HEAD
     public static Cineplex[] read_cineplex() {
     	String [] raw_records = utility.readContent("cineplex.txt");
         Cineplex[] cineplexs = new Cineplex[raw_records.length];
@@ -99,6 +106,19 @@ public class Database
         
         return cineplexs;
     }
+=======
+public static Cineplex[] read_all_cineplex() 
+{
+    String [] raw_records = utility.readContent("cineplex.txt");
+    Cineplex[] cineplexs = new Cineplex[raw_records.length];
+
+    for(int i=0;i < raw_records.length;i++){
+        cineplexs[i] = new Cineplex(raw_records[i]);
+    }
+
+    return cineplexs;
+}
+>>>>>>> 6e2c9ea6a732402dba5347f0b6da39b926a1c18b
 
 public static Cineplex read_cineplex(String location) 
 {

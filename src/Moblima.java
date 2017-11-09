@@ -106,7 +106,7 @@ public class Moblima {
                             CinemaStaff.setMovieStatus();
                             break;
                         case 3:
-                            CinemaStaff.listMovies();
+                            CinemaStaff.listMovies(false);
                             break;
                         case 4:
                             CinemaStaff.addSpecialDate();
@@ -124,6 +124,7 @@ public class Moblima {
                             CinemaStaff.showAllTicketPrice();
                             break;
                         case 9:
+                            CinemaStaff.createMovieShowTime();
                             break;
                         case 10:
                             break;
