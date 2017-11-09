@@ -10,12 +10,12 @@ public class ShowTime {
 	private String movie_title;
 	private String cineplex_location;
 	private String cinema_code;
-	private int listing_ID;
+	private String listing_ID;
 	private int[] purchased_row;
 	private int[] purchased_column;
 	private int available_seats;
 	
-	public ShowTime(int year, int month, int day, int start_time, int end_time, String movie, String cineplex_location, String cinema_code, int ID) {
+	public ShowTime(int year, int month, int day, int start_time, int end_time, String movie, String cineplex_location, String cinema_code) {
 		
 		this.year = year;
 		this.month = month;
@@ -25,7 +25,7 @@ public class ShowTime {
 		this.movie_title = movie;
 		this.cineplex_location = cineplex_location;
 		this.cinema_code = cinema_code;
-		this.listing_ID = ID;
+		this.listing_ID = cinema_code + Integer.toString(year)+ Integer.toString(month) + Integer.toString(day) + Integer.toString(start_time);
 		
 		Cineplex cineplex = Database.read_cineplex(cineplex_location);
 		this.available_seats = cineplex.getCinema(cinema_code).getSeatCapacity();
@@ -38,22 +38,35 @@ public class ShowTime {
 			purchased_column[i] = -1;
 		}
 	}
+	
 	public ShowTime(String record)
     {
         String [] attributes = record.split("\\|");
-        year = Integer.parseInt(attributes[0]);
-        month = Integer.parseInt(attributes[1]);
-        day = Integer.parseInt(attributes[2]);
-        start_time = Integer.parseInt(attributes[3]);
-        end_time = Integer.parseInt(attributes[4]);
-        movie_title = attributes[5];
-        cineplex_location = attributes[6];
-        cinema_code = attributes[7];
-        listing_ID = Integer.parseInt(attributes[8]);
+        listing_ID = attributes[0];
+        year = Integer.parseInt(attributes[1]);
+        month = Integer.parseInt(attributes[2]);
+        day = Integer.parseInt(attributes[3]);
+        start_time = Integer.parseInt(attributes[4]);
+        end_time = Integer.parseInt(attributes[5]);
+        movie_title = attributes[6];
+        cineplex_location = attributes[7];
+        cinema_code = attributes[8];
+        
     }
 	
+    public int getYear(){return  year; }
+    public int getMonth() { return month; }
+    public int getDay() { return day; }
+    public int getStartTime() { return start_time; }
+    public int getEndTime() { return end_time; }
+    public String getMovieTitle() { return movie_title; }
+    public String getCineplexLocation() { return cineplex_location; }
+    public String getCinemaCode() {return cinema_code;}
+    public String getListingID() {return listing_ID;}
+    public int getAvailableSeats() {return available_seats; }
+	
     public String toString() {
-        return this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + " | " + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code + "|" + this.listing_ID; 
+        return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + " | " + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code; 
 	}
 	
 	public void printSeatLayout() {
