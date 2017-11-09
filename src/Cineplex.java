@@ -13,9 +13,9 @@ public class Cineplex {
 	public Cineplex(String record)
     {
         Object [] attributes = record.split("\\|");
-        number_of_cinema = (int) attributes[0];
+        number_of_cinema = (Integer) attributes[0];
         location = (String)attributes[1];
-        //Cinema(record);
+        cinema = (cinema)attributes[2];
     }
 	
 	public String getLocation() {
