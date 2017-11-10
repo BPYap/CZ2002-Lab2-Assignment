@@ -20,12 +20,21 @@ public class Cinema {
 		return cinema_class;
 	}
 	
+    public int getNumberOfRows(){
+        return number_of_rows;
+    }
+    
+    public int getNumberOfColumns(){
+        return number_of_columns;
+    }
+    
 	public int getSeatCapacity() {
 		return number_of_rows*number_of_columns;
 	}
 	
 	public void printSeatLayout() {
-		for(int i=0;i<number_of_rows;i++) {
+		System.out.println("hihi");
+        for(int i=0;i<number_of_rows;i++) {
 			System.out.print("|  ");
 			for(int j=0;j<number_of_columns;j++) {
 				System.out.print("O");

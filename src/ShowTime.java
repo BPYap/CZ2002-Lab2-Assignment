@@ -18,6 +18,7 @@ public class ShowTime {
 	public ShowTime(int year, int month, int day, int start_time, String movie, String cineplex_location, String cinema_code) {
 		//assume all movies have the same duration of 2hours
 		//assume all movies are played at start_time before 2200
+        //pending
 		this.year = year;
 		this.month = month;
 		this.day = day;
@@ -53,7 +54,7 @@ public class ShowTime {
 		cinema_code = attributes[8];  
         
 		Cineplex cineplex = Database.read_cineplex(cineplex_location);
-		int capacity = cineplex.getCinema(cinema_code).getSeatCapacity();
+        int capacity = cineplex.getCinema(cinema_code).getSeatCapacity();
         String[] row = attributes[9].split(",");
         String[] column = attributes[10].split(",");
         
@@ -66,12 +67,13 @@ public class ShowTime {
             purchased_column[i] = Integer.parseInt(column[i]);
             counter++;
         }
-        for (int i = counter + 1; i < capacity; i++)
+        
+        /* for (int i = counter + 1; i < capacity; i++)
         {
             purchased_row[i] = -1;
             purchased_column[i] = -1;
-        }
-            
+        } */
+        
         this.available_seats = capacity - counter - 1;
 		}
 	
@@ -90,26 +92,41 @@ public class ShowTime {
         return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + "|" + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code; 
 	}
 	
-	public void printSeatLayout() {
-		for(int i=0;i<purchased_row.length;i++) {
+	public void printSeatLayout() {;
+        Cineplex cineplex = Database.read_cineplex(cineplex_location);
+        int capacity = cineplex.getCinema(cinema_code).getSeatCapacity();
+        int row = cineplex.getCinema(cinema_code).getNumberOfRows();
+        int column = cineplex.getCinema(cinema_code).getNumberOfColumns();
+        /* for(int i=0;i<available_seats;i++){
+            System.out.println(purchased_row[i]);
+            System.out.println(purchased_column[i]);
+        } */
+		for(int i=1;i<=row;i++) {
 			System.out.print("|  ");
-			for(int j=0;j<purchased_column.length;j++) {
-                if(j==(purchased_column.length/2)) {System.out.print("   ");}
-				else if (checkSeat(i,j) == false){System.out.print("X");}
-				else if (checkSeat(i,j) == true){System.out.print("O");}
+			for(int j=1;j<=column;j++) {
+                if(j==((column+1)/2)){
+                    System.out.print("   ");
+                }
+
+				if(checkSeat(i,j) == true){
+                    System.out.print("X");
+                }else{
+                    System.out.print("O");
+                }
 			}
 			System.out.print("  |");
+            System.out.println();
 		}
 	}
-	
-	public boolean checkSeat (int row_number, int column_number) {
-		for (int i=0;i<purchased_row.length;i++)
-		{
-			for (int j=0;j<purchased_column.length;j++)
-				if (row_number == purchased_row[i] && column_number == purchased_column[j])
-					return false;
+    
+	public boolean checkSeat (int row_number, int column_number){
+        for (int i=0;i<available_seats;i++){
+			if (row_number == purchased_row[i] && column_number == purchased_column[i]){
+                //System.out.println(purchased_row[i]);
+                //System.out.println(purchased_column[i]);
+                return true;
+            }
 		}
-			return true;
+		return false;
 	}
-	
 }
