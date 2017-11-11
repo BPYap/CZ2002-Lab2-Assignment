@@ -106,7 +106,7 @@ public class MovieGoer {
     }
     
     public static void listTopRatedMovies(){
-        System.out.println("========== Top 5 Now Showing Movies==========");
+        System.out.println("========== Top 5 Rating Movies(Now Showing)==========");
         Movie[] movies = Database.read_now_showing_movie();
         Review[] reviews = Database.read_review();
         
@@ -114,20 +114,6 @@ public class MovieGoer {
         int[] amountofreviewer = new int[movielist.length];
         int[] totalrating = new int[movielist.length];
         double[] rating = new double[movielist.length];
-        
-        /* //initialise into 0
-        for(int i=0;i<movielist.length;i++){
-            amountofreviewer[i]=0;
-        }
-        
-        for(int i=0;i<movielist.length;i++){
-            totalrating[i]=0;
-        }
-        
-        for(int i=0;i<movielist.length;i++){
-            rating[i]=0.0;
-        }
-        //end of initialising */
         
         for(int i=0;i<movies.length;i++){
             movielist[i]=movies[i].getMovieTitle();
@@ -273,6 +259,12 @@ public class MovieGoer {
     
     public static void viewMovieShowTimes(){
         Moblima.listMovieShowTime();
+    }
+    
+    public static void listTopSalesMovies(){
+        System.out.println("========== Top 5 Sales Movies(Now Showing)==========");
+        Transaction transaction[] = Database.read_transaction();
+        
     }
     
     //Function to sort array using insertion sort
