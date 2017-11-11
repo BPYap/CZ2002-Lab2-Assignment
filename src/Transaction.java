@@ -32,7 +32,7 @@ public class Transaction{
         this.rows = rows;
         this.columns = columns;
         this.showtime = Database.read_show_time(this.listing_Id);
-        calculateTotalFare(this.showtime,this.number_of_adult,this.number_of_child,this.number_of_scitizen);
+        calculateTotalFare();
     }
     
     public Transaction(String record)
@@ -40,7 +40,7 @@ public class Transaction{
         String [] attributes = record.split("\\|");
         this.transactionID = attributes[0];
         this.listing_Id = attributes[1];
-        this.total_fare = Integer.parseInt(attributes[2]);
+        this.total_fare = Double.parseDouble(attributes[2]);
         this.customer_name = attributes[3];
         this.mobile_number = attributes[4];
         this.email_address = attributes[5];
@@ -58,7 +58,7 @@ public class Transaction{
         }
     }
 	
-	private void calculateTotalFare(ShowTime showtime, int number_of_adult,int number_of_child,int number_of_scitizen)
+	private void calculateTotalFare()
     {
         TicketPrice ticket_info = Database.read_ticket_price();
         Cineplex cineplex = Database.read_cineplex(showtime.getCineplexLocation());

@@ -270,7 +270,7 @@ public class MovieGoer {
         System.out.print("Enter your email address: ");
         String email = sc.nextLine();
         
-        String widths = "30,20,15,15,15,15,25,30";
+        String widths = "45,20,15,15,15,15,25,30";
         utility.print_title_row("Transaction ID, Name, Email, No. Adult, No. Children, No. S.Citizen, Movie Title, Total Fare (S$)", widths);
         Transaction[] transactions = Database.read_transaction();
         for(int i = 0; i < transactions.length; i++)
