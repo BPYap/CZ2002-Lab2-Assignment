@@ -77,9 +77,9 @@ public class MovieGoer {
         String comment = sc.nextLine();
         int rating;
         do{
-            System.out.print("Enter your rating (1-10): ");
+            System.out.print("Enter your rating (1-5): ");
             rating = sc.nextInt();
-        }while(rating <= 0 || rating >10);
+        }while(rating <= 0 || rating >5);
         sc.nextLine();
         
         Review review = new Review(movie_title, reviewer, comment, rating);
@@ -115,7 +115,7 @@ public class MovieGoer {
         int[] totalrating = new int[movielist.length];
         double[] rating = new double[movielist.length];
         
-        //initialise into 0
+        /* //initialise into 0
         for(int i=0;i<movielist.length;i++){
             amountofreviewer[i]=0;
         }
@@ -127,7 +127,7 @@ public class MovieGoer {
         for(int i=0;i<movielist.length;i++){
             rating[i]=0.0;
         }
-        //end of initialising
+        //end of initialising */
         
         for(int i=0;i<movies.length;i++){
             movielist[i]=movies[i].getMovieTitle();
@@ -165,7 +165,7 @@ public class MovieGoer {
     
     public static void checkSeatAvailability(){
         System.out.println("========== Check Seat Availability ==========");
-        ShowTime[] showtime = Database.read_all_showtime();
+        ShowTime[] showtime = Database.read_all_showtime();//pending
 
         String movietitle=selectMovieTitle().getMovieTitle();
         String cineplex=selectCineplex().getLocation();
@@ -177,44 +177,93 @@ public class MovieGoer {
         }
     }
     
-    /* public static void bookTickets(){
+    public static void bookTickets(){
         System.out.println("========== Book Tickets ==========");
-        ShowTime[] showtime = Database.read_all_showtime();
-
-        String movietitle=selectMovieTitle().getMovieTitle();
-        String cineplex=selectCineplex().getLocation();
-        //select showtime
+        
+        //pending deacon
+        ShowTime[] showtime = Database.read_all_showtime(); 
+        
+        //select movie
+        Movie movie = selectMovieTitle();
+        String movietitle = movie.getMovieTitle();
+        
+        //select cineplex
+        Cineplex cineplex = selectCineplex();
+        String cineplexlocation = cineplex.getLocation();
+        
+        //deacon pass back showtime...pending
+        
+        //print showtime to select
         String widths = "20";
         utility.print_title_row("Showtime", widths);
-        //filter unrevelant showtimes
-        int count = 0;
-        int temp = 0;
         for(int i=0;i<showtime.length;i++){
-            if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getCineplexLocation().equals(cineplex)){
-                showtime[temp] = new ShowTime()
+            String row = showtime[i].getStartTime();
+            utility.print_row(i+1, row, widths);
+        }
+        
+        //select showtime
+        do{
+            System.out.println("Please select 1 showtime");
+            int selectedshowtime = sc.nextInt();
+        }while(selectedshowtime<0 || selectedshowtime>showtime.length);
+        
+        //print showtime layout
+        showtime[selectedshowtime].printSeatLayout();
+        
+        //check whether ticket amount > available seat
+        do{
+            //number of adult
+            do{
+                System.out.print("How many adults? ");
+                int number_of_adult = sc.nextInt();
+            }while(number_of_adult < 0);
+            //number of child,check age rating
+            if(movie.getAgeRating=="PG" || (movie.getAgeRating=="PG13" && number_of_adult>0)){
+                do{
+                System.out.print("How many children? ");
+                int number_of_child = sc.nextInt();
+                }while(number_of_child < 0); 
+            }
+            //number of sc
+            do{
+                System.out.print("How many senior citizen? ");
+                int number_of_scitizen = sc.nextInt();
+                String dummy = sc.nextLine();
+            }while(number_of_scitizen < 0);
+            //total_ticket
+            int totalticket = number_of_adult + number_of_child + number_of_scitizen;
+        }while(totalticket > showtime[selectedshowtime].getAvailableSeats());
+        
+        //check seat
+        int rows[] = new int[totalticket];
+        int columns[] = new int[totalticket];
+        int i=0;
+        while(i<totalticket){
+            System.out.println("Enter the row and column of the seat, e.g: 1,3");
+            String seatline = sc.nextLine();
+            String seat[] = seatline.split(",");
+            int row = Integer.parseInt(seat[0]);
+            int column = Integer.parseInt(seat[1]);
+            if(showtime[selectedshowtime].checkSeat(row,column)==false){
+                rows[i]=row;
+                columns[i]=column;
+                i++;
             }
         }
         
+        //get user name,email,mobile number
+        System.out.print("Name : ");
+        String name = sc.nextLine();
+        System.out.println();
+        System.out.print("Email : ");
+        String email = sc.nextLine();
+        System.out.println();
+        System.out.print("Mobile Number : ");
+        String mobile_number = sc.nextLine();
+        System.out.println();
         
         
-        for(int i=0;i<showtime.length;i++){
-            if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getCineplexLocation().equals(cineplex)){
-                showtime[i].printSeatLayout();
-            }
-        }
-        
-        do{
-            System.out.print("How many adults? ");
-            int number_of_adult = sc.nextInt();
-        }while(number_of_adult < 0); //assume costumer wont buy more than cinema seats as they have seen the seatlayout 
-        
-        if()
-        do{
-            System.out.print("How many children? ");
-            int number_of_child = sc.nextInt();
-        }while(number_of_child < 0);
-    } */
-    
+    }
     /* public static void Booking() {
 		SpecialDate[] s1 = Database.read_special_date();
         TicketPrice t1 = Database.read_ticket_price();
