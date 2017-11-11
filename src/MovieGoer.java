@@ -157,7 +157,7 @@ public class MovieGoer {
         String widths = "30,20";
         utility.print_title_row("Movie Title, Average Rating", widths);
         for(int i=0;i<movielist.length;i++){
-            String rating_print = String.format("%.1f", rating[i]); //pending
+            String rating_print = String.format("%.1f", rating[i]); 
             String row = movielist[i]+","+rating_print;
             utility.print_row(i+1, row, widths);
         }
@@ -177,10 +177,43 @@ public class MovieGoer {
         }
     }
     
-    public static void bookTickets(){
+    /* public static void bookTickets(){
         System.out.println("========== Book Tickets ==========");
+        ShowTime[] showtime = Database.read_all_showtime();
+
+        String movietitle=selectMovieTitle().getMovieTitle();
+        String cineplex=selectCineplex().getLocation();
+        //select showtime
+        String widths = "20";
+        utility.print_title_row("Showtime", widths);
+        //filter unrevelant showtimes
+        int count = 0;
+        int temp = 0;
+        for(int i=0;i<showtime.length;i++){
+            if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getCineplexLocation().equals(cineplex)){
+                showtime[temp] = new ShowTime()
+            }
+        }
         
-    }
+        
+        
+        for(int i=0;i<showtime.length;i++){
+            if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getCineplexLocation().equals(cineplex)){
+                showtime[i].printSeatLayout();
+            }
+        }
+        
+        do{
+            System.out.print("How many adults? ");
+            int number_of_adult = sc.nextInt();
+        }while(number_of_adult < 0); //assume costumer wont buy more than cinema seats as they have seen the seatlayout 
+        
+        if()
+        do{
+            System.out.print("How many children? ");
+            int number_of_child = sc.nextInt();
+        }while(number_of_child < 0);
+    } */
     
     /* public static void Booking() {
 		SpecialDate[] s1 = Database.read_special_date();
