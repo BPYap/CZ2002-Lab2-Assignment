@@ -161,7 +161,8 @@ public class MovieGoer {
         String widths = "30,20";
         utility.print_title_row("Movie Title, Average Rating", widths);
         for(int i=0;i<movielist.length;i++){
-            String row = movielist[i]+","+rating[i];
+            String rating_print = String.format("%.1f", rating[i]); //pending
+            String row = movielist[i]+","+rating_print;
             utility.print_row(i+1, row, widths);
         }
     }

@@ -46,7 +46,7 @@ public class Transaction extends ShowTime{
 		String DD = Integer.toString(D);
 		String hh = Integer.toString(h);
 		String mm = Integer.toString(m);
-		transactionID= "00"+cinema_code+YYYY+(M < 10 ? "0" + MM : MM) +(D < 10 ? "0" + DD : DD)+(h < 10 ? "0" + hh : hh)+(m < 10 ? "0" + mm : mm);
+		transactionID= cinema_code+YYYY+(M < 10 ? "0" + MM : MM) +(D < 10 ? "0" + DD : DD)+(h < 10 ? "0" + hh : hh)+(m < 10 ? "0" + mm : mm);
 	}
 	
 
@@ -114,7 +114,7 @@ public class Transaction extends ShowTime{
 			}
 		}
 		
-		if(c1.getCinema(cinema_code)[1].equals( "Platinum Movie Suites") {
+		if(c1.getCinema(cinema_code)[1].equals("Platinum Movie Suites")) {
 			extracharge += t1.getPlatinum();
 		}
 		
@@ -172,6 +172,6 @@ public class Transaction extends ShowTime{
 	public String toString() {
         return  s2.getCineplexLocation()+"|"+ s2.getMovieTitle() + "|" + s2.getYear()+'-'+s2.getMonth()+'-'+s2.getDay() + "|" +  s2.start_time() + '-' + s2.end_time()+
         	"|"+ this.transactionID +"|" + this.total_amount + "|" + this.number_of_adult +"|" + this.number_of_child + "|"+this.number_of_scitizen + "|"+ Arrays.toString(row)+
-        	"|"+Arrays.toString(column)
+        	"|"+Arrays.toString(column);
     }
 }
