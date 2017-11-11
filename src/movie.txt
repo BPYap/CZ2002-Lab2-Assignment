@@ -8,5 +8,5 @@ Fifty Shades of Freed|Digital|The third installment of the 'Fifty Shades of Grey
 Murder on the Orient Express|Digital|A lavish train ride unfolds into a stylish & suspenseful mystery.|Kenneth Branagh|Kenneth Branagh, Penélope Cruz |PG13|Coming Soon
 Suburbicon|BlockBuster|Suburbicon is a peaceful, idyllic suburban community with affordable homes and manicured lawns |George Clooney|Matt Damon, Oscar Isaac|PG13|NowShowing
 Geostorm|Digital|After an unprecedented series of natural disasters threatened the planet, the world's leaders came together to create an intricate network of satellites.|Dean Devlin|Gerard Butler, Abbie Cornish, Andy Garcia, Ed Harris, Jim Sturgess|PG|End of Showing
-My Little Pony|Digital|New dark force threatens Ponyville, and the Mane 6,embark on an unforgettable journey beyond Equestria|Jayson Thiessen|Uzo Aduba, Emily Blunt,Sia|PG|NowShowingTest|123|sfs|asd|sd|NC16|Coming Soon
-test|123|adlnasdka asdknaksd|ada|dasda|M18|End of Showing
+My Little Pony|Digital|New dark force threatens Ponyville, and the Mane 6,embark on an unforgettable journey beyond Equestria|Jayson Thiessen|Uzo Aduba, Emily Blunt,Sia|PG|NowShowingTest
+
