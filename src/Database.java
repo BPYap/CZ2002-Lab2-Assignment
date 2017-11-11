@@ -182,28 +182,28 @@ public class Database
 
     public static ShowTime[] read_show_time(String cineplex, String movie_title) 
     {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+    	SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmm");
         Date now = new Date();
-        String curDateTimeStr = sdf.format(now); //get the current time in YYYYMMDDHHMM format and store in string
+        String curDateTimeStr = sdf.format(now); //get the current time in ddMMyyyyHHmm format and store in string
         
-        String [] raw_records = utility.readContent("showtime.txt");
+    	String [] raw_records = utility.readContent("showtime.txt");
         ShowTime[] showtimes = new ShowTime[raw_records.length];
         ArrayList<ShowTime> result = new ArrayList<ShowTime>();
-        
+
         for (int i = 0; i < raw_records.length; i++)
         {
-            showtimes[i] = new ShowTime(raw_records[i]);
-            String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
+        	showtimes[i] = new ShowTime(raw_records[i]);
+        	String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
             Date showTime = null;
             try{showTime = sdf.parse(showDate);}
             catch(java.text.ParseException ex)
             {
-                System.out.println("Something bad happen");
+            	ex.printStackTrace();
             }
-            String showDateTimeStr = sdf.format(showTime);
-            if (showtimes[i].getCineplexLocation().equals(cineplex) && showtimes[i].getMovieTitle().equals(movie_title) &&   curDateTimeStr.compareTo(showDateTimeStr) == -1){
-                result.add(showtimes[i]);
-            }
+        	String showDateTimeStr = sdf.format(showTime);
+        	if (showtimes[i].getCineplexLocation().equals(cineplex) && showtimes[i].getMovieTitle().equals(movie_title) &&   curDateTimeStr.compareTo(showDateTimeStr) == -1){
+        		result.add(showtimes[i]);
+        	}
         }
         ShowTime [] resultShowTime = result.toArray(new ShowTime[result.size()]);
         return resultShowTime;
