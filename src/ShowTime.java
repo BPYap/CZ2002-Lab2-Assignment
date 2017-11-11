@@ -55,6 +55,14 @@ public class ShowTime {
         
 		Cineplex cineplex = Database.read_cineplex(cineplex_location);
         int capacity = cineplex.getCinema(cinema_code).getSeatCapacity();
+        
+        System.out.println(attributes[9]);
+        if(attributes[9] == "")
+        {
+            this.available_seats = capacity;
+            return;
+        }
+        
         String[] row = attributes[9].split(",");
         String[] column = attributes[10].split(",");
         
@@ -68,9 +76,22 @@ public class ShowTime {
             counter++;
         }
         
+<<<<<<< HEAD
+=======
+        /* for (int i = counter + 1; i < capacity; i++)
+        {
+            purchased_row[i] = -1;
+            purchased_column[i] = -1;
+        } */
+        
+>>>>>>> 7ec4252d855fc34e89fec14d1fcabcd2a279702b
         this.available_seats = capacity - counter;
 		}
-	
+        
+        public String getDate()
+        {
+            return this.year + "-" + this.month + "-" + this.day;
+        }
     	public int getYear(){return  year; }
     	public int getMonth() { return month; }
     	public int getDay() { return day; }
@@ -82,8 +103,20 @@ public class ShowTime {
     	public String getListingID() {return listing_ID;}
     	public int getAvailableSeats() {return available_seats; }
 	
-    public String toString() { //pending
-        return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + "|" + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code; 
+    public String toString() { //pending->updated
+    	String rowBought = new String(""); 
+    	String colBought = new String("");
+    	for (int i=0;i<purchased_row.length;i++) {
+    		if (purchased_row[i] != 0) {
+    			rowBought.concat(Integer.toString(purchased_row[i]));
+    			rowBought.concat(",");}
+    	}
+    	for (int i=0;i<purchased_column.length;i++) {
+    		if (purchased_column[i] != 0) {
+    			rowBought.concat(Integer.toString(purchased_column[i]));
+    			rowBought.concat(",");}
+    	}
+        return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + "|" + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code +  "|" + rowBought +  "|" + colBought; 
 	}
 	
 	public void printSeatLayout() {;
