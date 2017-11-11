@@ -359,10 +359,4 @@ public class CinemaStaff
         utility.addRecord("showtime.txt", record);
         System.out.println("Show Time ID: " + showtime.getListingID() + " is added into show time database.");
     }
-
-    public static void showAllMovieShowTime()
-    {
-        Moblima.listMovieShowTime();
-    }
-    
 }

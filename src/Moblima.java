@@ -57,6 +57,7 @@ public class Moblima {
                                 MovieGoer.viewMovieDetails();
 								break;
 							case 3:
+                                listMovieShowTime();
 								break;
 							case 4:
                                 MovieGoer.checkSeatAvailability();
@@ -140,7 +141,7 @@ public class Moblima {
                             CinemaStaff.createMovieShowTime();
                             break;
                         case 10:
-                            CinemaStaff.showAllMovieShowTime();
+                            listMovieShowTime();
                             break;
                         case 11:
                             break;

@@ -271,8 +271,28 @@ public class MovieGoer {
         System.out.println("The transaction( ID: "+transaction.getTransactionID()+") is made. Thanks for purchasing :)");
     }
     
-    public static void viewMovieShowTimes(){
-        Moblima.listMovieShowTime();
+    public static void checkTransactionHistory()
+    {
+        System.out.println("========== Check Transaction History ==========");
+        System.out.print("Enter your name: ");
+        String name = sc.nextLine();
+        System.out.print("Enter your email address: ");
+        String email = sc.nextLine();
+        
+        String widths = "30,20,15,15,15,15,25,30";
+        utility.print_title_row("Transaction ID, Name, Email, No. Adult, No. Children, No. S.Citizen, Movie Title, Total Fare (S$)", widths);
+        Transaction[] transactions = Database.read_transaction();
+        for(int i = 0; i < transactions.length; i++)
+        {
+            if(transactions[i].getCustomerName().equals(name) && transactions[i].getEmailAddress().equals(email))
+            {
+                String movie_title = Database.read_show_time(transactions[i].getListingID()).getMovieTitle();
+                String row = transactions[i].getTransactionID() + "," + transactions[i].getCustomerName() + "," + transactions[i].getEmailAddress() + "," + transactions[i].getNumberOfAdult() + "," +
+                                transactions[i].getNumberOfChildren() + "," + transactions[i].getNumberOfSenior() + "," + movie_title + "," + transactions[i].getTotalFare();
+                utility.print_row(i+1, row, widths);
+            }
+        }
+        
     }
     
     //Function to sort array using insertion sort
