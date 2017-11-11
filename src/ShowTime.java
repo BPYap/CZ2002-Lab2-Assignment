@@ -76,15 +76,6 @@ public class ShowTime {
             counter++;
         }
         
-<<<<<<< HEAD
-=======
-        /* for (int i = counter + 1; i < capacity; i++)
-        {
-            purchased_row[i] = -1;
-            purchased_column[i] = -1;
-        } */
-        
->>>>>>> 7ec4252d855fc34e89fec14d1fcabcd2a279702b
         this.available_seats = capacity - counter;
 		}
         
