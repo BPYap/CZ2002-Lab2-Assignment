@@ -55,6 +55,14 @@ public class ShowTime {
         
 		Cineplex cineplex = Database.read_cineplex(cineplex_location);
         int capacity = cineplex.getCinema(cinema_code).getSeatCapacity();
+        
+        System.out.println(attributes[9]);
+        if(attributes[9] == "")
+        {
+            this.available_seats = capacity;
+            return;
+        }
+        
         String[] row = attributes[9].split(",");
         String[] column = attributes[10].split(",");
         
@@ -74,9 +82,13 @@ public class ShowTime {
             purchased_column[i] = -1;
         } */
         
-        this.available_seats = capacity - counter - 1;
+        this.available_seats = capacity - counter;
 		}
-	
+        
+        public String getDate()
+        {
+            return this.year + "-" + this.month + "-" + this.day;
+        }
     	public int getYear(){return  year; }
     	public int getMonth() { return month; }
     	public int getDay() { return day; }

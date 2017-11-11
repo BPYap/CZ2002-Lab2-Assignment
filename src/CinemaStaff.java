@@ -71,7 +71,7 @@ public class CinemaStaff
         String cast = sc.nextLine();
         System.out.println("Select age group for this movie: ");
         System.out.println("    1. PG13");
-        System.out.println("    2. NC16");
+        System.out.println("    2. PG");
         System.out.println("    3. M18");
         int choice;
         do
@@ -86,7 +86,7 @@ public class CinemaStaff
                 age_group = "PG13";
                 break;
             case 2:
-                age_group = "NC16";
+                age_group = "PG";
                 break;
             case 3:
                 age_group = "M18";
@@ -359,10 +359,18 @@ public class CinemaStaff
         utility.addRecord("showtime.txt", record);
         System.out.println("Show Time ID: " + showtime.getListingID() + " is added into show time database.");
     }
-    
+
     public static void showAllMovieShowTime()
     {
-        
+        ShowTime[] showtimes = Database.read_show_time();
+        String widths = "12,12,35,25,20,18";
+        utility.print_title_row("Date, Start time, Movie Title, Cineplex Location, Cinema Code, Available Seat", widths);
+        for(int i = 0; i < showtimes.length; i++)
+        {
+            String row = showtimes[i].getDate() + "," + showtimes[i].getStartTime() + "," + showtimes[i].getMovieTitle() + "," + showtimes[i].getCineplexLocation() + "," +
+                            showtimes[i].getCinemaCode() + "," + showtimes[i].getAvailableSeats();
+            utility.print_row(i+1, row, widths);
+        }
     }
     
 }

@@ -116,9 +116,21 @@ public class Transaction{
 	}
     
 	public String toString() {
-        ShowTime s2 = Database.read_show_time(listing_Id);
-        return  s2.getCineplexLocation()+"|"+ s2.getMovieTitle() + "|" + s2.getYear()+'-'+s2.getMonth()+'-'+s2.getDay() + "|" +  s2.start_time() + '-' + s2.end_time()+
+        return  transactionID + "|" + total_fare + "|" + customer_name + "|" +  mobile_number + '-' + s2.end_time()+
         	"|"+ this.transactionID +"|" + this.total_amount + "|" + this.number_of_adult +"|" + this.number_of_child + "|"+this.number_of_scitizen + "|"+ Arrays.toString(row)+
         	"|"+Arrays.toString(column);
     }
+    
+    	private Calendar transactionDateTime;
+	private String transactionID;
+	private double total_fare;
+	private String customer_name;
+	private String mobile_number;
+	private String email_address;
+	private int number_of_adult;
+	private int number_of_child;
+	private int number_of_scitizen;
+	private String listing_Id;
+	private int rows[];
+	private int columns[];
 }

@@ -137,6 +137,7 @@ public class Moblima {
                             CinemaStaff.createMovieShowTime();
                             break;
                         case 10:
+                            CinemaStaff.showAllMovieShowTime();
                             break;
                         case 11:
                             break;

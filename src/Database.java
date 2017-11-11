@@ -3,8 +3,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
-
 import java.time.LocalDateTime;
 import java.text.SimpleDateFormat;
 
@@ -151,21 +149,27 @@ public static Cineplex read_cineplex(String location)
         return null;
 }
  
-public static ShowTime[] read_show_time() throws java.text.ParseException
+public static ShowTime[] read_show_time()
 {
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+	SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmm");
     Date now = new Date();
     String curDateTimeStr = sdf.format(now); //get the current time in YYYYMMDDHHMM format and store in string
     
 	String [] raw_records = utility.readContent("showtime.txt");
     ShowTime[] showtimes = new ShowTime[raw_records.length];
     ArrayList<ShowTime> result = new ArrayList<ShowTime>();
-    
+
     for (int i = 0; i < raw_records.length; i++)
     {
         showtimes[i] = new ShowTime(raw_records[i]);
         String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
-        Date showTime = sdf.parse(showDate);
+        Date showTime = null;
+        try{showTime = sdf.parse(showDate);}
+        
+        catch(java.text.ParseException ex)
+        {
+            System.out.println("Something bad happen");
+        }
         String showDateTimeStr = sdf.format(showTime);
         if (curDateTimeStr.compareTo(showDateTimeStr) == -1){
             result.add(showtimes[i]);
@@ -175,7 +179,7 @@ public static ShowTime[] read_show_time() throws java.text.ParseException
     return resultShowTime;
 }
 
-public static ShowTime[] read_show_time(String cineplex, String movie_title) throws java.text.ParseException
+public static ShowTime[] read_show_time(String cineplex, String movie_title) 
 {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
     Date now = new Date();
@@ -189,7 +193,12 @@ public static ShowTime[] read_show_time(String cineplex, String movie_title) thr
     {
     	showtimes[i] = new ShowTime(raw_records[i]);
     	String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
-    	Date showTime = sdf.parse(showDate);
+        Date showTime = null;
+        try{showTime = sdf.parse(showDate);}
+        catch(java.text.ParseException ex)
+        {
+            System.out.println("Something bad happen");
+        }
     	String showDateTimeStr = sdf.format(showTime);
     	if (showtimes[i].getCineplexLocation().equals(cineplex) && showtimes[i].getMovieTitle().equals(movie_title) &&   curDateTimeStr.compareTo(showDateTimeStr) == -1){
     		result.add(showtimes[i]);
