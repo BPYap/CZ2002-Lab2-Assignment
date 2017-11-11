@@ -98,7 +98,6 @@ public class Transaction{
                 break;
             }
         }
-        
 	}
 	
 	public String getTransactionID(){

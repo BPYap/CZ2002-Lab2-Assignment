@@ -29,7 +29,7 @@ public class MovieGoer {
         int choice =0;
         do
         {
-            System.out.println("Which cineplex you want to go?");
+            System.out.print("Which cineplex you want to go? ");
             choice = sc.nextInt();
         }while(choice <= 0 || choice > cineplex.length);
         sc.nextLine();
@@ -190,7 +190,7 @@ public class MovieGoer {
         //select showtime
         int selectedshowtime = 0;
         do{
-            System.out.println("Please select 1 showtime");
+            System.out.print("Please select 1 showtime: ");
             selectedshowtime= sc.nextInt();
         }while(selectedshowtime<1 || selectedshowtime>showtime.length);
         
@@ -248,10 +248,8 @@ public class MovieGoer {
         //get user name,email,mobile number
         System.out.print("Name : ");
         String name = sc.nextLine();
-        System.out.println();
         System.out.print("Email : ");
         String email = sc.nextLine();
-        System.out.println();
         System.out.print("Mobile Number : ");
         String mobile_number = sc.nextLine();
         
@@ -259,6 +257,10 @@ public class MovieGoer {
         Transaction transaction = new Transaction(name,mobile_number,email,number_of_adult,number_of_child,number_of_scitizen,showtime[selectedshowtime].getListingID(),rows,columns);
         String record = transaction.toString();
         utility.addRecord("transaction.txt",record);
+        String old_record = showtime[selectedshowtime].toString();
+        showtime[selectedshowtime].decrement_seat(rows, columns);
+        System.out.println(showtime[selectedshowtime].toString());
+        utility.updateFile("showtime.txt", old_record, showtime[selectedshowtime].toString());
         System.out.println("The transaction( ID: "+transaction.getTransactionID()+") is made. Thanks for purchasing :)");
     }
     

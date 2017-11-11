@@ -34,11 +34,6 @@ public class ShowTime {
 		
 		this.purchased_row = new int[this.available_seats];
 		this.purchased_column = new int[this.available_seats];
-		
-		for(int i=0;i<this.available_seats;i++) {
-			purchased_row[i] = -1;
-			purchased_column[i] = -1;
-		}
 	}
 	
 	public ShowTime(String record){
@@ -56,6 +51,8 @@ public class ShowTime {
 		Cineplex cineplex = Database.read_cineplex(cineplex_location);
         int capacity = cineplex.getCinema(cinema_code).getSeatCapacity();
         
+        purchased_row = new int[capacity];
+        purchased_column =  new int[capacity];
         if(attributes.length < 10)
         {
             this.available_seats = capacity;
@@ -65,8 +62,10 @@ public class ShowTime {
         String[] row = attributes[9].split(",");
         String[] column = attributes[10].split(",");
         
-        purchased_row = new int[capacity];
-        purchased_column =  new int[capacity];
+        if(row.length == 0)
+        {
+            return;
+        }
         int counter = 0;
         for (int i = 0; i < row.length; i++)
         {
@@ -96,16 +95,22 @@ public class ShowTime {
     public String toString() { //pending->updated
     	String rowBought = new String(""); 
     	String colBought = new String("");
-    	for (int i=0;i<purchased_row.length;i++) {
-    		if (purchased_row[i] != 0) {
-    			rowBought.concat(Integer.toString(purchased_row[i]));
-    			rowBought.concat(",");}
-    	}
-    	for (int i=0;i<purchased_column.length;i++) {
-    		if (purchased_column[i] != 0) {
-    			rowBought.concat(Integer.toString(purchased_column[i]));
-    			rowBought.concat(",");}
-    	}
+        if (purchased_row != null)
+        {
+            for (int i=0;i<purchased_row.length;i++) {
+                if (purchased_row[i] != 0) 
+                {
+                    rowBought += Integer.toString(purchased_row[i]) + ",";
+                }
+            }   
+            for (int i=0;i<purchased_column.length;i++) {
+                if (purchased_column[i] != 0) 
+                {
+                    colBought += Integer.toString(purchased_column[i]) + ",";
+                }
+            }
+        }
+
         return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + "|" + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code +  "|" + rowBought +  "|" + colBought; 
 	}
 	
@@ -137,6 +142,7 @@ public class ShowTime {
 	}
     //checkSeat return true if the seat is occupied
 	public boolean checkSeat (int row_number, int column_number){
+        if(purchased_row == null){return false;}
         for (int i=0;i<available_seats;i++){
 			if (row_number == purchased_row[i] && column_number == purchased_column[i]){
                 return true;
@@ -156,6 +162,8 @@ public class ShowTime {
                 purchased_column[i] = column[temp];
                 temp++;
                 this.available_seats -= 1;
+                if(temp == row.length)
+                    break;
             }
         }
     }
