@@ -1,50 +1,79 @@
-import java.util.Calendar;
-import java.util.Scanner;
-public class Transaction extends ShowTime{
+import java.util.*;
+
+public class Transaction{
 	private Calendar transactionDateTime;
 	private String transactionID;
-	private double TotalSum;
+	private double total_fare;
 	private String customer_name;
 	private String mobile_number;
 	private String email_address;
 	private int number_of_adult;
 	private int number_of_child;
 	private int number_of_scitizen;
-	private String cinema_code;
-	private int listing_Id;
+	private String listing_Id;
 	private int rows[];
 	private int columns[];
+    private ShowTime showtime;
 	
-	public Transaction(Calendar transactionDateTime,double TotalSum,String customer_name,
-			String mobile_number,String email_address,int number_of_adult,int number_of_child,int number_of_scitizen,
-			String cinema_code,int listing_Id){
-		this.transactionDateTime = transactionDateTime;
-		this.TotalSum = TotalSum;
+	public Transaction(String customer_name, String mobile_number,String email_address, int number_of_adult,int number_of_child,int number_of_scitizen, 
+        String listing_Id, int[] rows, int[] columns)
+    {
+		this.transactionDateTime = Calendar.getInstance();
+        this.listing_Id = listing_Id;
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        this.transactionID = listing_Id + "_" + dateFormat.format(this.transactionDateTime); 
 		this.customer_name = customer_name;
 		this.mobile_number = mobile_number;
 		this.email_address = email_address;
 		this.number_of_adult = number_of_adult;
 		this.number_of_child = number_of_child;
 		this.number_of_scitizen = number_of_scitizen;
-		this.cinema_code = cinema_code;
-		setTransactionID(transactionDateTime, cinema_code);
-		this.listing_Id = listing_Id;
-		
-		}
+        this.rows = rows;
+        this.column = columns;
+        calculateTotalFare();
+        this.showtime = Database.read_show_time(listingID);
+    }
 	
-	private void setTransactionID(Calendar dateTime, String cinema_code){
-
-		int Y = dateTime.get(Calendar.YEAR);
-		int M = dateTime.get(Calendar.MONTH)+1;
-		int D = dateTime.get(Calendar.DAY_OF_MONTH);
-		int h = dateTime.get(Calendar.HOUR_OF_DAY);
-		int m = dateTime.get(Calendar.MINUTE);
-		String YYYY=Integer.toString(Y);
-		String MM = Integer.toString(M);
-		String DD = Integer.toString(D);
-		String hh = Integer.toString(h);
-		String mm = Integer.toString(m);
-		transactionID = cinema_code+YYYY+(M < 10 ? "0" + MM : MM) +(D < 10 ? "0" + DD : DD)+(h < 10 ? "0" + hh : hh)+(m < 10 ? "0" + mm : mm);
+	private void calculateTotalFare()
+    {
+        TicketPrice ticket_info = Database.read_ticket_price();
+        Cinema cinema = Database.read_cineplex(showtime.cineplex_location).getCinema(showtime.cinema_code);
+        
+        if(cinema.getCinemaClass() == "Platinum Movie Suites")
+        {
+            int pax = this.number_of_adult + this.number_of_child + this.number_of_scitizen;
+            this.total_fare = (double)pax * ticket_info.getPlatinum();
+        }
+        else
+        {
+            this.total_fare = 0;
+        }
+        
+        for(int i = 0; i < this.number_of_adult; i++)
+        {
+            this.total_fare += ticket_info.getAdult();
+        }
+        
+        for(int i = 0; i < this.number_of_child; i++)
+        {
+            this.total_fare += ticket_info.getChildren();
+        }
+        
+        for(int i = 0; i < this.number_of_scitizen; i++)
+        {
+            this.total_fare += ticket_info.getSenior();
+        }
+        
+        SpecialDate special_dates = Database.read_special_date();
+        for (int i = 0; i < special_dates.length; i++)
+        {
+            if (showtime.getYear() == special_dates[i].getYear() && showtime.getMonth() == special_dates[i].getMonth() && showtime.getDay() == special_dates[i].getDay())
+            {
+                this.total_fare = this.total_fare - this.total_fare * special_dates[i].getDiscount() / 100;
+                break;
+            }
+        }
+        
 	}
 	
 	public String getTransactionID(){
@@ -85,16 +114,6 @@ public class Transaction extends ShowTime{
 	public int getListing_Id(){
 		return listing_Id;
 	}
-
-	public int getIndexNeg1(int[] x){
-		int i=0;
-		while(x[i]!=-1) i++;
-		return i;
-	}
-	
-    public static void selectSeat(){
-        
-    }
     
 	public String toString() {
         ShowTime s2 = Database.read_show_time(listing_Id);

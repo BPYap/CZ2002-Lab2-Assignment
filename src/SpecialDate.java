@@ -28,6 +28,10 @@ public class SpecialDate {
         return this.year + "-" + this.month + "-" + this.day;
     }
     
+    public int getYear(){return this.year;}
+    public int getMonth(){return this.month;}
+    public int getDay(){return this.day;}
+    
     public double getDiscount()
     {
         return this.discount;
