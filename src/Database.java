@@ -110,120 +110,124 @@ public class Database
         return cineplexs;
     }
 
-public static Cineplex[] read_all_cineplex() 
-{
-    String [] raw_records = utility.readContent("cineplex.txt");
-    Cineplex[] cineplexs = new Cineplex[raw_records.length];
-
-    for(int i=0;i < raw_records.length;i++){
-        cineplexs[i] = new Cineplex(raw_records[i]);
-    }
-
-    return cineplexs;
-}
-
-public static ShowTime[] read_all_showtime(){
-    String [] raw_records = utility.readContent("showtime.txt");
-    ShowTime[] showtime = new ShowTime[raw_records.length];
-
-    for(int i=0;i < raw_records.length;i++){
-        showtime[i] = new ShowTime(raw_records[i]);
-    }
-
-    return showtime;
-}
-
-public static Cineplex read_cineplex(String location) 
-{
-    	String [] raw_records = utility.readContent("cineplex.txt");
+    public static Cineplex[] read_all_cineplex() 
+    {
+        String [] raw_records = utility.readContent("cineplex.txt");
         Cineplex[] cineplexs = new Cineplex[raw_records.length];
-        
+
         for(int i=0;i < raw_records.length;i++){
             cineplexs[i] = new Cineplex(raw_records[i]);
-            if (cineplexs[i].getLocation().equals(location))
+        }
+
+        return cineplexs;
+    }
+
+    public static Cineplex read_cineplex(String location) 
+    {
+            String [] raw_records = utility.readContent("cineplex.txt");
+            Cineplex[] cineplexs = new Cineplex[raw_records.length];
+            
+            for(int i=0;i < raw_records.length;i++){
+                cineplexs[i] = new Cineplex(raw_records[i]);
+                if (cineplexs[i].getLocation().equals(location))
+                {
+                    return cineplexs[i];
+                }
+            }
+            
+            return null;
+    }
+ 
+    public static ShowTime[] read_show_time()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmm");
+        Date now = new Date();
+        String curDateTimeStr = sdf.format(now); //get the current time in YYYYMMDDHHMM format and store in string
+        
+        String [] raw_records = utility.readContent("showtime.txt");
+        ShowTime[] showtimes = new ShowTime[raw_records.length];
+        ArrayList<ShowTime> result = new ArrayList<ShowTime>();
+
+        for (int i = 0; i < raw_records.length; i++)
+        {
+            showtimes[i] = new ShowTime(raw_records[i]);
+            String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
+            Date showTime = null;
+            try{showTime = sdf.parse(showDate);}
+            
+            catch(java.text.ParseException ex)
             {
-                return cineplexs[i];
+                System.out.println("Something bad happen");
+            }
+            String showDateTimeStr = sdf.format(showTime);
+            if (curDateTimeStr.compareTo(showDateTimeStr) == -1){
+                result.add(showtimes[i]);
+            }
+        }
+        ShowTime [] resultShowTime = result.toArray(new ShowTime[result.size()]);
+        return resultShowTime;
+    }
+
+    public static ShowTime read_show_time(String listingID)
+    {
+        String [] raw_records = utility.readContent("showtime.txt");
+        ShowTime[] showtimes = new ShowTime[raw_records.length];
+        
+        for (int i = 0; i < raw_records.length; i++)
+        {
+            showtimes[i] = new ShowTime(raw_records[i]);
+            if (showtimes[i].getListingID().equals(listingID))
+            {
+                return showtimes[i];
             }
         }
         
         return null;
-}
- 
-public static ShowTime[] read_show_time()
-{
-	SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmm");
-    Date now = new Date();
-    String curDateTimeStr = sdf.format(now); //get the current time in YYYYMMDDHHMM format and store in string
-    
-	String [] raw_records = utility.readContent("showtime.txt");
-    ShowTime[] showtimes = new ShowTime[raw_records.length];
-    ArrayList<ShowTime> result = new ArrayList<ShowTime>();
+    }
 
-    for (int i = 0; i < raw_records.length; i++)
+    public static ShowTime[] read_show_time(String cineplex, String movie_title) 
     {
-        showtimes[i] = new ShowTime(raw_records[i]);
-        String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
-        Date showTime = null;
-        try{showTime = sdf.parse(showDate);}
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+        Date now = new Date();
+        String curDateTimeStr = sdf.format(now); //get the current time in YYYYMMDDHHMM format and store in string
         
-        catch(java.text.ParseException ex)
+        String [] raw_records = utility.readContent("showtime.txt");
+        ShowTime[] showtimes = new ShowTime[raw_records.length];
+        ArrayList<ShowTime> result = new ArrayList<ShowTime>();
+        
+        for (int i = 0; i < raw_records.length; i++)
         {
-            System.out.println("Something bad happen");
+            showtimes[i] = new ShowTime(raw_records[i]);
+            String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
+            Date showTime = null;
+            try{showTime = sdf.parse(showDate);}
+            catch(java.text.ParseException ex)
+            {
+                System.out.println("Something bad happen");
+            }
+            String showDateTimeStr = sdf.format(showTime);
+            if (showtimes[i].getCineplexLocation().equals(cineplex) && showtimes[i].getMovieTitle().equals(movie_title) &&   curDateTimeStr.compareTo(showDateTimeStr) == -1){
+                result.add(showtimes[i]);
+            }
         }
-        String showDateTimeStr = sdf.format(showTime);
-        if (curDateTimeStr.compareTo(showDateTimeStr) == -1){
-            result.add(showtimes[i]);
+        ShowTime [] resultShowTime = result.toArray(new ShowTime[result.size()]);
+        return resultShowTime;
+    } 
+
+    public static Transaction[] read_transaction() 
+    {
+        String [] raw_records = utility.readContent("transaction.txt");
+        Transaction[] transactions = new Transaction[raw_records.length];
+        
+        for(int i=0;i < raw_records.length;i++)
+        {
+            transactions[i] = new Transaction(raw_records[i]);
         }
+        
+        return transactions;
     }
-    ShowTime [] resultShowTime = result.toArray(new ShowTime[result.size()]);
-    return resultShowTime;
 }
 
-public static ShowTime read_show_time(String listingID)
-{
-    String [] raw_records = utility.readContent("showtime.txt");
-    ShowTime[] showtimes = new ShowTime[raw_records.length];
-    
-    for (int i = 0; i < raw_records.length; i++)
-    {
-        showtimes[i] = new ShowTime(raw_records[i]);
-        if (showtimes[i].getListingID().equals(listingID))
-        {
-            return showtimes[i];
-        }
-    }
-    
-    return null;
-}
-
-public static ShowTime[] read_show_time(String cineplex, String movie_title) 
-{
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
-    Date now = new Date();
-    String curDateTimeStr = sdf.format(now); //get the current time in YYYYMMDDHHMM format and store in string
-    
-	String [] raw_records = utility.readContent("showtime.txt");
-    ShowTime[] showtimes = new ShowTime[raw_records.length];
-    ArrayList<ShowTime> result = new ArrayList<ShowTime>();
-    
-    for (int i = 0; i < raw_records.length; i++)
-    {
-    	showtimes[i] = new ShowTime(raw_records[i]);
-    	String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
-        Date showTime = null;
-        try{showTime = sdf.parse(showDate);}
-        catch(java.text.ParseException ex)
-        {
-            System.out.println("Something bad happen");
-        }
-    	String showDateTimeStr = sdf.format(showTime);
-    	if (showtimes[i].getCineplexLocation().equals(cineplex) && showtimes[i].getMovieTitle().equals(movie_title) &&   curDateTimeStr.compareTo(showDateTimeStr) == -1){
-    		result.add(showtimes[i]);
-    	}
-    }
-    ShowTime [] resultShowTime = result.toArray(new ShowTime[result.size()]);
-    return resultShowTime;
-} 
 // example call: 
 /* Cineplex[] cineplexes = Database.read_cineplex();
 for(int i = 0; i < cineplexes.length; i++)
@@ -234,5 +238,3 @@ for(int i = 0; i < cineplexes.length; i++)
          System.out.println(cineplexes[i].cinema[j].toString());
     }
 } */
-    
-}
