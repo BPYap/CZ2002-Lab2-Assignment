@@ -56,8 +56,7 @@ public class ShowTime {
 		Cineplex cineplex = Database.read_cineplex(cineplex_location);
         int capacity = cineplex.getCinema(cinema_code).getSeatCapacity();
         
-        System.out.println(attributes[9]);
-        if(attributes[9] == "")
+        if(attributes.length < 10)
         {
             this.available_seats = capacity;
             return;
@@ -83,7 +82,7 @@ public class ShowTime {
         } */
         
         this.available_seats = capacity - counter;
-		}
+	}
         
         public String getDate()
         {
