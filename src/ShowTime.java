@@ -44,9 +44,9 @@ public class ShowTime {
 	public ShowTime(String record){
 		String [] attributes = record.split("\\|");
 		listing_ID = attributes[0];
-		year = Integer.parseInt(attributes[1]);
+		year = Integer.parseInt(attributes[3]);
 		month = Integer.parseInt(attributes[2]);
-		day = Integer.parseInt(attributes[3]);
+		day = Integer.parseInt(attributes[1]);
 		start_time = Integer.parseInt(attributes[4]);
 		end_time = Integer.parseInt(attributes[5]);
 		movie_title = attributes[6];

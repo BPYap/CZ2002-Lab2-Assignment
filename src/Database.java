@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 
 
 import java.time.LocalDateTime;
-import java.text.SimpleDateFormat;
+import java.text.*;
 
 public class Database
 {
@@ -135,9 +135,8 @@ public class Database
  
     public static ShowTime[] read_show_time()
     {
-        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmm");
+        DateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
         Date now = new Date();
-        String curDateTimeStr = sdf.format(now); //get the current time in YYYYMMDDHHMM format and store in string
         
         String [] raw_records = utility.readContent("showtime.txt");
         ShowTime[] showtimes = new ShowTime[raw_records.length];
@@ -146,16 +145,35 @@ public class Database
         for (int i = 0; i < raw_records.length; i++)
         {
             showtimes[i] = new ShowTime(raw_records[i]);
-            String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
+            String month = "";
+            if(showtimes[i].getMonth() < 10)
+            {
+                month = "0" + Integer.toString(showtimes[i].getMonth());
+            }
+            else
+            {
+                month = Integer.toString(showtimes[i].getMonth());
+            }
+            String day = "";
+            if(showtimes[i].getDay() < 10)
+            {
+                day = "0" + Integer.toString(showtimes[i].getDay());
+            }
+            else
+            {
+                day = Integer.toString(showtimes[i].getDay());
+            }                                                        
+
+            String showDate = Integer.toString(showtimes[i].getYear()) + month +  day + Integer.toString(showtimes[i].getStartTime());
             Date showTime = null;
-            try{showTime = sdf.parse(showDate);}
+            try{showTime = df.parse(showDate);}
             
             catch(java.text.ParseException ex)
             {
                 System.out.println("Something bad happen");
             }
-            String showDateTimeStr = sdf.format(showTime);
-            if (curDateTimeStr.compareTo(showDateTimeStr) == -1){
+            System.out.println(showDate);
+            if (now.compareTo(showTime) == -1){
                 result.add(showtimes[i]);
             }
         }
@@ -201,7 +219,7 @@ public class Database
                 System.out.println("Something bad happen");
             }
             String showDateTimeStr = sdf.format(showTime);
-            if (showtimes[i].getCineplexLocation().equals(cineplex) && showtimes[i].getMovieTitle().equals(movie_title) &&   curDateTimeStr.compareTo(showDateTimeStr) == -1){
+            if (showtimes[i].getCineplexLocation().equals(cineplex) && showtimes[i].getMovieTitle().equals(movie_title) &&   now.compareTo(showTime) == -1){
                 result.add(showtimes[i]);
             }
         }
