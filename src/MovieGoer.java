@@ -179,7 +179,7 @@ public class MovieGoer {
         
         //print showtime to select
         String widths = "20";
-        System.out.println("haha");
+        //System.out.println("haha");
         utility.print_title_row("Showtime", widths);
         for(int i=0;i<showtime.length;i++){
             String row = Integer.toString(showtime[i].getStartTime());
