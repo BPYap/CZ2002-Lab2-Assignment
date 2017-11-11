@@ -144,4 +144,19 @@ public class ShowTime {
 		}
 		return false;
 	}
+    
+    public void decrement_seat(int[] row, int[] column)
+    {
+        int temp = 0;
+        for(int i = 0; i < this.purchased_row.length; i++)
+        {
+            if(purchased_row[i] == 0)
+            {
+                purchased_row[i] = row[temp];
+                purchased_column[i] = column[temp];
+                temp++;
+                this.available_seats -= 1;
+            }
+        }
+    }
 }
