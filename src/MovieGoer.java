@@ -259,7 +259,6 @@ public class MovieGoer {
         utility.addRecord("transaction.txt",record);
         String old_record = showtime[selectedshowtime].toString();
         showtime[selectedshowtime].decrement_seat(rows, columns);
-        System.out.println(showtime[selectedshowtime].toString());
         utility.updateFile("showtime.txt", old_record, showtime[selectedshowtime].toString());
         System.out.println("The transaction( ID: "+transaction.getTransactionID()+") is made. Thanks for purchasing :)");
     }
