@@ -94,11 +94,6 @@ public class Database
         return reviews;
     }
     
-/*     public static Transaction[] read_transaction()
-    {
-        
-    } */
-    
     public static Cineplex[] read_cineplex() {
     	String [] raw_records = utility.readContent("cineplex.txt");
         Cineplex[] cineplexs = new Cineplex[raw_records.length];
