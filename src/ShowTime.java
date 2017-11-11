@@ -88,8 +88,20 @@ public class ShowTime {
     	public String getListingID() {return listing_ID;}
     	public int getAvailableSeats() {return available_seats; }
 	
-    public String toString() { //pending
-        return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + "|" + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code; 
+    public String toString() { //pending->updated
+    	String rowBought = new String(""); 
+    	String colBought = new String("");
+    	for (int i=0;i<purchased_row.length;i++) {
+    		if (purchased_row[i] != 0) {
+    			rowBought.concat(Integer.toString(purchased_row[i]));
+    			rowBought.concat(",");}
+    	}
+    	for (int i=0;i<purchased_column.length;i++) {
+    		if (purchased_column[i] != 0) {
+    			rowBought.concat(Integer.toString(purchased_column[i]));
+    			rowBought.concat(",");}
+    	}
+        return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + "|" + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code + rowBought + colBought; 
 	}
 	
 	public void printSeatLayout() {;
