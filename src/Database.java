@@ -11,7 +11,7 @@ public class Database
         String [] raw_records = utility.readContent("movie.txt");
         Movie[] movies = new Movie[raw_records.length];
         
-        int count = 0; // end of show count
+        int count = 0; 
         int temp = 0;
         
         for (int i = 0; i < raw_records.length; i++)
@@ -38,7 +38,7 @@ public class Database
         String [] raw_records = utility.readContent("movie.txt");
         Movie[] movies = new Movie[raw_records.length];
         
-        int count = 0; // end of show count
+        int count = 0; 
         int temp = 0;
         
         for (int i = 0; i < raw_records.length; i++)

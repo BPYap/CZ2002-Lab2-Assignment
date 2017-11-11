@@ -16,6 +16,7 @@ public class Movie {
          age_rating = f;
          status = g;
     }
+    
     public Movie(String record)
     {
         String [] attributes = record.split("\\|");
