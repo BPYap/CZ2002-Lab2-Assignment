@@ -180,9 +180,6 @@ public class MovieGoer {
     public static void bookTickets(){
         System.out.println("========== Book Tickets ==========");
         
-        //pending deacon
-        ShowTime[] showtime = Database.read_all_showtime(); 
-        
         //select movie
         Movie movie = selectMovieTitle();
         String movietitle = movie.getMovieTitle();
@@ -198,41 +195,46 @@ public class MovieGoer {
         String widths = "20";
         utility.print_title_row("Showtime", widths);
         for(int i=0;i<showtime.length;i++){
-            String row = showtime[i].getStartTime();
+            String row = Integer.toString(showtime[i].getStartTime());
             utility.print_row(i+1, row, widths);
         }
         
         //select showtime
+        int selectedshowtime = 0;
         do{
             System.out.println("Please select 1 showtime");
-            int selectedshowtime = sc.nextInt();
-        }while(selectedshowtime<0 || selectedshowtime>showtime.length);
+            selectedshowtime= sc.nextInt();
+        }while(selectedshowtime<1 || selectedshowtime>showtime.length);
         
         //print showtime layout
         showtime[selectedshowtime].printSeatLayout();
         
         //check whether ticket amount > available seat
+        int number_of_adult = 0;
+        int number_of_child = 0;
+        int number_of_scitizen = 0;
+        int totalticket = 0;
         do{
             //number of adult
             do{
                 System.out.print("How many adults? ");
-                int number_of_adult = sc.nextInt();
+                number_of_adult = sc.nextInt();
             }while(number_of_adult < 0);
             //number of child,check age rating
-            if(movie.getAgeRating=="PG" || (movie.getAgeRating=="PG13" && number_of_adult>0)){
+            if(movie.getAgeRating()=="PG" || (movie.getAgeRating()=="PG13" && number_of_adult>0)){
                 do{
                 System.out.print("How many children? ");
-                int number_of_child = sc.nextInt();
+                number_of_child = sc.nextInt();
                 }while(number_of_child < 0); 
             }
             //number of sc
             do{
                 System.out.print("How many senior citizen? ");
-                int number_of_scitizen = sc.nextInt();
+                number_of_scitizen = sc.nextInt();
                 String dummy = sc.nextLine();
             }while(number_of_scitizen < 0);
             //total_ticket
-            int totalticket = number_of_adult + number_of_child + number_of_scitizen;
+            totalticket = number_of_adult + number_of_child + number_of_scitizen;
         }while(totalticket > showtime[selectedshowtime].getAvailableSeats());
         
         //check seat
@@ -263,7 +265,7 @@ public class MovieGoer {
         String mobile_number = sc.nextLine();
         System.out.println();
         
-        Transaction transaction = new Transaction(name,mobile_number,email,number_of_adult,number_of_child,number_of_scitizen,showtime[selectedshowtime].getListingID(),rows[],columns[]);
+        Transaction transaction = new Transaction(name,mobile_number,email,number_of_adult,number_of_child,number_of_scitizen,showtime[selectedshowtime].getListingID(),rows,columns);
         String record = transaction.toString();
         utility.addRecord("transaction.txt",record);
         System.out.println("The transaction( ID: "+transaction.getTransactionID()+") is made. Thanks for purchasing :)");
