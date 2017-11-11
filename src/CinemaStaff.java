@@ -70,8 +70,8 @@ public class CinemaStaff
         System.out.print("Enter cast(s) for this movie: ");
         String cast = sc.nextLine();
         System.out.println("Select age group for this movie: ");
-        System.out.println("    1. PG13");
-        System.out.println("    2. PG");
+        System.out.println("    1. PG");
+        System.out.println("    2. PG13");
         System.out.println("    3. M18");
         int choice;
         do
@@ -83,10 +83,10 @@ public class CinemaStaff
         switch(choice)
         {
             case 1:
-                age_group = "PG13";
+                age_group = "PG";
                 break;
             case 2:
-                age_group = "PG";
+                age_group = "PG13";
                 break;
             case 3:
                 age_group = "M18";
