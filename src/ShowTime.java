@@ -68,13 +68,7 @@ public class ShowTime {
             counter++;
         }
         
-        /* for (int i = counter + 1; i < capacity; i++)
-        {
-            purchased_row[i] = -1;
-            purchased_column[i] = -1;
-        } */
-        
-        this.available_seats = capacity - counter - 1;
+        this.available_seats = capacity - counter;
 		}
 	
     	public int getYear(){return  year; }
@@ -118,12 +112,10 @@ public class ShowTime {
             System.out.println();
 		}
 	}
-    
+    //checkSeat return true if the seat is occupied
 	public boolean checkSeat (int row_number, int column_number){
         for (int i=0;i<available_seats;i++){
 			if (row_number == purchased_row[i] && column_number == purchased_column[i]){
-                //System.out.println(purchased_row[i]);
-                //System.out.println(purchased_column[i]);
                 return true;
             }
 		}

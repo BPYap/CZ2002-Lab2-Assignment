@@ -91,10 +91,6 @@ public class Transaction extends ShowTime{
 		while(x[i]!=-1) i++;
 		return i;
 	}
-	
-    public static void selectSeat(){
-        
-    }
     
 	public String toString() {
         ShowTime s2 = Database.read_show_time(listing_Id);

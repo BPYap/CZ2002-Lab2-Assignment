@@ -1,12 +1,12 @@
-JigSaw|Digital|Bodies are turning up around the city, each having met a uniquely gruesome demise|Michael Spierig, Peter Spierig|Tobin Belle, Matt Passmore , Mandela Van Peeble, Laura Vandervoot|M18|Now Showing
+﻿JigSaw|Digital|Bodies are turning up around the city, each having met a uniquely gruesome demise|Michael Spierig, Peter Spierig|Tobin Belle, Matt Passmore , Mandela Van Peeble, Laura Vandervoot|M18|Now Showing
 Thor: Ragnarok|BlockBuster|Imprisoned, the mighty Thor finds himself in a lethal gladiatorial contest against the Hulk, his former ally.|Taika Waititi|Tom Hiddleston, Chris Hemsworth, Cate Blanchett|PG13|NowShowing
 A Bad Moms Christmas|Digital|A BAD MOMS CHRISTMAS follows our three under-appreciated and over-burdened women as they rebel against the challenges.|Jon Lucas , Scott Moore|Christine Baranski , Kristen Bell|NC16|Preview
-Justice League|3D|Fueled by his restored faith in humanity and inspired by Superman's selfless act|Zack Snyder|Ben Affleck, Henry Cavill, Gal Gadot, Jason Momoa|PG|Preview
+Justice League|3D|Fueled by his restored faith in humanity and inspired by Superman's selfless act|Zack Snyder|Ben Affleck, Henry Cavill, Gal Gadot, Jason Momoa|PG13|Preview
 Ah Boys To Men 4|BlockBuster|After leaving the military, Lobang, Wayang King, Sergeant Ong, and Ken Chow are all busy with their respective career as civilians|Jack Neo|Apple Chan, Joshua Tan|PG13|Preview
 Star Wars: The Last Jedi|3D|Having taken her first steps into a larger world in Star Wars: The Force Awakens (2015), Rey continues her epic journey with Finn|Rian Johnson|Daisy Ridley, John Boyega|PG13|Preview
-Fifty Shades of Freed|Digital|The third installment of the 'Fifty Shades of Grey' trilogy.|James Foley|Jamie Dornan, Dakota Johnson|R21|Coming Soon
+Fifty Shades of Freed|Digital|The third installment of the 'Fifty Shades of Grey' trilogy.|James Foley|Jamie Dornan, Dakota Johnson|M18|Coming Soon
 Murder on the Orient Express|Digital|A lavish train ride unfolds into a stylish & suspenseful mystery.|Kenneth Branagh|Kenneth Branagh, Penélope Cruz |PG13|Coming Soon
 Suburbicon|BlockBuster|Suburbicon is a peaceful, idyllic suburban community with affordable homes and manicured lawns |George Clooney|Matt Damon, Oscar Isaac|NC16|NowShowing
 Geostorm|Digital|After an unprecedented series of natural disasters threatened the planet, the world's leaders came together to create an intricate network of satellites.|Dean Devlin|Gerard Butler, Abbie Cornish, Andy Garcia, Ed Harris, Jim Sturgess|PG13|End of Showing
-My Little Pony|Digital|New dark force threatens Ponyville, and the Mane 6,embark on an unforgettable journey beyond Equestria|Jayson Thiessen|Uzo Aduba, Emily Blunt,Sia|PG|NowShowingTest|123|sfs|asd|sd|NC16|Coming Soon
+My Little Pony|Digital|New dark force threatens Ponyville, and the Mane 6,embark on an unforgettable journey beyond Equestria|Jayson Thiessen|Uzo Aduba, Emily Blunt,Sia|PG13|NowShowing
 test|123|adlnasdka asdknaksd|ada|dasda|NC16|End of Showing
