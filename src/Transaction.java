@@ -110,31 +110,31 @@ public class Transaction{
 		return total_fare;
 	}
 	
-	public String getCustomer_Name(){
+	public String getCustomerName(){
 		return customer_name;
 	}
 	
-	public String getMobile_Number() {
+	public String getMobileNumber() {
 		return mobile_number;
 		
 	}
-	public String email_address() {
+	public String getEmailAddress() {
 		return email_address;
 		
 	}
-	public int getNumber_Of_Adult() {
+	public int getNumberOfAdult() {
 		return number_of_adult;
 	}
 	
-	public int getNumber_Of_Child() {
+	public int getNumberOfChildren() {
 		return number_of_child;
 	}
 	
-	public int getNumber_Of_Scitizen() {
+	public int getNumberOfSenior() {
 		return number_of_scitizen;
 	}
 
-	public String getListing_Id(){
+	public String getListingID(){
 		return listing_Id;
 	}
     
