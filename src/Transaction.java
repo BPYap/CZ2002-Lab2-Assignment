@@ -1,4 +1,5 @@
 import java.util.*;
+import java.text.*;
 
 public class Transaction{
 	private Calendar transactionDateTime;
@@ -29,15 +30,39 @@ public class Transaction{
 		this.number_of_child = number_of_child;
 		this.number_of_scitizen = number_of_scitizen;
         this.rows = rows;
-        this.column = columns;
+        this.columns = columns;
         calculateTotalFare();
-        this.showtime = Database.read_show_time(listingID);
+        this.showtime = Database.read_show_time(this.listing_Id);
+    }
+    
+    public Transaction(String record)
+    {
+        String [] attributes = record.split("\\|");
+        this.transactionID = attributes[0];
+        this.listing_Id = attributes[1];
+        this.total_fare = Integer.parseInt(attributes[2]);
+        this.customer_name = attributes[3];
+        this.mobile_number = attributes[4];
+        this.email_address = attributes[5];
+        this.number_of_adult = Integer.parseInt(attributes[6]);
+        this.number_of_child = Integer.parseInt(attributes[7]);
+        this.number_of_scitizen = Integer.parseInt(attributes[8]);
+        String[] rows_str = attributes[9].split(","); 
+        String[] cols_str = attributes[10].split(",");
+        this.rows = new int[rows_str.length];
+        this.columns = new int[rows_str.length];
+        
+        for (int i = 0; i < rows_str.length; i++)
+        {
+            this.rows[i] = Integer.parseInt(rows_str[i]);
+            this.columns[i] = Integer.parseInt(rows_str[i]);
+        }
     }
 	
 	private void calculateTotalFare()
     {
         TicketPrice ticket_info = Database.read_ticket_price();
-        Cinema cinema = Database.read_cineplex(showtime.cineplex_location).getCinema(showtime.cinema_code);
+        Cinema cinema = Database.read_cineplex(showtime.getCineplexLocation()).getCinema(showtime.getCinemaCode());
         
         if(cinema.getCinemaClass() == "Platinum Movie Suites")
         {
@@ -64,7 +89,7 @@ public class Transaction{
             this.total_fare += ticket_info.getSenior();
         }
         
-        SpecialDate special_dates = Database.read_special_date();
+        SpecialDate[] special_dates = Database.read_special_date();
         for (int i = 0; i < special_dates.length; i++)
         {
             if (showtime.getYear() == special_dates[i].getYear() && showtime.getMonth() == special_dates[i].getMonth() && showtime.getDay() == special_dates[i].getDay())
@@ -81,8 +106,8 @@ public class Transaction{
 	}
 	
 	
-	public double getTotalSum(){
-		return TotalSum;
+	public double getTotalFare(){
+		return total_fare;
 	}
 	
 	public String getCustomer_Name(){
@@ -108,22 +133,20 @@ public class Transaction{
 	public int getNumber_Of_Scitizen() {
 		return number_of_scitizen;
 	}
-	public String getCinema_Code(){
-		return cinema_code;
-	}
-	public int getListing_Id(){
+
+	public String getListing_Id(){
 		return listing_Id;
 	}
-
-	/* public int getIndexNeg1(int[] x){
-		int i=0;
-		while(x[i]!=-1) i++;
-		return i;
-	} */
     
-	public String toString() {
-        return  transactionID + "|" + total_fare + "|" + customer_name + "|" +  mobile_number + '-' + s2.end_time()+
-        	"|"+ this.transactionID +"|" + this.total_amount + "|" + this.number_of_adult +"|" + this.number_of_child + "|"+this.number_of_scitizen + "|"+ Arrays.toString(row)+
-        	"|"+Arrays.toString(column);
+	public String toString(){
+        String row_str = "";
+        String col_str = "";
+        for(int i = 0; i < rows.length; i++)
+        {
+            row_str += Integer.toString(rows[i]) + ",";
+            col_str += Integer.toString(columns[i]) + ",";
+        }
+        return  transactionID + "|" + listing_Id + "|" + total_fare + "|" + customer_name + "|" +  mobile_number + '|' + email_address + '|' + 
+        	"|"+ number_of_adult + "|" + number_of_child + "|" + number_of_scitizen + "|" + row_str + "|" + col_str;
     }
 }

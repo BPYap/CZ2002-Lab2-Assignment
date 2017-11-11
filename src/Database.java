@@ -179,6 +179,23 @@ public static ShowTime[] read_show_time()
     return resultShowTime;
 }
 
+public static ShowTime read_show_time(String listingID)
+{
+    String [] raw_records = utility.readContent("showtime.txt");
+    ShowTime[] showtimes = new ShowTime[raw_records.length];
+    
+    for (int i = 0; i < raw_records.length; i++)
+    {
+        showtimes[i] = new ShowTime(raw_records[i]);
+        if (showtimes[i].getListingID().equals(listingID))
+        {
+            return showtimes[i];
+        }
+    }
+    
+    return null;
+}
+
 public static ShowTime[] read_show_time(String cineplex, String movie_title) 
 {
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
