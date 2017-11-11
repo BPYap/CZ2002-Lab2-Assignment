@@ -1,4 +1,3 @@
-package movie;
 import java.util.Calendar;
 import java.util.Scanner;
 public class Transaction extends ShowTime{
@@ -15,7 +14,6 @@ public class Transaction extends ShowTime{
 	private int listing_Id;
 	private int rows[];
 	private int columns[];
-	
 	
 	public Transaction(Calendar transactionDateTime,double TotalSum,String customer_name,
 			String mobile_number,String email_address,int number_of_adult,int number_of_child,int number_of_scitizen,
@@ -46,10 +44,8 @@ public class Transaction extends ShowTime{
 		String DD = Integer.toString(D);
 		String hh = Integer.toString(h);
 		String mm = Integer.toString(m);
-		transactionID= cinema_code+YYYY+(M < 10 ? "0" + MM : MM) +(D < 10 ? "0" + DD : DD)+(h < 10 ? "0" + hh : hh)+(m < 10 ? "0" + mm : mm);
+		transactionID = cinema_code+YYYY+(M < 10 ? "0" + MM : MM) +(D < 10 ? "0" + DD : DD)+(h < 10 ? "0" + hh : hh)+(m < 10 ? "0" + mm : mm);
 	}
-	
-
 	
 	public String getTransactionID(){
 		return transactionID;
@@ -96,80 +92,32 @@ public class Transaction extends ShowTime{
 		return i;
 	}
 	
-	SpecialDate[] s1 = Database.read_special_date();
-	TicketPrice t1 = Database.read_ticket_price();
-	Cineplex c1 = new Cineplex();
-	ShowTime s2 = Database.read_show_time(listing_Id);
-	
-	public void Booking() {
-		
-		TotalSum=0;
-		int extracharge=0;
-		int[] row = new int[12];
-		int[] column = new int[12];
-		// get year,date,time from the movie object
-		for(int i=0;i<s1.length;i++) {
-    	     if  (s1[i].getDate().equals(s2.getYear+'-'+s2.getMonth+'-'+s2.getDay ) ){
-                extracharge = s1[i].getDiscount;
-			}
-		}
-		
-		if(c1.getCinema(cinema_code)[1].equals("Platinum Movie Suites")) {
-			extracharge += t1.getPlatinum();
-		}
-		
-			
-		for(int i = number_of_adult;i>0;i--) {
-			TotalSum += t1.getAdult()+extracharge;
-			do{
-	            System.out.println("Select a Seat");
-				Scanner scn1 = new Scanner(System.in);
-				System.out.println("    Please Enter Row Number:");
-				int x = scn1.nextInt();
-				System.out.println("    Please Enter Column Number:");
-		 		int y = scn1.nextInt();
-		 		//check seat automaticalies print out the layout 
-           }while (!s2.checkSeat(x,y));
-           int index=getIndexNeg1(purchased_column);
-           s2.purchased_column[index]=y;
-           s2.purchased_row[index]=x;
-		}
-		
-		for( int j = number_of_child ;j>0;j--) {
-			TotalSum += t1.getChild()+extracharge;
-			do{
-	            System.out.println("Select a Seat");
-				Scanner scn2 = new Scanner(System.in);
-				System.out.println("    Please Enter Row Number:");
-				int x = scn2.nextInt();
-				System.out.println("    Please Enter Column Number:");
-		 		int y = scn2.nextInt();
-		 		//check seat automaticalies print out the layout 
-           }while (!s2.checkSeat(x,y));
-           int index=getIndexNeg1(purchased_column);
-           s2.purchased_column[index]=y;
-           s2.purchased_row[index]=x;
-		}
-			
-		
-		for( int h = number_of_scitizen;h>0;h--) {
-			TotalSum += t1.getSenior()+extracharge;
-			do{
-	            System.out.println("Select a Seat");
-				Scanner scn3 = new Scanner(System.in);
-				System.out.println("    Please Enter Row Number:");
-				int x = scn3.nextInt();
-				System.out.println("    Please Enter Column Number:");
-		 		int y = scn3.nextInt();
-		 		//check seat automaticalies print out the layout 
-           }while (!s2.checkSeat(x,y));
-           int index=getIndexNeg1(purchased_column);
-           s2.purchased_column[index]=y;
-           s2.purchased_row[index]=x;
-		}
-	}
-	
+    public static void selectSeat(){
+        ShowTime[] showtime = Database.read_all_showtime();
+
+        String movietitle=selectMovieTitle();
+        String cineplex=selectCineplex();
+        
+        for(int i=0;i<showtime.length;i++){
+            if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getCineplexLocation().equals(cineplex)){
+                showtime[i].printSeatLayout();
+            }
+        }
+        
+        do{
+            System.out.print("How many adults? ");
+            int number_of_adult = sc.nextInt();
+        }while(number_of_adult < 0); //assume costumer wont buy more than cinema seats as they have seen the seatlayout 
+        
+        if()
+        do{
+            System.out.print("How many children? ");
+            int number_of_child = sc.nextInt();
+        }while(number_of_child < 0);
+    }
+    
 	public String toString() {
+        ShowTime s2 = Database.read_show_time(listing_Id);
         return  s2.getCineplexLocation()+"|"+ s2.getMovieTitle() + "|" + s2.getYear()+'-'+s2.getMonth()+'-'+s2.getDay() + "|" +  s2.start_time() + '-' + s2.end_time()+
         	"|"+ this.transactionID +"|" + this.total_amount + "|" + this.number_of_adult +"|" + this.number_of_child + "|"+this.number_of_scitizen + "|"+ Arrays.toString(row)+
         	"|"+Arrays.toString(column);
