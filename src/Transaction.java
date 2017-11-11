@@ -93,27 +93,7 @@ public class Transaction extends ShowTime{
 	}
 	
     public static void selectSeat(){
-        ShowTime[] showtime = Database.read_all_showtime();
-
-        String movietitle=selectMovieTitle();
-        String cineplex=selectCineplex();
         
-        for(int i=0;i<showtime.length;i++){
-            if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getCineplexLocation().equals(cineplex)){
-                showtime[i].printSeatLayout();
-            }
-        }
-        
-        do{
-            System.out.print("How many adults? ");
-            int number_of_adult = sc.nextInt();
-        }while(number_of_adult < 0); //assume costumer wont buy more than cinema seats as they have seen the seatlayout 
-        
-        if()
-        do{
-            System.out.print("How many children? ");
-            int number_of_child = sc.nextInt();
-        }while(number_of_child < 0);
     }
     
 	public String toString() {
