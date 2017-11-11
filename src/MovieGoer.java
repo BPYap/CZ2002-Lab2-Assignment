@@ -262,6 +262,7 @@ public class MovieGoer {
         String mobile_number = sc.nextLine();
         System.out.println();
         
+        Transaction transaction = new Transaction(name,mobile_number,email,number_of_adult,number_of_child,number_of_scitizen,showtime[selectedshowtime].getListingID(),rows[],columns[]);
         
     }
     /* public static void Booking() {

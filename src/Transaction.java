@@ -114,12 +114,6 @@ public class Transaction{
 	public int getListing_Id(){
 		return listing_Id;
 	}
-
-	/* public int getIndexNeg1(int[] x){
-		int i=0;
-		while(x[i]!=-1) i++;
-		return i;
-	} */
     
 	public String toString() {
         return  transactionID + "|" + total_fare + "|" + customer_name + "|" +  mobile_number + '-' + s2.end_time()+
