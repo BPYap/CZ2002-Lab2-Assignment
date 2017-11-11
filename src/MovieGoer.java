@@ -3,7 +3,7 @@ import java.util.*;
 public class MovieGoer {
 	public static Scanner sc = new Scanner(System.in);
     
-    	public static String selectMovieTitle(){
+    	public static Movie selectMovieTitle(){
 		Movie[] movies = Database.read_movie(false);
         listMovies();
 		System.out.println();
@@ -15,10 +15,10 @@ public class MovieGoer {
 		}while(choice <= 0 || choice > movies.length);
 		sc.nextLine();
 
-		return movies[choice-1].getMovieTitle();
+		return movies[choice-1];
     	}
     
-    public static String selectCineplex(){
+    public static Cineplex selectCineplex(){
         Cineplex[] cineplex = Database.read_cineplex();
         String widths = "20";
         utility.print_title_row("Cineplex Location", widths);
@@ -34,7 +34,7 @@ public class MovieGoer {
         }while(choice <= 0 || choice > cineplex.length);
         sc.nextLine();
         
-        return cineplex[choice-1].getLocation();
+        return cineplex[choice-1];
     }
     
 	public static void listMovies() 
@@ -70,7 +70,7 @@ public class MovieGoer {
     
     public static void reviewMovie(){
         System.out.println("========== Review Movie ==========");
-        String movie_title = selectMovieTitle();
+        String movie_title = selectMovieTitle().getMovieTitle();
         System.out.print("Enter your name: ");
         String reviewer = sc.nextLine();
         System.out.print("Enter your comment: ");
@@ -90,7 +90,7 @@ public class MovieGoer {
     
     public static void listReview(){
         System.out.println("========== View Movie Review ==========");
-        String movie_title = selectMovieTitle();
+        String movie_title = selectMovieTitle().getMovieTitle();
         Review[] reviews = Database.read_review();
         
         System.out.println("\nMovie Title: " + movie_title);
@@ -167,8 +167,8 @@ public class MovieGoer {
         System.out.println("========== Check Seat Availability ==========");
         ShowTime[] showtime = Database.read_all_showtime();
 
-        String movietitle=selectMovieTitle();
-        String cineplex=selectCineplex();
+        String movietitle=selectMovieTitle().getMovieTitle();
+        String cineplex=selectCineplex().getLocation();
         
         for(int i=0;i<showtime.length;i++){
             if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getCineplexLocation().equals(cineplex)){
@@ -182,7 +182,7 @@ public class MovieGoer {
         
     }
     
-    public static void Booking() {
+    /* public static void Booking() {
 		SpecialDate[] s1 = Database.read_special_date();
         TicketPrice t1 = Database.read_ticket_price();
         Cineplex c1 = new Cineplex();
@@ -252,7 +252,7 @@ public class MovieGoer {
            s2.purchased_column[index]=y;
            s2.purchased_row[index]=x;
 		}
-	}
+	} */
     
     //Function to sort array using insertion sort
     public static void insertionsort(double arr[],String str[])
