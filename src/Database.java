@@ -181,6 +181,55 @@ public class Database
         return resultShowTime;
     }
 
+    public static ShowTime[] read_show_time(String cineplex,String movie_title)
+    {
+        DateFormat df = new SimpleDateFormat("yyyyMMddHHmm");
+        Date now = new Date();
+        
+        String [] raw_records = utility.readContent("showtime.txt");
+        ShowTime[] showtimes = new ShowTime[raw_records.length];
+        ArrayList<ShowTime> result = new ArrayList<ShowTime>();
+
+        for (int i = 0; i < raw_records.length; i++)
+        {
+            showtimes[i] = new ShowTime(raw_records[i]);
+            String month = "";
+            if(showtimes[i].getMonth() < 10)
+            {
+                month = "0" + Integer.toString(showtimes[i].getMonth());
+            }
+            else
+            {
+                month = Integer.toString(showtimes[i].getMonth());
+            }
+            String day = "";
+            if(showtimes[i].getDay() < 10)
+            {
+                day = "0" + Integer.toString(showtimes[i].getDay());
+            }
+            else
+            {
+                day = Integer.toString(showtimes[i].getDay());
+            }                                                        
+
+            String showDate = Integer.toString(showtimes[i].getYear()) + month +  day + Integer.toString(showtimes[i].getStartTime());
+            Date showTime = null;
+            try{showTime = df.parse(showDate);}
+            
+            catch(java.text.ParseException ex)
+            {
+                System.out.println("Something bad happen");
+            }
+
+            if (showtimes[i].getCineplexLocation().equals(cineplex) && showtimes[i].getMovieTitle().equals(movie_title) &&   now.compareTo(showTime) == -1){
+                result.add(showtimes[i]);
+            }
+        }
+        ShowTime [] resultShowTime = result.toArray(new ShowTime[result.size()]);
+        return resultShowTime;
+    }
+    
+
     public static ShowTime read_show_time(String listingID)
     {
         String [] raw_records = utility.readContent("showtime.txt");
@@ -197,36 +246,6 @@ public class Database
         
         return null;
     }
-
-    public static ShowTime[] read_show_time(String cineplex, String movie_title) 
-    {
-    	SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyHHmm");
-        Date now = new Date();
-        String curDateTimeStr = sdf.format(now); //get the current time in ddMMyyyyHHmm format and store in string
-        
-    	String [] raw_records = utility.readContent("showtime.txt");
-        ShowTime[] showtimes = new ShowTime[raw_records.length];
-        ArrayList<ShowTime> result = new ArrayList<ShowTime>();
-
-        for (int i = 0; i < raw_records.length; i++)
-        {
-        	showtimes[i] = new ShowTime(raw_records[i]);
-        	String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
-            Date showTime = null;
-            try{showTime = sdf.parse(showDate);}
-            catch(java.text.ParseException ex)
-            {
-                System.out.println("Something bad happen");
-            	ex.printStackTrace();
-            }
-            String showDateTimeStr = sdf.format(showTime);
-            if (showtimes[i].getCineplexLocation().equals(cineplex) && showtimes[i].getMovieTitle().equals(movie_title) &&   now.compareTo(showTime) == -1){
-                result.add(showtimes[i]);
-            }
-        }
-        ShowTime [] resultShowTime = result.toArray(new ShowTime[result.size()]);
-        return resultShowTime;
-    } 
 
     public static Transaction[] read_transaction() 
     {

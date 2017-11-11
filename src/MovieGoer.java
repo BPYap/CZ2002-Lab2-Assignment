@@ -176,10 +176,11 @@ public class MovieGoer {
         
         //deacon pass back showtime
         ShowTime showtime[] = Database.read_show_time(cineplexlocation,movietitle);
-        
+        //System.out.println(movietitle);
+        //System.out.println(cineplexlocation);
         //print showtime to select
         String widths = "20";
-        //System.out.println("haha");
+        
         utility.print_title_row("Showtime", widths);
         for(int i=0;i<showtime.length;i++){
             String row = Integer.toString(showtime[i].getStartTime());
@@ -192,6 +193,9 @@ public class MovieGoer {
             System.out.println("Please select 1 showtime");
             selectedshowtime= sc.nextInt();
         }while(selectedshowtime<1 || selectedshowtime>showtime.length);
+        
+        //minus 1 = index;
+        selectedshowtime--;
         
         //print showtime layout
         showtime[selectedshowtime].printSeatLayout();
@@ -208,7 +212,7 @@ public class MovieGoer {
                 number_of_adult = sc.nextInt();
             }while(number_of_adult < 0);
             //number of child,check age rating
-            if(movie.getAgeRating()=="PG" || (movie.getAgeRating()=="PG13" && number_of_adult>0)){
+            if(movie.getAgeRating().equals("PG") || (movie.getAgeRating()=="PG13" && number_of_adult>0)){
                 do{
                 System.out.print("How many children? ");
                 number_of_child = sc.nextInt();
@@ -250,8 +254,8 @@ public class MovieGoer {
         System.out.println();
         System.out.print("Mobile Number : ");
         String mobile_number = sc.nextLine();
-        System.out.println();
         
+        //construct transaction
         Transaction transaction = new Transaction(name,mobile_number,email,number_of_adult,number_of_child,number_of_scitizen,showtime[selectedshowtime].getListingID(),rows,columns);
         String record = transaction.toString();
         utility.addRecord("transaction.txt",record);
