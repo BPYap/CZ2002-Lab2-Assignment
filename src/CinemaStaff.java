@@ -295,6 +295,8 @@ public class CinemaStaff
     }
     
     public static void createMovieShowTime()
+    // Assumptions : Cinema Staff will not create duplicate showtimes
+    //               Last show time is 2200 for simplicity
     {
         System.out.println("========== Create Movie Showtime ==========");
         System.out.print("Enter year: ");
