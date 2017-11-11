@@ -151,7 +151,7 @@ public class MovieGoer {
     
     public static void checkSeatAvailability(){
         System.out.println("========== Check Seat Availability ==========");
-        ShowTime[] showtime = Database.read_all_showtime();//pending
+        ShowTime[] showtime = Database.read_show_time();
 
         String movietitle=selectMovieTitle().getMovieTitle();
         String cineplex=selectCineplex().getLocation();
@@ -264,7 +264,33 @@ public class MovieGoer {
     public static void listTopSalesMovies(){
         System.out.println("========== Top 5 Sales Movies(Now Showing)==========");
         Transaction transaction[] = Database.read_transaction();
+        Movie movies[] = Database.read_now_showing_movie();
+        String movielist[] = new String[movies.length];
+        int movie_sale[] = new int[movies.length];
         
+        for(int i=0;i<movies.length;i++){
+            movielist[i]=movies[i].getMovieTitle();
+        }
+        
+        for(int i=0;i<transaction.length;i++){
+            String movietitle = Database.read_show_time(transaction[i].getListingID()).getMovieTitle();
+            for(int j=0;j<movielist.length;j++){
+                if(movietitle.equals(movielist[j])){
+                    int total_ticket = transaction[i].getNumberOfAdult() + transaction[i].getNumberOfChildren() + transaction[i].getNumberOfSenior();
+                    movie_sale[j]+=total_ticket;
+                    break;
+                }
+            }
+        }
+        
+        //implement insertion sort
+        insertionsort_forint(movie_sale, movielist);
+        String widths = "30,20";
+        utility.print_title_row("Movie Title, Sales", widths);
+        for(int i=0;i<movielist.length;i++){
+            String row = movielist[i]+","+movie_sale[i];
+            utility.print_row(i+1, row, widths);
+        }
     }
     
     //Function to sort array using insertion sort
@@ -274,6 +300,22 @@ public class MovieGoer {
             for (int j=i+1; j<arr.length; j++){
                 if (arr[i]<arr[j]){
                     double temp = arr[i];
+                    String tempmovie = str[i];
+                    arr[i] = arr[j];
+                    str[i] = str[j];
+                    arr[j] = temp;
+                    str[j] = tempmovie;
+                }
+            }
+        }
+    }
+    
+    public static void insertionsort_forint(int arr[],String str[])
+    {
+        for (int i=0; i<(arr.length-1); i++){
+            for (int j=i+1; j<arr.length; j++){
+                if (arr[i]<arr[j]){
+                    int temp = arr[i];
                     String tempmovie = str[i];
                     arr[i] = arr[j];
                     str[i] = str[j];

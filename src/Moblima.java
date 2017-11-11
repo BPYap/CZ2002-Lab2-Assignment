@@ -65,8 +65,10 @@ public class Moblima {
                                 MovieGoer.bookTickets();
 								break;
 							case 6:
+                                MovieGoer.checkTransactionHistory();
 								break;
 							case 7:
+                                MovieGoer.listTopSalesMovies();
 								break;
 							case 8:
                                 MovieGoer.listTopRatedMovies();
