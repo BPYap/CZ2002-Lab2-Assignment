@@ -191,7 +191,8 @@ public class MovieGoer {
         Cineplex cineplex = selectCineplex();
         String cineplexlocation = cineplex.getLocation();
         
-        //deacon pass back showtime...pending
+        //deacon pass back showtime
+        ShowTime showtime[] = Database.read_show_time(cineplexlocation,movietitle);
         
         //print showtime to select
         String widths = "20";
@@ -263,7 +264,9 @@ public class MovieGoer {
         System.out.println();
         
         Transaction transaction = new Transaction(name,mobile_number,email,number_of_adult,number_of_child,number_of_scitizen,showtime[selectedshowtime].getListingID(),rows[],columns[]);
-        
+        String record = transaction.toString();
+        utility.addRecord("transaction.txt",record);
+        System.out.println("The transaction( ID: "+transaction.getTransactionID()+") is made. Thanks for purchasing :)");
     }
     /* public static void Booking() {
 		SpecialDate[] s1 = Database.read_special_date();
