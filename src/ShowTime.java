@@ -101,7 +101,7 @@ public class ShowTime {
     			rowBought.concat(Integer.toString(purchased_column[i]));
     			rowBought.concat(",");}
     	}
-        return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + "|" + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code + rowBought + colBought; 
+        return this.listing_ID + "|" + this.day + "|" + this.month + "|" + this.year + "|" + this.start_time + "|" + this.end_time + "|" + this.movie_title + "|" + this.cineplex_location + "|" + this.cinema_code +  "|" + rowBought +  "|" + colBought; 
 	}
 	
 	public void printSeatLayout() {;
