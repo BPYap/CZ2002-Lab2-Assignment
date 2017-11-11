@@ -270,77 +270,10 @@ public class MovieGoer {
         utility.addRecord("transaction.txt",record);
         System.out.println("The transaction( ID: "+transaction.getTransactionID()+") is made. Thanks for purchasing :)");
     }
-    /* public static void Booking() {
-		SpecialDate[] s1 = Database.read_special_date();
-        TicketPrice t1 = Database.read_ticket_price();
-        Cineplex c1 = new Cineplex();
-        ShowTime s2 = Database.read_show_time(listing_Id);
-        
-		TotalSum=0;
-		int extracharge=0;
-		int[] row = new int[12];
-		int[] column = new int[12];
-		// get year,date,time from the movie object
-		for(int i=0;i<s1.length;i++) {
-    	     if  (s1[i].getDate().equals(s2.getYear+'-'+s2.getMonth+'-'+s2.getDay ) ){
-                extracharge = s1[i].getDiscount;
-			}
-		}
-		
-		if(c1.getCinema(cinema_code)[1].equals("Platinum Movie Suites")) {
-			extracharge += t1.getPlatinum();
-		}
-		
-			
-		for(int i = number_of_adult;i>0;i--) {
-			TotalSum += t1.getAdult()+extracharge;
-			do{
-	            System.out.println("Select a Seat");
-				Scanner scn1 = new Scanner(System.in);
-				System.out.println("    Please Enter Row Number:");
-				int x = scn1.nextInt();
-				System.out.println("    Please Enter Column Number:");
-		 		int y = scn1.nextInt();
-		 		//check seat automaticalies print out the layout 
-           }while (!s2.checkSeat(x,y));
-           int index=getIndexNeg1(purchased_column);
-           s2.purchased_column[index]=y;
-           s2.purchased_row[index]=x;
-		}
-		
-		for( int j = number_of_child ;j>0;j--) {
-			TotalSum += t1.getChild()+extracharge;
-			do{
-	            System.out.println("Select a Seat");
-				Scanner scn2 = new Scanner(System.in);
-				System.out.println("    Please Enter Row Number:");
-				int x = scn2.nextInt();
-				System.out.println("    Please Enter Column Number:");
-		 		int y = scn2.nextInt();
-		 		//check seat automaticalies print out the layout 
-           }while (!s2.checkSeat(x,y));
-           int index=getIndexNeg1(purchased_column);
-           s2.purchased_column[index]=y;
-           s2.purchased_row[index]=x;
-		}
-			
-		
-		for( int h = number_of_scitizen;h>0;h--) {
-			TotalSum += t1.getSenior()+extracharge;
-			do{
-	            System.out.println("Select a Seat");
-				Scanner scn3 = new Scanner(System.in);
-				System.out.println("    Please Enter Row Number:");
-				int x = scn3.nextInt();
-				System.out.println("    Please Enter Column Number:");
-		 		int y = scn3.nextInt();
-		 		//check seat automaticalies print out the layout 
-           }while (!s2.checkSeat(x,y));
-           int index=getIndexNeg1(purchased_column);
-           s2.purchased_column[index]=y;
-           s2.purchased_row[index]=x;
-		}
-	} */
+    
+    public static void viewMovieShowTimes(){
+        Moblima.listMovieShowTime();
+    }
     
     //Function to sort array using insertion sort
     public static void insertionsort(double arr[],String str[])

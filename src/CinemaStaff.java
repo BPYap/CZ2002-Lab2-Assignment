@@ -362,15 +362,7 @@ public class CinemaStaff
 
     public static void showAllMovieShowTime()
     {
-        ShowTime[] showtimes = Database.read_show_time();
-        String widths = "12,12,35,25,20,18";
-        utility.print_title_row("Date, Start time, Movie Title, Cineplex Location, Cinema Code, Available Seat", widths);
-        for(int i = 0; i < showtimes.length; i++)
-        {
-            String row = showtimes[i].getDate() + "," + showtimes[i].getStartTime() + "," + showtimes[i].getMovieTitle() + "," + showtimes[i].getCineplexLocation() + "," +
-                            showtimes[i].getCinemaCode() + "," + showtimes[i].getAvailableSeats();
-            utility.print_row(i+1, row, widths);
-        }
+        Moblima.listMovieShowTime();
     }
     
 }
