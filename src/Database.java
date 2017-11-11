@@ -3,6 +3,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
+import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.ParseException;
+
+import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+
 public class Database
 {
     public static Movie[] read_movie(boolean FilterEndOfShow)
@@ -146,16 +151,23 @@ public static Cineplex read_cineplex(String location)
         return null;
 }
  
-public static ShowTime read_show_time(String listingID)
+public static ShowTime read_show_time(String listingID) throws java.text.ParseException
 {
-    String [] raw_records = utility.readContent("showtime.txt");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
+    Date now = new Date();
+    String curDateTimeStr = sdf.format(now); //get the current time in YYYYMMDDHHMM format and store in string
+    
+	String [] raw_records = utility.readContent("showtime.txt");
     ShowTime[] showtimes = new ShowTime[raw_records.length];
     
     for (int i = 0; i < raw_records.length; i++)
     {
         showtimes[i] = new ShowTime(raw_records[i]);
-        if (showtimes[i].getListingID().equals(listingID))
-        {
+        String showDate = Integer.toString(showtimes[i].getYear()) + Integer.toString(showtimes[i].getMonth()) + Integer.toString(showtimes[i].getDay()) + Integer.toString(showtimes[i].getStartTime());
+        Date showTime = sdf.parse(showDate);
+        String showDateTimeStr = sdf.format(showTime);
+      
+        if (showtimes[i].getListingID().equals(listingID) &&   curDateTimeStr.compareTo(showDateTimeStr) == -1){
             return showtimes[i];
         }
     }
