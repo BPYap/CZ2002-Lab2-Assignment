@@ -139,12 +139,29 @@ public class MovieGoer {
         }
         
         //implement insertion sort
-        insertionsort(rating, movielist);
+        insertionsort(rating, movielist,amountofreviewer);
+        
+        String top5rating[] = new String[5];
+        String top5movie[] = new String[5];
+        
+        for(int i=0;i<movies.length;i++){
+            top5movie[i] = movielist[i];
+            if(amountofreviewer[i]<2){
+                top5rating[i] = "NA";
+            }else{
+                String rating_print = String.format("%.1f", rating[i]); 
+                top5rating[i] = rating_print;
+            }
+        }
+        for(int i=movies.length;i<5;i++){
+            top5movie[i] = "-";
+            top5rating[i] = "NA";
+        }
+        
         String widths = "30,20";
         utility.print_title_row("Movie Title, Average Rating", widths);
-        for(int i=0;i<movielist.length;i++){
-            String rating_print = String.format("%.1f", rating[i]); 
-            String row = movielist[i]+","+rating_print;
+        for(int i=0;i<5;i++){
+            String row = top5movie[i]+","+top5rating[i];
             utility.print_row(i+1, row, widths);
         }
     }
@@ -174,13 +191,21 @@ public class MovieGoer {
         Cineplex cineplex = selectCineplex();
         String cineplexlocation = cineplex.getLocation();
         
-        //deacon pass back showtime
-        ShowTime showtime[] = Database.read_show_time(cineplexlocation,movietitle);
-        //System.out.println(movietitle);
-        //System.out.println(cineplexlocation);
+        //select showtime
+        ShowTime showtime[] = Database.read_show_time(cineplexlocation,movietitle); 
+        //when there is no showtime 
+        while(showtime.length==0){
+            System.out.println("Sorry, there is no '" + movietitle + "' in " + cineplexlocation + ". Choose again");
+            System.out.println();
+            movie = selectMovieTitle();
+            movietitle = movie.getMovieTitle();
+            cineplex = selectCineplex();
+            cineplexlocation = cineplex.getLocation();
+            showtime = Database.read_show_time(cineplexlocation,movietitle); 
+        }
+
         //print showtime to select
         String widths = "20";
-        
         utility.print_title_row("Showtime", widths);
         for(int i=0;i<showtime.length;i++){
             String row = Integer.toString(showtime[i].getStartTime());
@@ -190,7 +215,7 @@ public class MovieGoer {
         //select showtime
         int selectedshowtime = 0;
         do{
-            System.out.print("Please select 1 showtime: ");
+            System.out.print("Please select the showtime: ");
             selectedshowtime= sc.nextInt();
         }while(selectedshowtime<1 || selectedshowtime>showtime.length);
         
@@ -242,15 +267,17 @@ public class MovieGoer {
                 rows[i]=row;
                 columns[i]=column;
                 i++;
+            }else{
+                System.out.println("The seat is booked by others. Choose again.");
             }
         }
         
         //get user name,email,mobile number
-        System.out.print("Name : ");
+        System.out.println("Name : ");
         String name = sc.nextLine();
-        System.out.print("Email : ");
+        System.out.println("Email : ");
         String email = sc.nextLine();
-        System.out.print("Mobile Number : ");
+        System.out.println("Mobile Number : ");
         String mobile_number = sc.nextLine();
         
         //construct transaction
@@ -311,6 +338,7 @@ public class MovieGoer {
         
         //implement insertion sort
         insertionsort_forint(movie_sale, movielist);
+        
         String widths = "30,20";
         utility.print_title_row("Movie Title, Sales", widths);
         for(int i=0;i<movielist.length;i++){
@@ -320,17 +348,20 @@ public class MovieGoer {
     }
     
     //Function to sort array using insertion sort
-    public static void insertionsort(double arr[],String str[])
+    public static void insertionsort(double arr[],String str[],int amountofreviewer[])
     {
         for (int i=0; i<(arr.length-1); i++){
             for (int j=i+1; j<arr.length; j++){
                 if (arr[i]<arr[j]){
                     double temp = arr[i];
                     String tempmovie = str[i];
+                    int temp_amount = amountofreviewer[i];
                     arr[i] = arr[j];
                     str[i] = str[j];
+                    amountofreviewer[i] = amountofreviewer[j];
                     arr[j] = temp;
                     str[j] = tempmovie;
+                    amountofreviewer[j] = temp_amount; 
                 }
             }
         }
@@ -341,6 +372,7 @@ public class MovieGoer {
         for (int i=0; i<(arr.length-1); i++){
             for (int j=i+1; j<arr.length; j++){
                 if (arr[i]<arr[j]){
+                    
                     int temp = arr[i];
                     String tempmovie = str[i];
                     arr[i] = arr[j];

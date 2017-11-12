@@ -46,7 +46,7 @@ public class Database
         
         for (int i = 0; i < raw_records.length; i++)
         {
-            if(raw_records[i].contains("NowShowing"))
+            if(raw_records[i].contains("Now Showing"))
             {
                 movies[temp] = new Movie(raw_records[i]);
                 temp++;
