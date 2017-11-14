@@ -126,16 +126,49 @@ public class MovieGoer {
             }
         }
         
+        int counter=0;
+        for(int i=0;i<movielist.length;i++){
+            if(amountofreviewer[i]>=2){
+                movielist[counter]=movielist[i];
+                amountofreviewer[counter]=amountofreviewer[i];
+                totalrating[counter]=totalrating[i];
+                counter++;
             }
         }
         
+        String[] movielist_print = new String[counter];
+        int[] amountofreviewer_print = new int[counter];
+        int[] totalrating_print = new int[counter];
+        for(int i=0;i<movielist_print.length;i++){
+            if(amountofreviewer[i]>=2){
+                movielist_print[i]=movielist[i];
+                amountofreviewer_print[i]=amountofreviewer[i];
+                totalrating_print[i]=totalrating[i];
             }
         }
+        
+        double[] rating = new double[counter];
+        //calculate the average
+        for(int i=0;i<movielist_print.length;i++){
+            if(totalrating_print[i]!=0){
+                rating[i]=(double)totalrating_print[i]/(double)amountofreviewer_print[i];
+            }
         }
+        
+        //implement insertion sort
+        insertionsort(rating, movielist_print,amountofreviewer_print);
         
         String widths = "30,20";
         utility.print_title_row("Movie Title, Average Rating", widths);
         for(int i=0;i<5;i++){
+            if(i<counter){
+                String prettyprint = String.format("%.1f",rating[i]);
+                String row = movielist_print[i]+","+prettyprint;
+                utility.print_row(i+1, row, widths);
+            }else{
+                String row = "-,NA";
+                utility.print_row(i+1, row, widths);
+            }
         }
     }
     
@@ -331,6 +364,7 @@ public class MovieGoer {
     public static void listTopSalesMovies(){
         System.out.println("========== Top 5 Sales Movies(Now Showing)==========");
         Transaction transaction[] = Database.read_transaction();
+        Movie movies[] = Database.read_movie(true, true);
         String movielist[] = new String[movies.length];
         int movie_sale[] = new int[movies.length];
         
@@ -354,6 +388,7 @@ public class MovieGoer {
         
         String widths = "30,20";
         utility.print_title_row("Movie Title, Sales", widths);
+        for(int i=0;i<5;i++){
             String row = movielist[i]+","+movie_sale[i];
             utility.print_row(i+1, row, widths);
         }
