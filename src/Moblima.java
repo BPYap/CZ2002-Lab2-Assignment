@@ -60,7 +60,7 @@ public class Moblima {
 						sc.nextLine();
 						switch(choice) {
 							case 1:
-								MovieGoer.listMovies();
+								MovieGoer.listMovies(true, false);
 								break;
 							case 2:
                                 MovieGoer.viewMovieDetails();
