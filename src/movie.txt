@@ -11,3 +11,5 @@ Geostorm|Digital|After an unprecedented series of natural disasters threatened t
 My Little Pony|Digital|New dark force threatens Ponyville, and the Mane 6,embark on an unforgettable journey beyond Equestria|Jayson Thiessen|Uzo Aduba, Emily Blunt,Sia|PG13|Now Showing
 Lion King|Cartoon|Roar~|John Doe|Simba, Monkey|PG|Preview
 NBA Legend Story|History|This is about the legend, Micheal Jordan.|Yap|Deacon, Adam|PG|Coming Soon
+Nemo and Dory|Cartoon|Nemo finding Dory|Nature|Fish and more fish|PG|Now Showing
+|Plant vs Zombie|who will win?|NPC|plants and zombies|PG13|Preview
