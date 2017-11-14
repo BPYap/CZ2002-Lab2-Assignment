@@ -59,8 +59,8 @@ public class MovieGoer {
 		{
 		    System.out.print("Enter the index of movie you wish to know more about: ");
 		    choice = sc.nextInt();
+            sc.nextLine();
 		}while (choice <= 0 || choice > movies.length);
-		sc.nextLine();
 		utility.printBorder();
 		System.out.println("Movie Title: " + movies[choice-1].getMovieTitle());
 		System.out.println("Synopsis   : " + movies[choice-1].getSynopsis());
