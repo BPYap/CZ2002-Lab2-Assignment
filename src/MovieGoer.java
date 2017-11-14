@@ -234,7 +234,7 @@ public class MovieGoer {
                 number_of_adult = sc.nextInt();
             }while(number_of_adult < 0);
             //number of child,check age rating
-            if(movie.getAgeRating().equals("PG") || (movie.getAgeRating()=="PG13" && number_of_adult>0)){
+            if(movie.getAgeRating().equals("PG") || (movie.getAgeRating().equals("PG13") && number_of_adult>0)){
                 do{
                 System.out.print("How many children? ");
                 number_of_child = sc.nextInt();
@@ -270,11 +270,11 @@ public class MovieGoer {
         }
         
         //get user name,email,mobile number
-        System.out.println("Name : ");
+        System.out.print("Name : ");
         String name = sc.nextLine();
-        System.out.println("Email : ");
+        System.out.print("Email : ");
         String email = sc.nextLine();
-        System.out.println("Mobile Number : ");
+        System.out.print("Mobile Number : ");
         String mobile_number = sc.nextLine();
         
         //construct transaction
