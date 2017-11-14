@@ -5,12 +5,14 @@ public class Moblima {
     
     public static void listMovieShowTime(){
         ShowTime[] showtimes = Database.read_show_time();
-        String widths = "12,12,35,25,20,18";
-        utility.print_title_row("Date, Start time, Movie Title, Cineplex Location, Cinema Code, Available Seat", widths);
+        String widths = "12,12,35,25,20,25,18";
+        utility.print_title_row("Date, Start time, Movie Title, Cineplex Location, Cinema Code, Cinema Class, Available Seat", widths);
         for(int i = 0; i < showtimes.length; i++)
         {
+            Cineplex cineplex = Database.read_cineplex(showtimes[i].getCineplexLocation());
+            String cinema_class = cineplex.getCinema(showtimes[i].getCinemaCode()).getCinemaClass();
             String row = showtimes[i].getDate() + "," + showtimes[i].getStartTime() + "," + showtimes[i].getMovieTitle() + "," + showtimes[i].getCineplexLocation() + "," +
-                            showtimes[i].getCinemaCode() + "," + showtimes[i].getAvailableSeats();
+                            showtimes[i].getCinemaCode() + "," + cinema_class + "," + showtimes[i].getAvailableSeats();
             utility.print_row(i+1, row, widths);
         }
     }
