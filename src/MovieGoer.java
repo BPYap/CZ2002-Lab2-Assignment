@@ -4,7 +4,7 @@ public class MovieGoer {
 	public static Scanner sc = new Scanner(System.in);
     
     	public static Movie selectMovieTitle(){
-		Movie[] movies = Database.read_movie(false);
+		Movie[] movies = Database.read_now_showing_movie();
         listMovies();
 		System.out.println();
 		int choice = 0;
@@ -248,7 +248,7 @@ public class MovieGoer {
             }while(number_of_scitizen < 0);
             //total_ticket
             totalticket = number_of_adult + number_of_child + number_of_scitizen;
-        }while(totalticket > showtime[selectedshowtime].getAvailableSeats());
+        }while(totalticket > showtime[selectedshowtime].getAvailableSeats()||totalticket==0);
         
         //check seat
         int rows[] = new int[totalticket];
