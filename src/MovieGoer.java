@@ -66,6 +66,20 @@ public class MovieGoer {
 		System.out.println("Director   : " + movies[choice-1].getDirector());
 		System.out.println("Cast       : " + movies[choice-1].getCast());
 		utility.printBorder();
+        String movie_title = movies[choice-1].getMovieTitle();
+        Review[] reviews = Database.read_review();
+        
+        System.out.println("\nMovie Title: " + movie_title);
+        utility.printline();
+        for(int i=0;i<reviews.length;i++){
+            if(reviews[i].getMovieTitle().equals(movie_title)){
+                System.out.println("Reviewer : " + reviews[i].getReviewer());
+                System.out.println("Rating   : " + reviews[i].getRating());
+                System.out.println('"'+ reviews[i].getComments() + '"');
+                utility.printline();
+            }
+        }
+        utility.printBorder();
 	    }
     
     public static void reviewMovie(){
@@ -86,23 +100,6 @@ public class MovieGoer {
         String record = review.toString();
         utility.addRecord("review.txt",record);
         System.out.println("Your review has been added into review database");
-    }
-    
-    public static void listReview(){
-        System.out.println("========== View Movie Review ==========");
-        String movie_title = selectMovieTitle().getMovieTitle();
-        Review[] reviews = Database.read_review();
-        
-        System.out.println("\nMovie Title: " + movie_title);
-        utility.printline();
-        for(int i=0;i<reviews.length;i++){
-            if(reviews[i].getMovieTitle().equals(movie_title)){
-                System.out.println("Reviewer : " + reviews[i].getReviewer());
-                System.out.println("Rating   : " + reviews[i].getRating());
-                System.out.println('"'+ reviews[i].getComments() + '"');
-                utility.printline();
-            }
-        }
     }
     
     public static void listTopRatedMovies(){
@@ -252,6 +249,7 @@ public class MovieGoer {
             //total_ticket
             totalticket = number_of_adult + number_of_child + number_of_scitizen;
         }while(totalticket > showtime[selectedshowtime].getAvailableSeats());
+        }while(totalticket > showtime[selectedshowtime].getAvailableSeats()||totalticket==0);
         
         //check seat
         int rows[] = new int[totalticket];
