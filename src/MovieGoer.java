@@ -261,7 +261,7 @@ public class MovieGoer {
             String seat[] = seatline.split(",");
             int row = Integer.parseInt(seat[0]);
             int column = Integer.parseInt(seat[1]);
-            if(showtime[selectedshowtime].checkSeat(row,column)==false){
+            if(showtime[selectedshowtime].checkSeat(row,column)==false && localcheckseat(rows,columns,row,column)==false){
                 rows[i]=row;
                 columns[i]=column;
                 i++;
@@ -286,6 +286,16 @@ public class MovieGoer {
         showtime[selectedshowtime].decrement_seat(rows, columns);
         utility.updateFile("showtime.txt", old_record, showtime[selectedshowtime].toString());
         System.out.println("The transaction( ID: "+transaction.getTransactionID()+") is made. Thanks for purchasing :)");
+    }
+    
+    public static boolean localcheckseat(int rows[],int columns[], int row, int column){
+        int rowlength=rows.length-1;
+        for(int i=0;i<rowlength;i++){
+            if(row==rows[i] || column==columns[i]){
+            return true;   
+            }
+        }
+        return false;
     }
     
     public static void checkTransactionHistory()
