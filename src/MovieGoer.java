@@ -214,7 +214,6 @@ public class MovieGoer {
 
         //print showtime to select
         String widths = "20,20,30,20,20";
-        utility.print_title_row("Date,Showtime,Cinema Class,Discount,Promotion", widths);
         SpecialDate[] special_dates = Database.read_special_date();
         String discount;
         String promotion;
@@ -233,7 +232,6 @@ public class MovieGoer {
                     break;
                 }
             }
-            String row = year+"/"+month+"/"+day+","+Integer.toString(showtime[i].getStartTime()) + "," + cineplex.getCinema(showtime[i].getCinemaCode()).getCinemaClass() + "," + discount + "," + promotion;
             utility.print_row(i+1, row, widths);
         }
         
