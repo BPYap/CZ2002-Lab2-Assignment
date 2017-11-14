@@ -329,7 +329,7 @@ public class MovieGoer {
     
     public static boolean localcheckseat(int rows[],int columns[], int row, int column, int row_number, int column_number){
         int rowlength=rows.length-1;
-        if(row>row_number || columns>column_number){
+        if(row>row_number || column>column_number){
             return true;
         }
         for(int i=0;i<rowlength;i++){
