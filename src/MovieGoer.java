@@ -5,6 +5,7 @@ public class MovieGoer {
     
     	public static Movie selectMovieTitle(){
 		Movie[] movies = Database.read_movie(true, true);
+		Movie[] movies = Database.read_now_showing_movie();
         listMovies();
 		System.out.println();
 		int choice = 0;
