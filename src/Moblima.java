@@ -41,8 +41,7 @@ public class Moblima {
 						System.out.println("(7)List Current Top Sales Movies");
 						System.out.println("(8)List Current Top Rated Movies");
 						System.out.println("(9)Review Movie");
-						System.out.println("(10)View Movie's Reviews");
-                        System.out.println("(11)Exit");
+                        System.out.println("(10)Exit");
                         do
                         {
                             System.out.print("\nChoose an option: ");
@@ -78,12 +77,9 @@ public class Moblima {
                                 MovieGoer.reviewMovie();
 								break;
 							case 10:
-                                MovieGoer.listReview();
 								break;
-                            case 11:
-                                break;
 						}
-					}while(choice<11);
+					}while(choice<10);
 					break;
 				case 2:
                     System.out.println("\nPlease login.");   
