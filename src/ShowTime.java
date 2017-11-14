@@ -92,7 +92,7 @@ public class ShowTime {
     	public String getListingID() {return listing_ID;}
     	public int getAvailableSeats() {return available_seats; }
 	
-    public String toString() { //pending->updated
+    public String toString() {
     	String rowBought = new String(""); 
     	String colBought = new String("");
         if (purchased_row != null)

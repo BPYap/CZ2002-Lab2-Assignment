@@ -51,7 +51,7 @@ public class MovieGoer {
         }
 	}
     
-	 public static void viewMovieDetails(){
+	public static void viewMovieDetails(){
 		listMovies(true, false);
 		Movie movies[] = Database.read_movie(true, false);
 		int choice = 0;
@@ -260,7 +260,10 @@ public class MovieGoer {
             String seat[] = seatline.split(",");
             int row = Integer.parseInt(seat[0]);
             int column = Integer.parseInt(seat[1]);
-            if(showtime[selectedshowtime].checkSeat(row,column)==false && localcheckseat(rows,columns,row,column)==false){
+            int row_number = cineplex.getCinema(cinema_code).getNumberOfRows();
+            int column_number = cineplex.getCinema(cinema_code).getNumberOfColumns();
+            
+            if(showtime[selectedshowtime].checkSeat(row,column)==false && localcheckseat(rows,columns,row,column,row_number,column_number)==false){
                 rows[i]=row;
                 columns[i]=column;
                 i++;
@@ -287,11 +290,11 @@ public class MovieGoer {
         System.out.println("The transaction( ID: "+transaction.getTransactionID()+") is made. Thanks for purchasing :)");
     }
     
-    public static boolean localcheckseat(int rows[],int columns[], int row, int column){
+    public static boolean localcheckseat(int rows[],int columns[], int row, int column, int row_number, int column_number){
         int rowlength=rows.length-1;
         for(int i=0;i<rowlength;i++){
-            if(row==rows[i] || column==columns[i]){
-            return true;   
+            if(row==rows[i] || column==columns[i] || row>row_number || row>column_number){
+                return true;   
             }
         }
         return false;
