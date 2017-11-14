@@ -288,6 +288,14 @@ public class MovieGoer {
         showtime[selectedshowtime].decrement_seat(rows, columns);
         utility.updateFile("showtime.txt", old_record, showtime[selectedshowtime].toString());
         System.out.println("The transaction( ID: "+transaction.getTransactionID()+") is made. Thanks for purchasing :)");
+        System.out.println("\nThe receipt is at below: ");
+        System.out.println("Cineplex: " + cineplexlocation);
+        System.out.println("Cinema Hall: " + cineplex.getCinema(cinema_code).getCinemaCode(););
+        System.out.println("Name: "+name);
+        System.out.println("Mobile Number: "+mobile_number);
+        System.out.println("Email: "+email);
+        System.out.println("Pax: "+totalticket);
+        System.out.println("Total Fare: "+transaction.getTotalFare());
     }
     
     public static boolean localcheckseat(int rows[],int columns[], int row, int column, int row_number, int column_number){
