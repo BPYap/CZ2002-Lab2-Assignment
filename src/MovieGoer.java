@@ -203,10 +203,10 @@ public class MovieGoer {
         }
 
         //print showtime to select
-        String widths = "20";
-        utility.print_title_row("Showtime", widths);
+        String widths = "20,20";
+        utility.print_title_row("Date,Showtime", widths);
         for(int i=0;i<showtime.length;i++){
-            String row = Integer.toString(showtime[i].getStartTime());
+            String row = showtime[i].getYear()+"/"+showtime[i].getMonth()+"/"+showtime[i].getDay()+","+Integer.toString(showtime[i].getStartTime());
             utility.print_row(i+1, row, widths);
         }
         
