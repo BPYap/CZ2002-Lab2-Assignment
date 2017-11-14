@@ -15,6 +15,15 @@ public class Moblima {
         }
     }
     
+    public static void showAllTicketPrice()
+    {
+        TicketPrice ticket_info = Database.read_ticket_price();
+        String widths = "8,10,15,30";
+        utility.print_title_row("Adult, Children, Senior Citizen, Platinum suite extra charge", widths);
+        String row = "S$" + ticket_info.getAdult() + "," + "S$" +  ticket_info.getChildren() + "," + "S$" + ticket_info.getSenior() + "," + "S$" + ticket_info.getPlatinum();
+        utility.print_row(1, row, widths);
+    }
+    
 	public static void main(String[] args) {
 		int stafforcust = 0;
 		do {
@@ -41,7 +50,8 @@ public class Moblima {
 						System.out.println("(7)List Current Top Sales Movies");
 						System.out.println("(8)List Current Top Rated Movies");
 						System.out.println("(9)Review Movie");
-                        System.out.println("(10)Exit");
+                        System.out.println("(10)Show current ticket price");
+                        System.out.println("(11)Exit");
                         do
                         {
                             System.out.print("\nChoose an option: ");
@@ -77,9 +87,12 @@ public class Moblima {
                                 MovieGoer.reviewMovie();
 								break;
 							case 10:
+                                showAllTicketPrice();
 								break;
+                            case 11:
+                                break;
 						}
-					}while(choice<10);
+					}while(choice < 11);
 					break;
 				case 2:
                     System.out.println("\nPlease login.");   
@@ -133,7 +146,7 @@ public class Moblima {
                             CinemaStaff.editTicketPrice();
                             break;
                         case 8:
-                            CinemaStaff.showAllTicketPrice();
+                            showAllTicketPrice();
                             break;
                         case 9:
                             CinemaStaff.createMovieShowTime();

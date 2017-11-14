@@ -285,15 +285,6 @@ public class CinemaStaff
         
     }
     
-    public static void showAllTicketPrice()
-    {
-        TicketPrice ticket_info = Database.read_ticket_price();
-        String widths = "8,10,15,30";
-        utility.print_title_row("Adult, Children, Senior Citizen, Platinum suite extra charge", widths);
-        String row = "S$" + ticket_info.getAdult() + "," + "S$" +  ticket_info.getChildren() + "," + "S$" + ticket_info.getSenior() + "," + "S$" + ticket_info.getPlatinum();
-        utility.print_row(1, row, widths);
-    }
-    
     public static void createMovieShowTime()
     // Assumptions : Cinema Staff will not create duplicate showtimes
     //               Last show time is 22:00 for simplicity
