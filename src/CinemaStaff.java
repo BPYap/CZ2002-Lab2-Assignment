@@ -135,6 +135,17 @@ public class CinemaStaff
         }while (choice <= 0 || choice > movies.length);
         
         Movie selected_movie = movies[choice-1];
+        
+        ShowTime[] showtimes = Database.read_show_time();
+        for(int i = 0; i < showtimes.length; i++)
+        {
+            if(showtimes[i].getMovieTitle().equals(selected_movie.getMovieTitle()))
+            {
+                System.out.println("Cannot change status of " + selected_movie.getMovieTitle() + " because it is featured in showtime ID " + showtimes[i].getListingID());
+                return;
+            }
+        }
+    
         String old_record = selected_movie.toString();
         
         System.out.println("Select status for " + selected_movie.getMovieTitle() + " (Current Status: " + selected_movie.getStatus() + ") : ");
