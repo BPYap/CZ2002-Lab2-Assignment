@@ -122,7 +122,7 @@ public class Moblima {
                             CinemaStaff.setMovieStatus();
                             break;
                         case 3:
-                            CinemaStaff.listMovies(false);
+                            CinemaStaff.listMovies(false, false);
                             break;
                         case 4:
                             CinemaStaff.addSpecialDate();

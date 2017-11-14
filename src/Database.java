@@ -8,8 +8,8 @@ import java.text.*;
 
 public class Database
 {
-    public static Movie[] read_movie(boolean FilterEndOfShow)
-    // available attributes : Movie_Title, Genre, Synopsis, Director, Cast, Age_Group, Status
+    public static Movie[] read_movie(boolean FilterEndOfShow, boolean FilterComingSoon)
+    // contains all movies except End Of Show/Coming Soon if FilterEndOfShow/FilterComingSoon is true
     {
         String [] raw_records = utility.readContent("movie.txt");
         Movie[] movies = new Movie[raw_records.length];
@@ -24,6 +24,12 @@ public class Database
                 count++;
                 continue;
             }
+            else if(FilterComingSoon && raw_records[i].contains("Coming Soon"))
+            {
+                count++;
+                continue;
+            }
+            
             movies[temp] = new Movie(raw_records[i]);
             temp++;
         }
@@ -32,28 +38,6 @@ public class Database
         {
             movies = Arrays.copyOfRange(movies, 0, movies.length - count);
         }
-
-        return movies;
-    }
-    
-    public static Movie[] read_now_showing_movie()
-    {
-        String [] raw_records = utility.readContent("movie.txt");
-        Movie[] movies = new Movie[raw_records.length];
-        
-        int count = 0; 
-        int temp = 0;
-        
-        for (int i = 0; i < raw_records.length; i++)
-        {
-            if(raw_records[i].contains("Now Showing"))
-            {
-                movies[temp] = new Movie(raw_records[i]);
-                temp++;
-                count++;
-            }
-        }
-        movies = Arrays.copyOfRange(movies, 0, count);
 
         return movies;
     }

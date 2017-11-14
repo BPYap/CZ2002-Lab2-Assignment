@@ -4,7 +4,7 @@ public class MovieGoer {
 	public static Scanner sc = new Scanner(System.in);
     
     	public static Movie selectMovieTitle(){
-		Movie[] movies = Database.read_movie(false);
+		Movie[] movies = Database.read_movie(true, true);
         listMovies();
 		System.out.println();
 		int choice = 0;
@@ -39,7 +39,7 @@ public class MovieGoer {
     
 	public static void listMovies() 
     {
-        Movie[] movies = Database.read_movie(true);
+        Movie[] movies = Database.read_movie(true, true);
         
         String widths = "30,15,12,18";
         utility.print_title_row("Movie Title, Genre, Age_Rating, Status", widths);
@@ -52,7 +52,7 @@ public class MovieGoer {
     
 	 public static void viewMovieDetails(){
 		listMovies();
-		Movie movies[] = Database.read_movie(true);
+		Movie movies[] = Database.read_movie(true, false);
 		int choice = 0;
 		do
 		{
@@ -107,7 +107,7 @@ public class MovieGoer {
     
     public static void listTopRatedMovies(){
         System.out.println("========== Top 5 Rating Movies(Now Showing)==========");
-        Movie[] movies = Database.read_now_showing_movie();
+        Movie[] movies = Database.read_movie(true, true);
         Review[] reviews = Database.read_review();
         
         String[] movielist = new String[movies.length];
@@ -298,7 +298,7 @@ public class MovieGoer {
         System.out.print("Enter your email address: ");
         String email = sc.nextLine();
         
-        String widths = "45,20,15,15,15,15,25,30";
+        String widths = "45,20,15,15,15,15,35,30";
         utility.print_title_row("Transaction ID, Name, Email, No. Adult, No. Children, No. S.Citizen, Movie Title, Total Fare (S$)", widths);
         Transaction[] transactions = Database.read_transaction();
         for(int i = 0; i < transactions.length; i++)
@@ -317,7 +317,7 @@ public class MovieGoer {
     public static void listTopSalesMovies(){
         System.out.println("========== Top 5 Sales Movies(Now Showing)==========");
         Transaction transaction[] = Database.read_transaction();
-        Movie movies[] = Database.read_now_showing_movie();
+        Movie movies[] = Database.read_movie(true, false);
         String movielist[] = new String[movies.length];
         int movie_sale[] = new int[movies.length];
         

@@ -20,9 +20,9 @@ public class CinemaStaff
 
     }
     
-    public static void listMovies(boolean FilterEndOfShow) 
+    public static void listMovies(boolean FilterEndOfShow, boolean FilterComingSoon) 
     {
-        Movie[] movies = Database.read_movie(FilterEndOfShow);
+        Movie[] movies = Database.read_movie(FilterEndOfShow, FilterComingSoon);
         
         String widths = "30,18";
         utility.print_title_row("Movie Title, Status", widths);
@@ -125,8 +125,8 @@ public class CinemaStaff
     public static void setMovieStatus()
     {
         System.out.println("========== Set Movie Status ==========");
-        listMovies(false);
-        Movie[] movies = Database.read_movie(false);
+        listMovies(false, false);
+        Movie[] movies = Database.read_movie(false, false);
         int choice = 0;
         do
         {
@@ -321,8 +321,8 @@ public class CinemaStaff
         }while(start_time <= 0000 || start_time > 2000); // Set the start time for last movie of the day at 2000 for simplicity
         sc.nextLine();
         
-        listMovies(true);
-        Movie[] movies = Database.read_movie(true);
+        listMovies(true, true);
+        Movie[] movies = Database.read_movie(true, true);
         int choice = 0;
         do
         {
