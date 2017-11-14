@@ -33,11 +33,10 @@ public class Cinema {
 	}
 	
 	public void printSeatLayout() {
-		System.out.println("hihi");
         for(int i=0;i<number_of_rows;i++) {
-			System.out.print("|  ");
+			System.out.print(i + "  |  ");
 			for(int j=0;j<number_of_columns;j++) {
-				System.out.print("O");
+				System.out.print("O ");
 				if(j==(number_of_columns/2)) {
 					System.out.print("   ");
 				}
@@ -45,6 +44,14 @@ public class Cinema {
 			System.out.print("  |");
             System.out.println();
 		}
+        System.out.print("  |  ");
+        for(int x=1;x<=number_of_columns;x++){
+            if(x==((number_of_columns+1)/2)){
+                System.out.print("   ");
+            }
+            System.out.print(x+" ");
+        }
+        System.out.print("  |");
 	}
 	
 	public String toString() {

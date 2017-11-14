@@ -123,6 +123,10 @@ public class ShowTime {
             System.out.println(purchased_row[i]);
             System.out.println(purchased_column[i]);
         } */
+        System.out.println("Showing date: " + day + "-" + month + "-" + year + ", " + "time: " + start_time);
+        System.out.println("Cinema Hall : " + cinema_code);
+        String format = "%" + (column + 10) + "s" + "\n";
+        System.out.printf(format,"SCREEN");
 		for(int i=1;i<=row+1;i++) {
             if(i != row+1){
                 System.out.print(i + "  |  ");
@@ -148,6 +152,7 @@ public class ShowTime {
             }
             System.out.println();
 		}
+        utility.printline();
 	}
     //checkSeat return true if the seat is occupied
 	public boolean checkSeat (int row_number, int column_number){

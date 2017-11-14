@@ -5,12 +5,12 @@ public class utility
 {
     public static void printBorder()
     {
-        System.out.println("==========================================");
+        System.out.println("=============================================");
     }
     
     public static void printline()
     {
-        System.out.println("--------------------------");
+        System.out.println("---------------------------------------------");
     }
     
     public static void print_title_row(String titles, String widths)

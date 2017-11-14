@@ -170,6 +170,8 @@ public class MovieGoer {
         String movietitle=selectMovieTitle().getMovieTitle();
         String cineplex=selectCineplex().getLocation();
         
+        utility.printBorder();
+        System.out.println("Seats allocation(s) for " + movietitle + " at " + cineplex + ": ");
         for(int i=0;i<showtime.length;i++){
             if(showtime[i].getMovieTitle().equals(movietitle) && showtime[i].getCineplexLocation().equals(cineplex)){
                 showtime[i].printSeatLayout();
@@ -202,17 +204,34 @@ public class MovieGoer {
         }
 
         //print showtime to select
-        String widths = "20,20";
-        utility.print_title_row("Date,Showtime", widths);
+        String widths = "20,20,30,20,20";
+        utility.print_title_row("Date,Showtime,Cinema Class,Discount,Promotion", widths);
+        SpecialDate[] special_dates = Database.read_special_date();
+        String discount;
+        String promotion;
         for(int i=0;i<showtime.length;i++){
-            String row = showtime[i].getYear()+"/"+showtime[i].getMonth()+"/"+showtime[i].getDay()+","+Integer.toString(showtime[i].getStartTime());
+            discount = "NA";
+            promotion = "NA";
+            int year = showtime[i].getYear();
+            int month = showtime[i].getMonth();
+            int day = showtime[i].getDay();
+            for(int j = 0; j < special_dates.length; j++)
+            {
+                if(special_dates[j].getYear() == year && special_dates[j].getMonth() == month && special_dates[j].getDay() == day)
+                {
+                    discount = special_dates[j].getDiscount() + "%";
+                    promotion = special_dates[j].getRemark();
+                    break;
+                }
+            }
+            String row = year+"/"+month+"/"+day+","+Integer.toString(showtime[i].getStartTime()) + "," + cineplex.getCinema(showtime[i].getCinemaCode()).getCinemaClass() + "," + discount + "," + promotion;
             utility.print_row(i+1, row, widths);
         }
         
         //select showtime
         int selectedshowtime = 0;
         do{
-            System.out.print("Please select the showtime: ");
+            System.out.print("Please select one showtime: ");
             selectedshowtime= sc.nextInt();
         }while(selectedshowtime<1 || selectedshowtime>showtime.length);
         
