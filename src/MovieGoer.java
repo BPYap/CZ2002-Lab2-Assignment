@@ -3,21 +3,8 @@ import java.util.*;
 public class MovieGoer {
 	public static Scanner sc = new Scanner(System.in);
     
-    	public static Movie selectMovieTitle(){
-		Movie[] movies = Database.read_movie(true, true);
-        listMovies();
-		System.out.println();
-		int choice = 0;
-		do
-		{
-		    System.out.print("Select an index from the movie titles: ");
-		    choice = sc.nextInt();
-            sc.nextLine();
-		}while(choice <= 0 || choice > movies.length);
 
 
-		return movies[choice-1];
-    	}
     
     public static Cineplex selectCineplex(){
         Cineplex[] cineplex = Database.read_cineplex();
@@ -38,9 +25,7 @@ public class MovieGoer {
         return cineplex[choice-1];
     }
     
-	public static void listMovies() 
     {
-        Movie[] movies = Database.read_movie(true, true);
         
         String widths = "30,15,12,18";
         utility.print_title_row("Movie Title, Genre, Age_Rating, Status", widths);
@@ -52,7 +37,6 @@ public class MovieGoer {
 	}
     
 	 public static void viewMovieDetails(){
-		listMovies();
 		Movie movies[] = Database.read_movie(true, false);
 		int choice = 0;
 		do
