@@ -12,8 +12,9 @@ public class MovieGoer {
 		{
 		    System.out.print("Select an index from the movie titles: ");
 		    choice = sc.nextInt();
+            sc.nextLine();
 		}while(choice <= 0 || choice > movies.length);
-		sc.nextLine();
+
 
 		return movies[choice-1];
     	}
