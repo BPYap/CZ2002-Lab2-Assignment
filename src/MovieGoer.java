@@ -4,10 +4,6 @@ public class MovieGoer {
 	public static Scanner sc = new Scanner(System.in);
     
     	public static Movie selectMovieTitle(){
-<<<<<<< HEAD
-
-=======
->>>>>>> 9fdc1678882b415bb19204a917b5300103d1ce2b
 		Movie[] movies = Database.read_movie(true, true);
         listMovies();
 		System.out.println();
