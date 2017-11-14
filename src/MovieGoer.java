@@ -69,8 +69,7 @@ public class MovieGoer {
 		utility.printBorder();
         String movie_title = movies[choice-1].getMovieTitle();
         Review[] reviews = Database.read_review();
-        
-        System.out.println("\nMovie Title: " + movie_title);
+        System.out.println("Reviews :");
         utility.printline();
         for(int i=0;i<reviews.length;i++){
             if(reviews[i].getMovieTitle().equals(movie_title)){
