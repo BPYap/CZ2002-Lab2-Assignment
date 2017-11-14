@@ -1,5 +1,16 @@
-2017|12|25|25.0|Special Holiday
-2017|10|31|15.0|Holiday
-2017|8|31|31.0|Independence day
-2018|1|1|51.0|New Year
-2017|1|2|30.0|New Year
+2017|10|31|25.0|Special Holiday
+2017|12|24|50.0|Christmas Eve
+2017|12|25|25.0|Christmas
+2017|12|31|50.0|New Year Eve
+2018|1|1|25.0|New Year
+2018|2|16|25.0|Chinese New Year
+2018|2|17|25.0|Chinese New Year
+2018|3|30|25.0|Good Friday
+2018|4|30|50.0|Labour Day Eve
+2018|5|1|25.0|Labour Day
+2018|5|28|50.0|Hari Raya Puasa Eve
+2018|5|29|25.0|Hari Raya Puasa
+2018|8|9|25.0|National day
+2018|8|22|25.0|Hari Raya Haji
+2018|11|6|25.0|Deepavali
+
