@@ -221,6 +221,7 @@ public class MovieGoer {
         
         //print showtime layout
         showtime[selectedshowtime].printSeatLayout();
+        String cinema_code = showtime[selectedshowtime].getCinemaCode();
         
         //check whether ticket amount > available seat
         int number_of_adult = 0;
@@ -290,7 +291,7 @@ public class MovieGoer {
         System.out.println("The transaction( ID: "+transaction.getTransactionID()+") is made. Thanks for purchasing :)");
         System.out.println("\nThe receipt is at below: ");
         System.out.println("Cineplex: " + cineplexlocation);
-        System.out.println("Cinema Hall: " + cineplex.getCinema(cinema_code).getCinemaCode(););
+        System.out.println("Cinema Hall: " + cinema_code);
         System.out.println("Name: "+name);
         System.out.println("Mobile Number: "+mobile_number);
         System.out.println("Email: "+email);
