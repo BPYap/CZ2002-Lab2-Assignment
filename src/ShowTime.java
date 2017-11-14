@@ -123,20 +123,29 @@ public class ShowTime {
             System.out.println(purchased_row[i]);
             System.out.println(purchased_column[i]);
         } */
-		for(int i=1;i<=row;i++) {
-			System.out.print("|  ");
-			for(int j=1;j<=column;j++) {
-                if(j==((column+1)/2)){
-                    System.out.print("   ");
+		for(int i=1;i<=row+1;i++) {
+            if(i != row+1){
+                System.out.print(i + "  |  ");
+                for(int j=1;j<=column;j++) {
+                    if(j==((column+1)/2)){
+                        System.out.print("   ");
+                    }
+                    if(checkSeat(i,j) == true){
+                        System.out.print("X ");
+                    }else{
+                        System.out.print("O ");
+                    }
                 }
-
-				if(checkSeat(i,j) == true){
-                    System.out.print("X");
-                }else{
-                    System.out.print("O");
+                System.out.print("  |");
+            }else{
+                System.out.print("      ");
+                for(int x=1;x<=column;x++){
+                    if(x==((column+1)/2)){
+                        System.out.print("   ");
+                    }
+                    System.out.print(x+" ");
                 }
-			}
-			System.out.print("  |");
+            }
             System.out.println();
 		}
 	}
