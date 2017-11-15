@@ -24,11 +24,11 @@ public class CinemaStaff
     {
         Movie[] movies = Database.read_movie(FilterEndOfShow, FilterComingSoon);
         
-        String widths = "30,18";
-        utility.print_title_row("Movie Title, Status", widths);
+        String widths = "30,18,18";
+        utility.print_title_row("Movie Title, Genre, Status", widths);
         for(int i = 0; i < movies.length; i++)
         {
-            String row = movies[i].getMovieTitle() + "," + movies[i].getStatus();
+            String row = movies[i].getMovieTitle() + "," + movies[i].getGenre() + "," + movies[i].getStatus();
             utility.print_row(i+1, row, widths);
         }
 	}
@@ -61,8 +61,29 @@ public class CinemaStaff
         System.out.println("========== Add Movie ==========");
         System.out.print("Enter movie title: ");
         String title = sc.nextLine();
-        System.out.print("Enter genre: ");
-        String genre = sc.nextLine();
+        int choice_genre = 0;
+        System.out.println("Select genre for this movie: ");
+        System.out.println("    1. Blockbuster");
+        System.out.println("    2. Digital");
+        System.out.println("    3. 3D");
+        do
+        {
+            System.out.print("> ");
+            choice_genre = sc.nextInt();
+        }while(choice_genre <= 0 || choice_genre > 3);
+        String genre = "NULL";
+        switch(choice_genre)
+        {
+            case 1:
+                genre = "Blockbuster";
+                break;
+            case 2:
+                genre = "Digital";
+                break;
+            case 3:
+                genre = "3D";
+                break;
+        }
         System.out.print("Enter movie synopsis: ");
         String synopsis = sc.nextLine();
         System.out.print("Enter director(s) for this movie: ");
@@ -260,11 +281,12 @@ public class CinemaStaff
         System.out.println("    2. Children Ticket Price       (current: S$" + ticket_info.getChildren() + ")");
         System.out.println("    3. Senior Citizen Ticket Price (current: S$" + ticket_info.getSenior() + ")");
         System.out.println("    4. Platinum suites charge      (current: S$" + ticket_info.getPlatinum() + ")");
+        System.out.println("    5. 3D charge                   (current: S$" + ticket_info.get3D() + ")");
         do
         {
             System.out.print("> ");
             choice = sc.nextInt();
-        }while(choice <= 0 || choice > 4);
+        }while(choice <= 0 || choice > 5);
         sc.nextLine();
         double amount = 0;
         do
@@ -288,6 +310,8 @@ public class CinemaStaff
             case 4:
                 ticket_info.setPlatinum(amount);
                 break;
+            case 5:
+                ticket_info.set3D(amount);
         }
         
         utility.updateFile("ticket.txt", old_record, ticket_info.toString());

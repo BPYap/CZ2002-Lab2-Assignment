@@ -63,15 +63,23 @@ public class Transaction{
         TicketPrice ticket_info = Database.read_ticket_price();
         Cineplex cineplex = Database.read_cineplex(showtime.getCineplexLocation());
         Cinema cinema = cineplex.getCinema(showtime.getCinemaCode());
-
+        
+        int pax = number_of_adult + number_of_child + number_of_scitizen;
         if(cinema.getCinemaClass().equals("Platinum Movie Suites"))
         {
-            int pax = number_of_adult + number_of_child + number_of_scitizen;
             this.total_fare = (double)pax * ticket_info.getPlatinum();
         }
         else
         {
-            this.total_fare = 0;
+            Movie movie = Database.read_movie(showtime.getMovieTitle());
+            if(movie.getGenre().equals("3D"))
+            {
+                this.total_fare = (double)pax * ticket_info.get3D();
+            }
+            else
+            {
+                this.total_fare = 0;
+            }
         }
         
         for(int i = 0; i < number_of_adult; i++)

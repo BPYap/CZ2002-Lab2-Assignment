@@ -42,6 +42,23 @@ public class Database
         return movies;
     }
     
+    public static Movie read_movie(String movie_title)
+    // return movie with the selected movie_title
+    {
+        String [] raw_records = utility.readContent("movie.txt");
+        Movie[] movies = new Movie[raw_records.length];
+        
+        for (int i = 0; i < raw_records.length; i++)
+        {
+            if(raw_records[i].contains(movie_title))
+            {
+                return new Movie(raw_records[i]);
+            }
+        }
+
+        return null;
+    }
+    
     public static SpecialDate[] read_special_date()
     {
         String[] raw_records = utility.readContent("special_date.txt");

@@ -3,6 +3,7 @@ public class TicketPrice {
     private double children_price;
     private double senior_citizen_price;
     private double platinum_charge;
+    private double _3D_charge;
 	
     public TicketPrice(String record) {
         String [] attributes = record.split("\\|");
@@ -10,18 +11,21 @@ public class TicketPrice {
         children_price = Double.parseDouble(attributes[1]);
         senior_citizen_price = Double.parseDouble(attributes[2]);
         platinum_charge = Double.parseDouble(attributes[3]);
+        _3D_charge = Double.parseDouble(attributes[4]);
 	}
     
     public double getAdult() {return adult_price;}
     public double getChildren() {return children_price;}
     public double getSenior() {return senior_citizen_price;}
     public double getPlatinum() {return platinum_charge;}
+    public double get3D() {return _3D_charge;}
     public void setAdult(double price) {adult_price = price;}
     public void setChildren(double price) {children_price = price;}
     public void setSenior(double price) {senior_citizen_price = price;}
     public void setPlatinum(double charge) {platinum_charge = charge;}
+    public void set3D(double charge) {_3D_charge = charge;}
     public String toString()
     {
-        return (adult_price + "|" + children_price + "|" + senior_citizen_price + "|" + platinum_charge);
+        return (adult_price + "|" + children_price + "|" + senior_citizen_price + "|" + platinum_charge + "|" + _3D_charge);
     }
 }

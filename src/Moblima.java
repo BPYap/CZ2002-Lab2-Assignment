@@ -5,13 +5,14 @@ public class Moblima {
     
     public static void listMovieShowTime(){
         ShowTime[] showtimes = Database.read_show_time();
-        String widths = "12,12,35,25,20,25,18";
-        utility.print_title_row("Date, Start time, Movie Title, Cineplex Location, Cinema Code, Cinema Class, Available Seat", widths);
+        String widths = "12,12,35,18,25,20,25,18";
+        utility.print_title_row("Date, Start time, Movie Title, Genre, Cineplex Location, Cinema Code, Cinema Class, Available Seat", widths);
         for(int i = 0; i < showtimes.length; i++)
         {
             Cineplex cineplex = Database.read_cineplex(showtimes[i].getCineplexLocation());
             String cinema_class = cineplex.getCinema(showtimes[i].getCinemaCode()).getCinemaClass();
-            String row = showtimes[i].getDate() + "," + showtimes[i].getStartTime() + "," + showtimes[i].getMovieTitle() + "," + showtimes[i].getCineplexLocation() + "," +
+            Movie movie = Database.read_movie(showtimes[i].getMovieTitle());
+            String row = showtimes[i].getDate() + "," + showtimes[i].getStartTime() + "," + showtimes[i].getMovieTitle() + "," + movie.getGenre() + "," + showtimes[i].getCineplexLocation() + "," +
                             showtimes[i].getCinemaCode() + "," + cinema_class + "," + showtimes[i].getAvailableSeats();
             utility.print_row(i+1, row, widths);
         }
@@ -20,9 +21,9 @@ public class Moblima {
     public static void showAllTicketPrice()
     {
         TicketPrice ticket_info = Database.read_ticket_price();
-        String widths = "8,10,15,30";
-        utility.print_title_row("Adult, Children, Senior Citizen, Platinum suite extra charge", widths);
-        String row = "S$" + ticket_info.getAdult() + "," + "S$" +  ticket_info.getChildren() + "," + "S$" + ticket_info.getSenior() + "," + "S$" + ticket_info.getPlatinum();
+        String widths = "8,10,15,30,20";
+        utility.print_title_row("Adult, Children, Senior Citizen, Platinum suite extra charge, 3D movie charge", widths);
+        String row = "S$" + ticket_info.getAdult() + "," + "S$" +  ticket_info.getChildren() + "," + "S$" + ticket_info.getSenior() + "," + "S$" + ticket_info.getPlatinum() + "," + "S$" + ticket_info.get3D();
         utility.print_row(1, row, widths);
     }
     
