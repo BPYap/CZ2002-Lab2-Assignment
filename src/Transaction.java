@@ -65,21 +65,15 @@ public class Transaction{
         Cinema cinema = cineplex.getCinema(showtime.getCinemaCode());
         
         int pax = number_of_adult + number_of_child + number_of_scitizen;
+        this.total_fare = 0;
         if(cinema.getCinemaClass().equals("Platinum Movie Suites"))
         {
             this.total_fare = (double)pax * ticket_info.getPlatinum();
         }
-        else
+        Movie movie = Database.read_movie(showtime.getMovieTitle());
+        if(movie.getGenre().equals("3D"))
         {
-            Movie movie = Database.read_movie(showtime.getMovieTitle());
-            if(movie.getGenre().equals("3D"))
-            {
-                this.total_fare = (double)pax * ticket_info.get3D();
-            }
-            else
-            {
-                this.total_fare = 0;
-            }
+            this.total_fare += (double)pax * ticket_info.get3D();
         }
         
         for(int i = 0; i < number_of_adult; i++)
