@@ -114,6 +114,7 @@ public class CinemaStaff
                 age_group = "M18";
                 break;
         }
+        sc.nextLine();
         System.out.println("Select movie status for this movie: ");
         System.out.println("    1. Coming Soon");
         System.out.println("    2. Now Showing");
@@ -136,7 +137,7 @@ public class CinemaStaff
                 status = "Preview";
                 break;
         }
-        
+        sc.nextLine();
         Movie movie = new Movie(title, genre, synopsis, director, cast, age_group, status);
         String record = movie.toString();
         utility.addRecord("movie.txt", record);
