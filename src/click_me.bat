@@ -1,0 +1,3 @@
+@Echo Off
+
+java Moblima
