@@ -262,23 +262,23 @@ public class MovieGoer {
                 System.out.print("How many adults? ");
                 number_of_adult = sc.nextInt();
             }while(number_of_adult < 0);
-            //number of child,check age rating
-            if(movie.getAgeRating().equals("PG") || (movie.getAgeRating().equals("PG13") && number_of_adult>0)){
-                do{
-                System.out.print("How many children? ");
-                number_of_child = sc.nextInt();
-                }while(number_of_child < 0); 
-            }
             //number of sc
             do{
                 System.out.print("How many senior citizen? ");
                 number_of_scitizen = sc.nextInt();
-                String dummy = sc.nextLine();
             }while(number_of_scitizen < 0);
+            //number of child,check age rating
+            int nonchildticket = number_of_adult + number_of_scitizen;
+            if(movie.getAgeRating().equals("PG") || (movie.getAgeRating().equals("PG13") && nonchildticket>0)){
+                do{
+                System.out.print("How many children? ");
+                number_of_child = sc.nextInt();
+                String dummy = sc.nextLine();
+                }while(number_of_child < 0); 
+            }
             //total_ticket
             totalticket = number_of_adult + number_of_child + number_of_scitizen;
         }while(totalticket > showtime[selectedshowtime].getAvailableSeats()||totalticket==0);
-        
         //check seat
         int rows[] = new int[totalticket];
         int columns[] = new int[totalticket];
