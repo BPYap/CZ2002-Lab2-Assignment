@@ -84,6 +84,7 @@ public class CinemaStaff
                 genre = "3D";
                 break;
         }
+        sc.nextLine();
         System.out.print("Enter movie synopsis: ");
         String synopsis = sc.nextLine();
         System.out.print("Enter director(s) for this movie: ");
